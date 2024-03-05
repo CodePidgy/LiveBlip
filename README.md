@@ -1,5 +1,7 @@
 # LiveBlip
 
+A website that allows for the tracking of select GPS devices
+
 ## Development
 
 ### Building
