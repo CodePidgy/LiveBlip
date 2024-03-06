@@ -21,6 +21,7 @@ Arguments:
 `-b`: Build the app before publishing  
 `-c`: Clean the binaries directory after publishing  
 `-d`: Publish the app in development mode  
+`-s`: Skip restarting the services after publishing
 
 ## Cleaning
 
