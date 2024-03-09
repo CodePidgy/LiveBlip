@@ -6,20 +6,20 @@ namespace Namespace;
 
 /// <summary>
 /// Class to handle a client's connection to the server
-/// <param name="device"=>
-/// The <c>TcpClient</c> object representing the device's connection
+/// <param name="client"=>
+/// The <c>TcpClient</c> object representing the client's connection
 /// </param>
 /// </summary>
 public class Client {
 	// fields ----------------------------------------------------------------------------------- //
-	private TcpClient _device;
+	private TcpClient _client;
 	private Thread _thread;
 
 	// constructors ----------------------------------------------------------------------------- //
-	public Client(TcpClient device) {
-		Console.WriteLine($"+ Client connected: {device.Client.RemoteEndPoint}");
+	public Client(TcpClient client) {
+		Console.WriteLine($"+ Client connected: {client.Client.RemoteEndPoint}");
 
-		this._device = device;
+		this._client = client;
 		this._thread = new(this.HandleData);
 
 		this._thread.Start();
@@ -32,7 +32,7 @@ public class Client {
 	/// </summary>
 	private void HandleData() {
 		// Get the network stream (data) sent by the client
-		NetworkStream stream = this._device.GetStream();
+		NetworkStream stream = this._client.GetStream();
 
 		while (true) {
 			// Create a buffer to temporarily store the data
@@ -49,7 +49,7 @@ public class Client {
 				return;
 			}
 
-			Console.WriteLine($"=== {this._device.Client.RemoteEndPoint} ===");
+			Console.WriteLine($"=== {this._client.Client.RemoteEndPoint} ===");
 
 			int messageType = buffer[0];
 			int packetIdentifier = buffer[1];
