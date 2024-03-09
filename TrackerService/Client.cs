@@ -1,5 +1,6 @@
 using System;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 
 namespace Namespace;
@@ -56,6 +57,19 @@ public class Client {
 			int payloadLength = buffer[2] | buffer[3];
 			byte[] payload = buffer[4..(4 + payloadLength)];
 			int crc = buffer[^2] | buffer[^1];
+
+			// Direct payload based on message type
+			switch (messageType) {
+				case 1: // Login request
+					this.HandleLoginRequest(payload);
+
+					break;
+				default: // Unknown message type
+					Console.WriteLine("--- Error ---");
+					Console.WriteLine($"Unknown message type: {messageType}");
+
+					break;
+			}
 		}
 	}
 
@@ -64,5 +78,45 @@ public class Client {
 	/// </summary>
 	private void HandleDisconnect() {
 		Console.WriteLine("--- Disconnect ---");
+	}
+
+	/// <summary>
+	/// Method to handle a login request from the client.
+	/// </summary>
+	/// <param name="payload"></param>
+	private void HandleLoginRequest(byte[] payload) {
+		Console.WriteLine("--- Login Request ---");
+
+		int index = 0;
+		int majorVersion = payload[index++];
+		int minorVersion = payload[index++];
+		int imeiLength = payload[index++];
+		string imei = Encoding.ASCII.GetString(payload, index, imeiLength);
+
+		index += imeiLength;
+
+		int modelLength = payload[index++];
+		string model = Encoding.ASCII.GetString(payload, index, modelLength);
+
+		index += modelLength;
+
+		int firmwareVersionLength = payload[index++];
+		string firmwareVersion = Encoding.ASCII.GetString(payload, index, firmwareVersionLength);
+
+		index += firmwareVersionLength;
+
+		int passwordLength = payload[index++];
+		string password = Encoding.ASCII.GetString(payload, index, passwordLength);
+
+		Console.WriteLine($"Major Version: {majorVersion}");
+		Console.WriteLine($"Minor Version: {minorVersion}");
+		Console.WriteLine($"IMIE Length: {imeiLength}");
+		Console.WriteLine($"IMEI: {imei}");
+		Console.WriteLine($"Model Length: {modelLength}");
+		Console.WriteLine($"Model: {model}");
+		Console.WriteLine($"Firmware Version Length: {firmwareVersionLength}");
+		Console.WriteLine($"Firmware Version: {firmwareVersion}");
+		Console.WriteLine($"Password Length: {passwordLength}");
+		Console.WriteLine($"Password: {password}");
 	}
 }
