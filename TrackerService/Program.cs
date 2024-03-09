@@ -9,7 +9,7 @@ namespace TrackerService;
 
 public class Program {
 	public static void Main(string[] args) {
-		bool test = true;
+		bool test = false;
 
 		int port = 22368;
 
