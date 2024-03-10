@@ -217,6 +217,12 @@ public class Client {
 					}
 
 					break;
+				case 18: // Battery voltage
+					double voltage = ((double) (payload[index++] << 8 | payload[index++])) / 10;
+
+					Console.WriteLine($"Voltage: {voltage}V");
+
+					break;
 				default:
 					Console.WriteLine("--- Error ---");
 					Console.WriteLine($"Unknown record type: {recordType}");
