@@ -178,6 +178,35 @@ public class Client {
 					Console.WriteLine($"Direction: {direction}°");
 
 					break;
+				case 3: // Geo-fence state
+					int shape = payload[index++];
+					int id = payload[index++];
+					int state = payload[index++];
+
+					switch (shape) {
+						case 0:
+							Console.WriteLine("Geo-fence shape: Circle");
+
+							break;
+						case 1:
+							Console.WriteLine("Geo-fence shape: Rectangle");
+
+							break;
+						default:
+							Console.WriteLine("Geo-fence shape: Polygon");
+
+							break;
+					}
+
+					Console.WriteLine($"Geo-fence ID: {id}");
+
+					if (state == 1) {
+						Console.WriteLine("Geo-fence state: Inside");
+					} else if (state == 2) {
+						Console.WriteLine("Geo-fence state: Outside");
+					}
+
+					break;
 				default:
 					Console.WriteLine("--- Error ---");
 					Console.WriteLine($"Unknown record type: {recordType}");
