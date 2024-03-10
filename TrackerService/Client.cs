@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -64,6 +65,10 @@ public class Client {
 					this.HandleLoginRequest(payload);
 
 					break;
+				case 5: // Record
+					this.HandleRecord(payload);
+
+					break;
 				default: // Unknown message type
 					Console.WriteLine("--- Error ---");
 					Console.WriteLine($"Unknown message type: {messageType}");
@@ -118,5 +123,68 @@ public class Client {
 		Console.WriteLine($"Firmware Version: {firmwareVersion}");
 		Console.WriteLine($"Password Length: {passwordLength}");
 		Console.WriteLine($"Password: {password}");
+	}
+
+	private void HandleRecord(byte[] payload) {
+		Console.WriteLine("--- Record ---");
+
+		int index = 0;
+		int recordCount = payload[index++];
+
+		Console.WriteLine($"Record Count: {recordCount}");
+
+		DateTime timeStamp = DateTime.UnixEpoch.AddSeconds(
+				payload[index++] << 24 |
+				payload[index++] << 16 |
+				payload[index++] << 8 |
+				payload[index++]
+			);
+
+		Console.WriteLine($"Time Stamp: {timeStamp}");
+
+		for (int _ = 0; _ < recordCount; _++) {
+			int recordType = payload[index++];
+
+			Console.WriteLine($"--- Record Type: {recordType}");
+
+			switch (recordType) {
+				case 1: // GPS location
+					double lattitude = (
+						(double) (
+							payload[index++] << 24 |
+							payload[index++] << 16 |
+							payload[index++] << 8 |
+							payload[index++]
+						)
+					) / 10000000;
+					double longitude =  (
+						(double) (
+							payload[index++] << 24 |
+							payload[index++] << 16 |
+							payload[index++] << 8 |
+							payload[index++]
+						)
+					) / 10000000;
+					double speed = (
+						(double) (payload[index++] << 8 | payload[index++])
+					) / 10;
+					double direction = (
+						(double) (payload[index++] << 8 | payload[index++])
+					) / 100;
+
+					Console.WriteLine($"Lattitude: {lattitude}");
+					Console.WriteLine($"Longitude: {longitude}");
+					Console.WriteLine($"Speed: {speed}km/h");
+					Console.WriteLine($"Direction: {direction}°");
+
+					break;
+				default:
+					Console.WriteLine("--- Error ---");
+					Console.WriteLine($"Unknown record type: {recordType}");
+					Console.WriteLine($"Payload: {BitConverter.ToString(payload)}");
+
+					return;
+			}
+		}
 	}
 }
