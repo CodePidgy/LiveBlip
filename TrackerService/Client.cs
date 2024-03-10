@@ -207,6 +207,16 @@ public class Client {
 					}
 
 					break;
+				case 9: // G-sensor collision alarm
+					int collision = payload[index++];
+
+					if (collision == 0) {
+						Console.WriteLine("No collision detected");
+					} else if (collision == 1) {
+						Console.WriteLine("Collision detected");
+					}
+
+					break;
 				default:
 					Console.WriteLine("--- Error ---");
 					Console.WriteLine($"Unknown record type: {recordType}");
