@@ -233,6 +233,28 @@ public class Client {
 					}
 
 					break;
+				case 87: // CSQ
+					int csq = payload[index++];
+					int strength = (62 / 31) * csq - 113;
+					string status = "";
+
+					if (csq == 99) {
+						Console.WriteLine($"CSQ: No signal");
+					} else {
+						if (csq >= 0 && csq <= 9) {
+							status = "Marginal";
+						} else if (csq >= 10 && csq <= 14) {
+							status = "OK";
+						} else if (csq >= 15 && csq <= 19) {
+							status = "Good";
+						} else if (csq >= 20 && csq <= 30) {
+							status = "Excellent";
+						}
+
+						Console.WriteLine($"CSQ: {strength}dBm ({status})");
+					}
+
+					break;
 				default:
 					Console.WriteLine("--- Error ---");
 					Console.WriteLine($"Unknown record type: {recordType}");
