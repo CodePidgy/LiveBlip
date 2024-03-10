@@ -223,6 +223,16 @@ public class Client {
 					Console.WriteLine($"Voltage: {voltage}V");
 
 					break;
+				case 86: // LBS
+					int lbs = payload[index++];
+
+					if (lbs == 0) {
+						Console.WriteLine("Location lost");
+					} else if (lbs == 1) {
+						Console.WriteLine("Location found");
+					}
+
+					break;
 				default:
 					Console.WriteLine("--- Error ---");
 					Console.WriteLine($"Unknown record type: {recordType}");
