@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace Namespace;
+namespace TrackerService;
 
 /// <summary>
 /// Class to handle a client's connection to the server
