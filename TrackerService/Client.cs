@@ -1,7 +1,10 @@
 using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Decode;
+using TrackerService.Data;
 
 namespace TrackerService;
 
@@ -34,14 +37,16 @@ public class Client {
 	private void HandleData() {
 		// Get the network stream (data) sent by the client
 		NetworkStream stream = this._client.GetStream();
+		DateTime connectionTime = DateTime.Now;
+		string imei = "";
 
 		while (true) {
-			// Create a buffer to temporarily store the data
-			byte[] buffer = new byte[1024];
+			// Create an array to temporarily store the data
+			byte[] data = new byte[1024];
 
 			// Copy the data from the stream to the buffer from the first byte to the last
 			// Get how many bytes are in the buffer from the first byte to the last
-			int bytesCount = stream.Read(buffer, 0, buffer.Length);
+			int bytesCount = stream.Read(data, 0, data.Length);
 
 			// If the bytes read is 0, the client disconnected, and we can stop reading
 			if (bytesCount == 0) {
@@ -50,26 +55,180 @@ public class Client {
 				return;
 			}
 
-			Console.WriteLine($"=== {this._client.Client.RemoteEndPoint} ===");
+			Packet packet = new(data);
 
-			int messageType = buffer[0];
-			int packetIdentifier = buffer[1];
-			int payloadLength = buffer[2] | buffer[3];
-			byte[] payload = buffer[4..(4 + payloadLength)];
-			int crc = buffer[^2] | buffer[^1];
+			try {
+				if (imei == "") {
+					imei = new LoginRequest(packet.Payload).IMEI;
+				}
+			} catch (Exception exception) {
+				Console.WriteLine(exception.Message);
 
-			// Direct payload based on message type
-			switch (messageType) {
+				return;
+			}
+
+			StreamWriter logRaw = new(
+				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}.raw",
+				true,
+				Encoding.ASCII
+			);
+			StreamWriter logText = new(
+				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}.txt",
+				true,
+				Encoding.ASCII
+			);
+
+			Console.WriteLine($"=== {imei} : {this._client.Client.RemoteEndPoint} ===");
+
+			switch (packet.MessageType) {
 				case 1: // Login request
-					this.HandleLoginRequest(payload);
+					LoginRequest loginRequest = new(packet.Payload);
+
+					Console.WriteLine("--- Login Request ---");
+					Console.WriteLine(loginRequest.ToString());
+
+					logText.WriteLine("--- Login Request ---");
+					logText.WriteLine(loginRequest.ToString());
+
+					break;
+				case 3: // Heartbeat request
+					Console.WriteLine("--- Heartbeat Request ---");
+
+					break;
+				case 5: // Record
+					int index = 0;
+					int recordCount = packet.Payload[index++];
+					DateTime timeStamp = DateTime.UnixEpoch.AddSeconds(
+						packet.Payload[index++] << 24 |
+						packet.Payload[index++] << 16 |
+						packet.Payload[index++] << 8 |
+						packet.Payload[index++]
+					);
+
+					Console.WriteLine("--- Record ---");
+					Console.WriteLine($"Time Stamp: {timeStamp}");
+					Console.WriteLine($"Record Count: {recordCount}");
+
+					logText.WriteLine("--- Record ---");
+					logText.WriteLine($"Time Stamp: {timeStamp}");
+					logText.WriteLine($"Record Count: {recordCount}");
+
+					for (int _ = 0; _ < recordCount; _++) {
+						int recordType = packet.Payload[index++];
+
+						switch (recordType) {
+							case 1: // GPS location
+								GPSLocation gpsLocation = new(packet.Payload[index..]);
+
+								index += 12;
+
+								Console.WriteLine("--- Record: GPS Location ---");
+								Console.WriteLine(gpsLocation.ToString());
+
+								logText.WriteLine("--- Record: GPS Location ---");
+								logText.WriteLine(gpsLocation.ToString());
+
+								break;
+							case 9: // G-sensor collision alarm
+								GSensorCollisionAlarm gSensorCollisionAlarm = new(
+									packet.Payload[index..]
+								);
+
+								index++;
+
+								Console.WriteLine("--- Record: G-Sensor Collision Alarm ---");
+								Console.WriteLine(gSensorCollisionAlarm.ToString());
+
+								logText.WriteLine("--- Record: G-Sensor Collision Alarm ---");
+								logText.WriteLine(gSensorCollisionAlarm.ToString());
+
+								break;
+							case 11: // G-senson tow alarm
+								GSensorTowAlarm gSensorTowAlarm = new(packet.Payload[index..]);
+
+								index++;
+
+								Console.WriteLine("--- Record: G-Sensor Tow Alarm ---");
+								Console.WriteLine(gSensorTowAlarm.ToString());
+
+								logText.WriteLine("--- Record: G-Sensor Tow Alarm ---");
+								logText.WriteLine(gSensorTowAlarm.ToString());
+
+								break;
+							case 18: // Battery voltage
+								BatteryVoltage batteryVoltage = new(packet.Payload[index..]);
+
+								index += 2;
+
+								Console.WriteLine("--- Record: Battery Voltage ---");
+								Console.WriteLine(batteryVoltage.ToString());
+
+								logText.WriteLine("--- Record: Battery Voltage ---");
+								logText.WriteLine(batteryVoltage.ToString());
+
+								break;
+							case 86: // LBS state
+								LBSState lbsState = new(packet.Payload[index..]);
+
+								index++;
+
+								Console.WriteLine("--- Record: LBS State ---");
+								Console.WriteLine(lbsState.ToString());
+
+								logText.WriteLine("--- Record: LBS State ---");
+								logText.WriteLine(lbsState.ToString());
+
+								break;
+							case 87: // CSQ
+								CSQ csq = new(packet.Payload[index..]);
+
+								index++;
+
+								Console.WriteLine("--- Record: CSQ ---");
+								Console.WriteLine(csq.ToString());
+
+								logText.WriteLine("--- Record: CSQ ---");
+								logText.WriteLine(csq.ToString());
+
+								break;
+							case 97: // Unknown
+								// This type is unknown, but going through sample data it seems to be 1
+								// byte long
+								index++;
+
+								Console.WriteLine("--- Error ---");
+								Console.WriteLine($"Unknown record type: {recordType}");
+
+								logText.WriteLine("--- Error ---");
+								logText.WriteLine($"Unknown record type: {recordType}");
+
+								break;
+							default: // Unknown record type
+								Console.WriteLine("--- Error ---");
+								Console.WriteLine($"Unknown record type: {recordType}");
+
+								logText.WriteLine("--- Error ---");
+								logText.WriteLine($"Unknown record type: {recordType}");
+
+								break;
+						}
+					}
 
 					break;
 				default: // Unknown message type
 					Console.WriteLine("--- Error ---");
-					Console.WriteLine($"Unknown message type: {messageType}");
+					Console.WriteLine($"Unknown message type: {packet.MessageType}");
+
+					logText.WriteLine("--- Error ---");
+					logText.WriteLine($"Unknown message type: {packet.MessageType}");
 
 					break;
 			}
+
+			logRaw.WriteLine(BitConverter.ToString(packet.Raw()));
+
+			logRaw.Close();
+			logText.Close();
 		}
 	}
 
@@ -78,45 +237,5 @@ public class Client {
 	/// </summary>
 	private void HandleDisconnect() {
 		Console.WriteLine("--- Disconnect ---");
-	}
-
-	/// <summary>
-	/// Method to handle a login request from the client.
-	/// </summary>
-	/// <param name="payload"></param>
-	private void HandleLoginRequest(byte[] payload) {
-		Console.WriteLine("--- Login Request ---");
-
-		int index = 0;
-		int majorVersion = payload[index++];
-		int minorVersion = payload[index++];
-		int imeiLength = payload[index++];
-		string imei = Encoding.ASCII.GetString(payload, index, imeiLength);
-
-		index += imeiLength;
-
-		int modelLength = payload[index++];
-		string model = Encoding.ASCII.GetString(payload, index, modelLength);
-
-		index += modelLength;
-
-		int firmwareVersionLength = payload[index++];
-		string firmwareVersion = Encoding.ASCII.GetString(payload, index, firmwareVersionLength);
-
-		index += firmwareVersionLength;
-
-		int passwordLength = payload[index++];
-		string password = Encoding.ASCII.GetString(payload, index, passwordLength);
-
-		Console.WriteLine($"Major Version: {majorVersion}");
-		Console.WriteLine($"Minor Version: {minorVersion}");
-		Console.WriteLine($"IMIE Length: {imeiLength}");
-		Console.WriteLine($"IMEI: {imei}");
-		Console.WriteLine($"Model Length: {modelLength}");
-		Console.WriteLine($"Model: {model}");
-		Console.WriteLine($"Firmware Version Length: {firmwareVersionLength}");
-		Console.WriteLine($"Firmware Version: {firmwareVersion}");
-		Console.WriteLine($"Password Length: {passwordLength}");
-		Console.WriteLine($"Password: {password}");
 	}
 }

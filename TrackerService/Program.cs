@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -9,7 +10,6 @@ namespace TrackerService;
 public class Program {
 	public static void Main(string[] args) {
 		bool test = false;
-
 		int port = 22368;
 
 		TcpListener listener = new(IPAddress.Any, port);
@@ -32,9 +32,15 @@ public class Program {
 	}
 
 	// methods ---------------------------------------------------------------------------------- //
+	private static void Setup() {
+		if (!Directory.Exists("logs")) {
+			Directory.CreateDirectory("logs");
+		}
+	}
+
 	private static void Test() {
 		// Get test bytes from text file
-		string[] tests = System.IO.File.ReadAllLines("TrackerService/test_data.txt");
+		string[] tests = System.IO.File.ReadAllLines("test_data.txt");
 		// Connect to localhost
 		TcpClient client = new("localhost", 22368);
 		// Get the stream to send data to the server
