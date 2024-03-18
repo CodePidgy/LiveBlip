@@ -1,5 +1,8 @@
 ﻿namespace Decode;
 
+/// <summary>
+/// Represents a login request.
+/// </summary>
 public class LoginRequest {
 	// fields ----------------------------------------------------------------------------------- //
 	private readonly byte _majorVersion;
@@ -14,6 +17,12 @@ public class LoginRequest {
 	private readonly string _password;
 
 	// constructors ----------------------------------------------------------------------------- //
+	/// <summary>
+	/// Initializes a new instance of the <c>LoginRequest</c> class with the specified data.
+	/// </summary>
+	/// <param name="data">
+	/// The byte array containing the login request data.
+	/// </param>
 	public LoginRequest(byte[] data) {
 		int index = 0;
 
@@ -39,22 +48,49 @@ public class LoginRequest {
 	}
 
 	// properties ------------------------------------------------------------------------------- //
+	/// <summary>
+	/// Gets the firmware version.
+	/// </summary>
 	public string FirmwareVersion => this._firmwareVersion;
 
+	/// <summary>
+	/// Gets the length of the firmware version.
+	/// </summary>
 	public int FirmwareVersionLength => this._firmwareVersionLength;
 
+	/// <summary>
+	/// Gets the IMEI.
+	/// </summary>
 	public string IMEI => this._imei;
 
+	/// <summary>
+	/// Gets the length of the IMEI.
+	/// </summary>
 	public int IMEILength => this._imeiLength;
 
+	/// <summary>
+	/// Gets the major version.
+	/// </summary>
 	public int MajorVersion => this._majorVersion;
 
+	/// <summary>
+	/// Gets the minor version.
+	/// </summary>
 	public int MinorVersion => this._minorVersion;
 
+	/// <summary>
+	/// Gets the model.
+	/// </summary>
 	public string Model => this._model;
 
+	/// <summary>
+	/// Gets the password.
+	/// </summary>
 	public string Password => this._password;
 
+	/// <summary>
+	/// Gets the length of the password.
+	/// </summary>
 	public int PasswordLength => this._passwordLength;
 
 	// methods ---------------------------------------------------------------------------------- //

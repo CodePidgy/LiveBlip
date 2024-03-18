@@ -1,5 +1,8 @@
 ﻿namespace Decode;
 
+/// <summary>
+/// Represents a GPS location with latitude, longitude, speed, and direction.
+/// </summary>
 public class GPSLocation {
 	// fields ----------------------------------------------------------------------------------- //
 	private readonly byte[] _latitude;
@@ -8,6 +11,12 @@ public class GPSLocation {
 	private readonly byte[] _direction;
 
 	// constructors ----------------------------------------------------------------------------- //
+	/// <summary>
+	/// Initializes a new instance of the <c>GPSLocation</c> class with the specified data.
+	/// </summary>
+	/// <param name="data">
+	/// The byte array containing the GPS location data.
+	/// </param>
 	public GPSLocation(byte[] data) {
 		int index = 0;
 
@@ -27,23 +36,35 @@ public class GPSLocation {
 	}
 
 	// properties ------------------------------------------------------------------------------- //
-	public double Direction => (double) (this._direction[0] << 8 | this._direction[1]) / 100;
+	/// <summary>
+	/// Gets the direction in degrees.
+	/// </summary>
+	public double Direction => (double)(this._direction[0] << 8 | this._direction[1]) / 100;
 
-	public double Latitude => (double) (
+	/// <summary>
+	/// Gets the latitude value in degrees.
+	/// </summary>
+	public double Latitude => (double)(
 		this._latitude[0] << 24 |
 		this._latitude[1] << 16 |
 		this._latitude[2] << 8 |
 		this._latitude[3]
 	) / 10000000;
 
-	public double Longitude => (double) (
+	/// <summary>
+	/// Gets the longitude value in degrees.
+	/// </summary>
+	public double Longitude => (double)(
 		this._longitude[0] << 24 |
 		this._longitude[1] << 16 |
 		this._longitude[2] << 8 |
 		this._longitude[3]
 	) / 10000000;
 
-	public double Speed => (double) (this._speed[0] << 8 | this._speed[1]) / 10;
+	/// <summary>
+	/// Gets the speed in kilometers per hour.
+	/// </summary>
+	public double Speed => (double)(this._speed[0] << 8 | this._speed[1]) / 10;
 
 	// methods ---------------------------------------------------------------------------------- //
 	public override string ToString() {
