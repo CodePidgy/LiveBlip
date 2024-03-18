@@ -55,25 +55,17 @@ public class Packet {
 
 	public bool IsValid() {
 		return CRC16.Calculate(
-			[this._messageType, this._packetIdentifier, .. this._payloadLength, .. this._payload]
+			[this._messageType, this._packetIdentifier, ..this._payloadLength, ..this._payload]
 		) == this.CRC;
 	}
 
 	public byte[] Raw() {
-		byte[] raw = new byte[6 + this.PayloadLength];
-
-		raw[0] = this._messageType;
-		raw[1] = this._packetIdentifier;
-		raw[2] = this._payloadLength[0];
-		raw[3] = this._payloadLength[1];
-
-		for (int i = 0; i < this.PayloadLength; i++) {
-			raw[i + 4] = this._payload[i];
-		}
-
-		raw[^2] = this._crc[0];
-		raw[^1] = this._crc[1];
-
-		return raw;
+		return [
+			this._messageType,
+			this._packetIdentifier,
+			..this._payloadLength,
+			..this._payload,
+			..this._crc
+		];
 	}
 }
