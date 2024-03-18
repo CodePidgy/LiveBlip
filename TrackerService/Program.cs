@@ -12,6 +12,8 @@ public class Program {
 		bool test = false;
 		int port = 22368;
 
+		Setup();
+
 		TcpListener listener = new(IPAddress.Any, port);
 
 		listener.Start();
