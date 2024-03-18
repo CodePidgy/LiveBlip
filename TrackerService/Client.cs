@@ -9,10 +9,7 @@ using TrackerService.Data;
 namespace TrackerService;
 
 /// <summary>
-/// Class to handle a client's connection to the server
-/// <param name="client"=>
-/// The <c>TcpClient</c> object representing the client's connection
-/// </param>
+/// Represents a client connected to the server.
 /// </summary>
 public class Client {
 	// fields ----------------------------------------------------------------------------------- //
@@ -20,6 +17,12 @@ public class Client {
 	private Thread _thread;
 
 	// constructors ----------------------------------------------------------------------------- //
+	/// <summary>
+	/// Represents a client connected to the server.
+	/// </summary>
+	/// <param name="client">
+	/// The TCP client representing the connection to the client.
+	/// </param>
 	public Client(TcpClient client) {
 		Console.WriteLine($"+ Client connected: {client.Client.RemoteEndPoint}");
 

@@ -7,6 +7,9 @@ using System.Threading;
 
 namespace TrackerService;
 
+/// <summary>
+/// Represents the entry point of the application.
+/// </summary>
 public class Program {
 	public static void Main(string[] args) {
 		bool test = false;
@@ -34,12 +37,20 @@ public class Program {
 	}
 
 	// methods ---------------------------------------------------------------------------------- //
+	/// <summary>
+	/// Sets up the necessary directories for the application.
+	/// </summary>
 	private static void Setup() {
 		if (!Directory.Exists("logs")) {
 			Directory.CreateDirectory("logs");
 		}
 	}
 
+	/// <summary>
+	/// This method is used to perform test operations.
+	/// It reads test data from the test file, connects to the server, and sends the data to the
+	/// server.
+	/// </summary>
 	private static void Test() {
 		// Get test bytes from text file
 		string[] tests = System.IO.File.ReadAllLines("test_data.txt");
