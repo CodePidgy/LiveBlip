@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,6 +32,12 @@ public class Program {
 	}
 
 	// methods ---------------------------------------------------------------------------------- //
+	private static void Setup() {
+		if (!Directory.Exists("logs")) {
+			Directory.CreateDirectory("logs");
+		}
+	}
+
 	private static void Test() {
 		// Get test bytes from text file
 		string[] tests = System.IO.File.ReadAllLines("test_data.txt");
