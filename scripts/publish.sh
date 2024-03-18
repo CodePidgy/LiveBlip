@@ -62,7 +62,7 @@ if [ $app = "trackerservice" ]; then
 		ssh linode "rm -r ~/trackerservice/*"
 
 		echo "Copying..."
-		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Release/net7.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice/ --info=progress2
+		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice/ --info=progress2
 
 		if [ $silent -eq 0 ]; then
 			echo "Enabling..."
@@ -79,7 +79,7 @@ if [ $app = "trackerservice" ]; then
 		ssh linode "rm -r ~/trackerservice-dev/*"
 
 		echo "Copying..."
-		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Debug/net7.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice-dev/ --info=progress2
+		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Debug/net8.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice-dev/ --info=progress2
 
 		if [ $silent -eq 0 ]; then
 			echo "Enabling..."
@@ -101,7 +101,7 @@ elif [ $app = "liveblip" ]; then
 		ssh linode "rm -r /var/www/liveblip/*"
 
 		echo "Copying..."
-		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Release/net7.0/linux-x64/publish/* root@213.219.36.37:/var/www/liveblip/ --info=progress2
+		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:/var/www/liveblip/ --info=progress2
 
 		if [ $silent -eq 0 ]; then
 			echo "Enabling..."
@@ -118,7 +118,7 @@ elif [ $app = "liveblip" ]; then
 		ssh linode "rm -r /var/www/liveblip-dev/*"
 
 		echo "Copying..."
-		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Debug/net7.0/linux-x64/publish/* root@213.219.36.37:/var/www/liveblip-dev/ --info=progress2
+		rsync -avzP -e "ssh -i ~/.ssh/linode" bin/Debug/net8.0/linux-x64/publish/* root@213.219.36.37:/var/www/liveblip-dev/ --info=progress2
 
 		if [ $silent -eq 0 ]; then
 			echo "Enabling..."

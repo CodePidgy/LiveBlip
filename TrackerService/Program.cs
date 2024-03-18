@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -35,7 +35,7 @@ public class Program {
 	// methods ---------------------------------------------------------------------------------- //
 	private static void Test() {
 		// Get test bytes from text file
-		string[] tests = System.IO.File.ReadAllLines("TrackerService/test_data.txt");
+		string[] tests = System.IO.File.ReadAllLines("test_data.txt");
 		// Connect to localhost
 		TcpClient client = new("localhost", 22368);
 		// Get the stream to send data to the server
