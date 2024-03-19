@@ -14,21 +14,15 @@ while getopts "a:" opt; do
 done
 
 if [ -z "$app" ]; then
-	rm -r Decode/bin/Release/*
-	rm -r Decode/bin/Debug/*
-	rm -r LiveBlip/bin/Release/*
-	rm -r LiveBlip/bin/Debug/*
-	rm -r TrackerService/bin/Release/*
-	rm -r TrackerService/bin/Debug/*
+	rm -r Decode/bin/*
+	rm -r LiveBlip/bin/*
+	rm -r TrackerService/bin/*
 elif [ $app = "decode" ]; then
-	rm -r Decode/bin/Release/*
-	rm -r Decode/bin/Debug/*
+	rm -r Decode/bin/*
 elif [ $app = "liveblip" ]; then
-	rm -r LiveBlip/bin/Release/*
-	rm -r LiveBlip/bin/Debug/*
+	rm -r LiveBlip/bin/*
 elif [ $app = "trackerservice" ]; then
-	rm -r TrackerService/bin/Release/*
-	rm -r TrackerService/bin/Debug/*
+	rm -r TrackerService/bin/*
 else
 	echo "Invalid app: $app" >&2
 
