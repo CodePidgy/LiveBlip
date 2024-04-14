@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: gray;
+}
+/* Start of Nav bar */
+nav {
+  background-color: transparent;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+ul li {
+  margin-right: 20px;
+}
+
+ul li:last-child {
+  margin-right: 0;
+}
+
+ul li a {
+  color: white;
+  font-size: 25px;
+  text-shadow: black;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-shadow: 2px 2px 6px black;
+}
+
+ul li a img {
+  height: 40px;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+nav :hover {
+  text-shadow: 2px 2px 6px red;
+}
+
+
+/* Start of search bar */
+.MainLogo {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.search-container {
+  position: fixed;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  width: 25%;
+  height: 10%;
+  padding: 4px;
+  border-radius: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 10px;
+  margin-left: 35px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+}
+
+
+
+.search-container button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  margin-right: 30px;
+  margin-bottom: 45px;
+  cursor: pointer;
+  background-image: url('img/search.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: auto;
+  height: 20%; /* Adjust button height if needed */
+}
+
+
+/* Mid section */
+
+.midSection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+/* login section */
+
+.login-form {
+  align-content: center;
+  margin: 20px;
+}
+
+.login-form button{
+  position: absolute;
+  left: 40%;
+}
+
+p {
+  margin: 20px;
+}
