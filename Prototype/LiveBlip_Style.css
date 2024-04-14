@@ -140,6 +140,54 @@ nav :hover {
   position: absolute;
   left: 40%;
 }
+/* About Page */
+.MyClass {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px; /* Add padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  max-width: 400px; /* Limit maximum width */
+  text-align: center; /* Center align text */
+  font-family: Arial, sans-serif; /* Specify font */
+  font-size: 18px; /* Set font size */
+  line-height: 1.5; /* Set line height for readability */
+  color: #333333; /* Set text color */
+}
+
+.card {
+  max-width: 300px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: 500px;
+  height: 300px;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(30px);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card-footer {
+  font-size: 0.65em;
+  color: #446;
+}
+
+
 
 p {
   margin: 20px;
