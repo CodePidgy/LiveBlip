@@ -141,6 +141,22 @@ nav :hover {
   left: 40%;
 }
 
+
+/* GPS PAGE */
+
+.logo1 {
+  /* Horizontal gradient background */
+  background-image: linear-gradient(to bottom, gray, transparent); /* Example gradient from white to light gray */
+
+}
+
+
+.logo1 img {
+  height: 60px;
+  width: auto;
+
+}
+
 p {
   margin: 20px;
 }
