@@ -188,6 +188,7 @@ nav :hover {
 }
 
 .heading {
+    padding-bottom: 10px ;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -196,7 +197,7 @@ nav :hover {
 
 
 .login-form {
-    width: 300px;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #666666;
@@ -210,7 +211,7 @@ nav :hover {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #d6d6d6;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 
@@ -219,14 +220,14 @@ nav :hover {
     padding: 10px;
     margin-top: 10px;
     border: none;
-    border-radius: 9px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
 
 .login-form button.login-button {
     width: 25%;
-    padding: 10px;
+    padding: 7px;
     margin-top: -5%;
     margin-left: -25%;
     background-color: #f51414;
@@ -235,7 +236,7 @@ nav :hover {
 
 .login-form button.signup-button {
     width: 25%;
-    padding: 10px;
+    padding: 7px;
     margin-top: -5%;
     margin-left: 20%;
     background-color: #f51414;
@@ -249,6 +250,9 @@ nav :hover {
 .forgot-password {
     text-align: center;
     color: #f51414;
+    font-size: medium;
+    padding-top: 10px;
+    text-decoration: none;
 }
 
 p {
