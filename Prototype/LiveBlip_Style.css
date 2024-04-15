@@ -246,6 +246,10 @@ nav :hover {
     opacity: 0.8;
 }
 
+.forgot-password {
+    text-align: center;
+    color: #f51414;
+}
 
 p {
   margin: 20px;
