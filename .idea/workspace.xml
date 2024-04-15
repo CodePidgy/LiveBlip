@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dc64d23-1c41-4cd2-95d1-7388c4e5fbed" name="Changes" comment="Created page that displays the tracker">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/About.html" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/About.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Prototype/Account.html" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/Account.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +89,7 @@
       <workItem from="1713121619565" duration="158000" />
       <workItem from="1713121901198" duration="1836000" />
       <workItem from="1713158588565" duration="3352000" />
-      <workItem from="1713181155706" duration="2427000" />
+      <workItem from="1713181155706" duration="2508000" />
     </task>
     <task id="LOCAL-00001" summary="Created page that displays the tracker">
       <created>1713122011172</created>
