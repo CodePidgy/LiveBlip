@@ -126,6 +126,7 @@ nav :hover {
 .Heading {
   text-align: center;
   margin-bottom: 10px;
+  font-weight: bolder;
 }
 
 
@@ -147,7 +148,10 @@ nav :hover {
 .logo1 {
   /* Horizontal gradient background */
   background-image: linear-gradient(to bottom, gray, transparent); /* Example gradient from white to light gray */
-
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 
@@ -156,6 +160,42 @@ nav :hover {
   width: auto;
 
 }
+
+.deviceList {
+  position: fixed;
+  left: 3%;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 20%;
+  height: 70%;
+  padding: 20px;
+  padding-top: 25px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1); /* Adjust the opacity as needed */
+  display: flex;
+  flex-direction: column; /* Display items in column */
+  justify-content: space-between; /* Add space between items */
+}
+
+.deviceBlock {
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Add margin between device blocks */
+}
+
+.deviceBlock img {
+  width: 50px; /* Adjust the width of the image */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add space between image and text */
+}
+
+
+.deviceSettings {
+  margin-top: auto; /* Push deviceSettings to the bottom */
+}
+
+
 
 p {
   margin: 20px;

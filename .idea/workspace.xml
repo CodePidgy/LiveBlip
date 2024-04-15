@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dc64d23-1c41-4cd2-95d1-7388c4e5fbed" name="Changes" comment="Created page that displays the tracker">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/LiveBlip_Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/LiveBlip_Style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Prototype/Tracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/Tracker.html" afterDir="false" />
     </list>
@@ -48,20 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/nefal/OneDrive/Desktop/LiveBlip",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nefal/OneDrive/Desktop/LiveBlip&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="LiveBlip" />
@@ -88,7 +89,8 @@
       <workItem from="1713120891219" duration="582000" />
       <workItem from="1713121502466" duration="107000" />
       <workItem from="1713121619565" duration="158000" />
-      <workItem from="1713121901198" duration="432000" />
+      <workItem from="1713121901198" duration="1836000" />
+      <workItem from="1713158588565" duration="2611000" />
     </task>
     <task id="LOCAL-00001" summary="Created page that displays the tracker">
       <created>1713122011172</created>
