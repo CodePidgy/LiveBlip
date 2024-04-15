@@ -140,6 +140,120 @@ nav :hover {
   position: absolute;
   left: 40%;
 }
+/* About Page */
+.MyClass {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px; /* Add padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  max-width: 400px; /* Limit maximum width */
+  text-align: center; /* Center align text */
+  font-family: Arial, sans-serif; /* Specify font */
+  font-size: 18px; /* Set font size */
+  line-height: 1.5; /* Set line height for readability */
+  color: #333333; /* Set text color */
+}
+
+.card {
+  max-width: 300px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: 500px;
+  height: 300px;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(30px);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card-footer {
+  font-size: 0.65em;
+  color: #446;
+}
+
+.heading {
+    padding-bottom: 10px ;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000; /* Choose your preferred color */
+}
+
+
+.login-form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d6d6d6;
+    border-radius: 10px;
+}
+
+
+.login-form button[type="submit"] {
+    width: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.login-form button.login-button {
+    width: 25%;
+    padding: 7px;
+    margin-top: -5%;
+    margin-left: -25%;
+    background-color: #f51414;
+    color: #fff;
+}
+
+.login-form button.signup-button {
+    width: 25%;
+    padding: 7px;
+    margin-top: -5%;
+    margin-left: 20%;
+    background-color: #f51414;
+    color: #fff;
+}
+
+.login-form button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+.forgot-password {
+    text-align: center;
+    color: #f51414;
+    font-size: medium;
+    padding-top: 10px;
+    text-decoration: none;
+}
 
 
 /* GPS PAGE */

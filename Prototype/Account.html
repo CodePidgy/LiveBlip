@@ -3,42 +3,71 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Live Blip</title>
-  <link rel="icon" href="img/pin.png" type="image/png">
-  <link rel="stylesheet" href="LiveBlip_Style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="img/pin.png" type="image/png">
+    <link rel="stylesheet" href="LiveBlip_Style.css">
+    <title>Live Blip</title>
 
 </head>
 
 <body background="img/map.png">
 
-<nav>
-  <div class="logo">
-    <img src="img/LiveBlipLogo.png" alt="Logo">
-  </div>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#"> About</a></li>
-    <li><a href="#">Contact</a></li>
-    <li><u><a href="#">Account<img src="img/AccountImg.png" alt="Logo"></a></u></li>
-  </ul>
-</nav>
+    <nav>
+        <div class="logo">
+            <img src="img/LiveBlipLogo.png" alt="Logo">
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html"> About</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><u><a href="Account.html">Account<img src="img/AccountImg.png" alt="Logo"></a></u></li>
+        </ul>
+    </nav>
 
-<div class="midSection">
-  <div class="Heading">
-    Login/Sign up
-  </div>
-  <div class="login-form">
-    <form>
-      <input type="text" placeholder="Username">
-      <br><br>
-      <input type="password" placeholder="Password">
-      <br><br>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-</div>
+    <style>
+        :root {
+            font-size: 20px;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        p:not(:last-child) {
+            margin-bottom: 1.5em;
+        }
+    </style>
+
+    <div class="card">
+        <div class="heading">
+            Login/Sign Up
+        </div>
+        <div class="login-form">
+            <form>
+                <input type="text" placeholder="Username">
+                <br><br>
+                <input type="password" placeholder="Password">
+                <br><br>
+                <div class="login-button">
+                    <button class="login-button" type="submit">Login</button>
+                </div>
+                <div class="signup-button">
+                    <button class="signup-button" type="submit">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div class="forgot-password">
+            <a href="index.html">Forgot Password?</a>
+        </div>
+    </div>
+
 
 
 </body>
