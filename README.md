@@ -41,7 +41,7 @@ Arguments:
 ### Commit Verbs
 
 - Add = Create a capability e.g. feature, test, dependency  
-- Cut = Remove a capability e.g. feature, test, dependency  
+- Remove = Remove a capability e.g. feature, test, dependency  
 - Fix = Fix an issue e.g. bug, typo, accident, misstatement  
 - Bump = Increase the version of something e.g. dependency  
 - Make = Change the build process, tooling, or infra  
