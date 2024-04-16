@@ -132,18 +132,8 @@ public class Client {
 								logText.WriteLine(gpsLocation.ToString());
 
 								break;
-							case 9: // G-sensor collision alarm
-								GSensorCollisionAlarm gSensorCollisionAlarm = new(
-									packet.Payload[index..]
-								);
-
+							case 9: // G-sensor collision alarm (unused)
 								index++;
-
-								Console.WriteLine("--- Record: G-Sensor Collision Alarm ---");
-								Console.WriteLine(gSensorCollisionAlarm.ToString());
-
-								logText.WriteLine("--- Record: G-Sensor Collision Alarm ---");
-								logText.WriteLine(gSensorCollisionAlarm.ToString());
 
 								break;
 							case 11: // G-sensor tow alarm (unused)
