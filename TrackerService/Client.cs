@@ -132,30 +132,12 @@ public class Client {
 								logText.WriteLine(gpsLocation.ToString());
 
 								break;
-							case 9: // G-sensor collision alarm
-								GSensorCollisionAlarm gSensorCollisionAlarm = new(
-									packet.Payload[index..]
-								);
-
+							case 9: // G-sensor collision alarm (unused)
 								index++;
-
-								Console.WriteLine("--- Record: G-Sensor Collision Alarm ---");
-								Console.WriteLine(gSensorCollisionAlarm.ToString());
-
-								logText.WriteLine("--- Record: G-Sensor Collision Alarm ---");
-								logText.WriteLine(gSensorCollisionAlarm.ToString());
 
 								break;
-							case 11: // G-senson tow alarm
-								GSensorTowAlarm gSensorTowAlarm = new(packet.Payload[index..]);
-
+							case 11: // G-sensor tow alarm (unused)
 								index++;
-
-								Console.WriteLine("--- Record: G-Sensor Tow Alarm ---");
-								Console.WriteLine(gSensorTowAlarm.ToString());
-
-								logText.WriteLine("--- Record: G-Sensor Tow Alarm ---");
-								logText.WriteLine(gSensorTowAlarm.ToString());
 
 								break;
 							case 18: // Battery voltage
@@ -170,16 +152,8 @@ public class Client {
 								logText.WriteLine(batteryVoltage.ToString());
 
 								break;
-							case 86: // LBS state
-								LBSState lbsState = new(packet.Payload[index..]);
-
+							case 86: // LBS state (unused)
 								index++;
-
-								Console.WriteLine("--- Record: LBS State ---");
-								Console.WriteLine(lbsState.ToString());
-
-								logText.WriteLine("--- Record: LBS State ---");
-								logText.WriteLine(lbsState.ToString());
 
 								break;
 							case 87: // CSQ
@@ -195,8 +169,8 @@ public class Client {
 
 								break;
 							case 97: // Unknown
-								// This type is unknown, but going through sample data it seems to be 1
-								// byte long
+								// This type is unknown, but going through sample data it seems to
+								// be 1 byte long
 								index++;
 
 								Console.WriteLine("--- Error ---");
