@@ -170,16 +170,8 @@ public class Client {
 								logText.WriteLine(batteryVoltage.ToString());
 
 								break;
-							case 86: // LBS state
-								LBSState lbsState = new(packet.Payload[index..]);
-
+							case 86: // LBS state (unused)
 								index++;
-
-								Console.WriteLine("--- Record: LBS State ---");
-								Console.WriteLine(lbsState.ToString());
-
-								logText.WriteLine("--- Record: LBS State ---");
-								logText.WriteLine(lbsState.ToString());
 
 								break;
 							case 87: // CSQ
@@ -195,8 +187,8 @@ public class Client {
 
 								break;
 							case 97: // Unknown
-								// This type is unknown, but going through sample data it seems to be 1
-								// byte long
+								// This type is unknown, but going through sample data it seems to
+								// be 1 byte long
 								index++;
 
 								Console.WriteLine("--- Error ---");
