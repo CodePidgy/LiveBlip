@@ -146,16 +146,8 @@ public class Client {
 								logText.WriteLine(gSensorCollisionAlarm.ToString());
 
 								break;
-							case 11: // G-senson tow alarm
-								GSensorTowAlarm gSensorTowAlarm = new(packet.Payload[index..]);
-
+							case 11: // G-sensor tow alarm (unused)
 								index++;
-
-								Console.WriteLine("--- Record: G-Sensor Tow Alarm ---");
-								Console.WriteLine(gSensorTowAlarm.ToString());
-
-								logText.WriteLine("--- Record: G-Sensor Tow Alarm ---");
-								logText.WriteLine(gSensorTowAlarm.ToString());
 
 								break;
 							case 18: // Battery voltage
