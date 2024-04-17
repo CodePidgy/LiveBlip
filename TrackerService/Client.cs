@@ -71,12 +71,12 @@ public class Client {
 			}
 
 			StreamWriter logRaw = new(
-				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}.raw",
+				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}",
 				true,
 				Encoding.ASCII
 			);
 			StreamWriter logText = new(
-				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}.txt",
+				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}.log",
 				true,
 				Encoding.ASCII
 			);
