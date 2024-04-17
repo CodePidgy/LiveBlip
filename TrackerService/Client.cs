@@ -78,7 +78,7 @@ public class Client {
 			StreamWriter logText = new(
 				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}.log",
 				true,
-				Encoding.ASCII
+				Encoding.UTF8
 			);
 
 			Console.WriteLine($"=== {imei} : {this._client.Client.RemoteEndPoint} ===");
