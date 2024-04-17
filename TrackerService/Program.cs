@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -59,8 +59,8 @@ public class Program {
 		// Get the stream to send data to the server
 		NetworkStream stream = client.GetStream();
 
-		for (int i = 0; i < 10; i++) {
-			stream.Write(tests[i].Split('-').Select(x => Convert.ToByte(x, 16)).ToArray());
+		foreach (string test in tests) {
+			stream.Write(test.Split('-').Select(x => Convert.ToByte(x, 16)).ToArray());
 
 			Thread.Sleep(1000);
 		}
