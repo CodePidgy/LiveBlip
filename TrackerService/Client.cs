@@ -13,8 +13,8 @@ namespace TrackerService;
 /// </summary>
 public class Client {
 	// fields ----------------------------------------------------------------------------------- //
-	private TcpClient _client;
-	private Thread _thread;
+	private readonly TcpClient _client;
+	private readonly Thread _thread;
 
 	// constructors ----------------------------------------------------------------------------- //
 	/// <summary>
@@ -27,8 +27,9 @@ public class Client {
 		Console.WriteLine($"+ Client connected: {client.Client.RemoteEndPoint}");
 
 		this._client = client;
-		this._thread = new(this.HandleData);
 
+		// Start a new thread to handle the client's data, so as to not block the main thread
+		this._thread = new(this.HandleData);
 		this._thread.Start();
 	}
 
@@ -40,9 +41,13 @@ public class Client {
 	private void HandleData() {
 		// Get the network stream (data) sent by the client
 		NetworkStream stream = this._client.GetStream();
+
+		// Get the current time to use as the connection time
 		DateTime connectionTime = DateTime.Now;
+
 		string imei = "";
 
+		// Loop to read data from the client
 		while (true) {
 			// Create an array to temporarily store the data
 			byte[] data = new byte[1024];
@@ -58,6 +63,7 @@ public class Client {
 				return;
 			}
 
+			// Create a new packet object from the data received
 			Packet packet = new(data);
 
 			try {
@@ -70,6 +76,7 @@ public class Client {
 				return;
 			}
 
+			// Create new log files to store the raw and decoded data respectively
 			StreamWriter logRaw = new(
 				$"logs/{imei} - {connectionTime:yyyy-MM-dd HH-mm-ss}",
 				true,
@@ -83,6 +90,7 @@ public class Client {
 
 			Console.WriteLine($"=== {imei} : {this._client.Client.RemoteEndPoint} ===");
 
+			// Switch statement to handle the different message types
 			switch (packet.MessageType) {
 				case 1: // Login request
 					LoginRequest loginRequest = new(packet.Payload);
@@ -202,8 +210,10 @@ public class Client {
 					break;
 			}
 
+			// Write the raw data to the raw log file
 			logRaw.WriteLine(BitConverter.ToString(packet.Raw()));
 
+			// Close the log files
 			logRaw.Close();
 			logText.Close();
 		}
