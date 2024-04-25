@@ -1,4 +1,6 @@
-﻿namespace Decode.TP302F;
+﻿using System;
+
+namespace Decode.TP302F;
 
 /// <summary>
 /// Represents the battery voltage.
@@ -20,6 +22,8 @@ public class BatteryVoltage {
 	}
 
 	// properties ------------------------------------------------------------------------------- //
+	public double Percentage => Math.Round((this.Voltage - 10.2) / 2.2 * 100);
+
 	/// <summary>
 	/// Gets the voltage value in volts.
 	/// </summary>
@@ -27,6 +31,6 @@ public class BatteryVoltage {
 
 	// methods ---------------------------------------------------------------------------------- //
 	public override string ToString() {
-		return $"Voltage: {this.Voltage}V";
+		return $"Voltage: {this.Voltage}V ({this.Percentage}%)";
 	}
 }
