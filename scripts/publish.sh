@@ -47,7 +47,7 @@ if [ $build -eq 1 ]; then
 	fi
 fi
 
-# type is console
+# type is trackerservice
 if [ $app = "trackerservice" ]; then
 	cd "TrackerService"
 
@@ -86,7 +86,7 @@ if [ $app = "trackerservice" ]; then
 			ssh linode "systemctl start trackerservice-dev"
 		fi
 	fi
-# type is blazorserver
+# type is liveblip
 elif [ $app = "liveblip" ]; then
 	cd "LiveBlip"
 
@@ -132,7 +132,7 @@ else
 	exit 1
 fi
 
-# keep is not set
+# clean is set
 if [ $clean -eq 1 ]; then
 	echo "Cleaning..."
 
