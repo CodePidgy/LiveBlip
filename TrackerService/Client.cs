@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using Decode;
+using Decode.TP302F;
 using TrackerService.Data;
 
 namespace TrackerService;
