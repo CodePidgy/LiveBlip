@@ -1,4 +1,4 @@
-﻿namespace Decode;
+﻿namespace Decode.TP302F;
 
 /// <summary>
 /// Represents the CSQ (Cell Signal Quality) class that calculates the signal strength and status
