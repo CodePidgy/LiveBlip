@@ -62,7 +62,7 @@ public class Program {
 		foreach (string test in tests) {
 			stream.Write(test.Split('-').Select(x => Convert.ToByte(x, 16)).ToArray());
 
-			Thread.Sleep(1000);
+			Thread.Sleep(50);
 		}
 
 		stream.Close();
