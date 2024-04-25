@@ -1,4 +1,4 @@
-﻿namespace Decode;
+﻿namespace Decode.TP302F;
 
 /// <summary>
 /// Represents a login request.
