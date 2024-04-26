@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -73,8 +73,7 @@ public class Program {
 			// server
 			stream.Write(test.Split('-').Select(x => Convert.ToByte(x, 16)).ToArray());
 
-			// Wait for a second before sending the next data to avoid flooding the server
-			Thread.Sleep(1000);
+			Thread.Sleep(50);
 		}
 
 		stream.Close();
