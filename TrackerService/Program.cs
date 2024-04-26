@@ -73,6 +73,7 @@ public class Program {
 			// server
 			stream.Write(test.Split('-').Select(x => Convert.ToByte(x, 16)).ToArray());
 
+			// Wait a bit before sending the next data to avoid flooding the server
 			Thread.Sleep(50);
 		}
 
