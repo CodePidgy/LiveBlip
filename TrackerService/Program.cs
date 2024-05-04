@@ -12,6 +12,9 @@ namespace TrackerService;
 /// </summary>
 public class Program {
 	public static void Main(string[] args) {
+		// Will print the connection info if true
+		bool verbose = false;
+
 		// Will use the test_data.txt if true
 		bool test = false;
 
@@ -37,7 +40,7 @@ public class Program {
 			TcpClient client = listener.AcceptTcpClient();
 
 			// Create a new client object to handle the client's connection
-			_ = new Client(client);
+			_ = new Client(client, verbose);
 		}
 	}
 
