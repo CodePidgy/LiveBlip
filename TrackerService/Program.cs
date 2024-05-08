@@ -18,6 +18,20 @@ public class Program {
 		// Will use the test_data.txt if true
 		bool test = false;
 
+		// Parse the command line arguments
+		foreach (string arg in args) {
+			switch (arg[..2]) {
+				case "-v":
+					verbose = true;
+
+					break;
+				case "-t":
+					test = true;
+
+					break;
+			}
+		}
+
 		// Port to listen for connections
 		int port = 22368;
 
