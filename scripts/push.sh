@@ -9,9 +9,6 @@ while getopts "a:bcds" opt; do
 		a)
 			app=$OPTARG
 			;;
-		d)
-			dev=1
-			;;
 		s)
 			silent=1
 			;;
@@ -34,46 +31,23 @@ scripts/clean.sh -a "$app"
 if [ $app = "trackerservice" ]; then
 	cd "TrackerService"
 
-	# dev is not set
-	if [ $dev -eq 0 ]; then
-		if [ $silent -eq 0 ]; then
-			echo "Stopping..."
-			ssh main "systemctl stop trackerservice"
-		fi
+	if [ $silent -eq 0 ]; then
+		echo "Stopping..."
+		ssh main "systemctl stop trackerservice"
+	fi
 
-		echo "Building..."
-		dotnet publish -c Release -r linux-x64
+	echo "Building..."
+	dotnet publish -c Release -r linux-x64
 
-		echo "Removing..."
-		ssh main "rm -r ~/trackerservice/*"
+	echo "Removing..."
+	ssh main "rm -r ~/trackerservice/*"
 
-		echo "Copying..."
-		rsync -avzP -e "ssh" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice/ --info=progress2
+	echo "Copying..."
+	rsync -avzP -e "ssh" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice/ --info=progress2
 
-		if [ $silent -eq 0 ]; then
-			echo "Enabling..."
-			ssh main "systemctl start trackerservice"
-		fi
-	# dev is set
-	else
-		if [ $silent -eq 0 ]; then
-			echo "Stopping..."
-			ssh main "systemctl stop trackerservice-dev"
-		fi
-
-		echo "Building..."
-		dotnet publish -c Release -r linux-x64
-
-		echo "Removing..."
-		ssh main "rm -r ~/trackerservice-dev/*"
-
-		echo "Copying..."
-		rsync -avzP -e "ssh" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice-dev/ --info=progress2
-
-		if [ $silent -eq 0 ]; then
-			echo "Enabling..."
-			ssh main "systemctl start trackerservice-dev"
-		fi
+	if [ $silent -eq 0 ]; then
+		echo "Enabling..."
+		ssh main "systemctl start trackerservice"
 	fi
 # type is liveblip
 elif [ $app = "liveblip" ]; then
