@@ -16,6 +16,8 @@ public class Client {
 	private readonly TcpClient _client;
 	private readonly bool _verbose;
 	private readonly Thread _thread;
+	private string _imei;
+	private bool _justConnected;
 
 	// constructors ----------------------------------------------------------------------------- //
 	/// <summary>
@@ -25,10 +27,10 @@ public class Client {
 	/// The TCP client representing the connection to the client.
 	/// </param>
 	public Client(TcpClient client, bool verbose = false) {
-		Console.WriteLine($"+ Client connected: {client.Client.RemoteEndPoint}");
-
 		this._client = client;
 		this._verbose = verbose;
+		this._imei = "";
+		this._justConnected = true;
 
 		// Start a new thread to handle the client's data, so as to not block the main thread
 		this._thread = new(this.HandleData);
@@ -60,7 +62,7 @@ public class Client {
 
 			// If the bytes read is 0, the client disconnected, and we can stop reading
 			if (bytesCount == 0) {
-				Console.WriteLine($"- Client disconnected: {this._client.Client.RemoteEndPoint}");
+				Console.WriteLine($"- Client disconnected: {this._imei} ({this._client.Client.RemoteEndPoint})");
 
 				return;
 			}
@@ -103,6 +105,18 @@ public class Client {
 			switch (packet.MessageType) {
 				case 1: // Login request
 					LoginRequest loginRequest = new(packet.Payload);
+
+					// Client just connected, so we store the imei and print the connection info,
+					// otherwise it will error out since we only need to set the imei once
+					if (this._justConnected) {
+						this._imei = loginRequest.IMEI;
+						this._justConnected = false;
+
+						Console.WriteLine(
+							"+ Client connected: " +
+							$"{this._imei} ({this._client.Client.RemoteEndPoint})"
+						);
+					}
 
 					logText.WriteLine("--- Login Request ---");
 					logText.WriteLine(loginRequest.ToString());
