@@ -33,21 +33,21 @@ if [ $app = "trackerservice" ]; then
 
 	if [ $silent -eq 0 ]; then
 		echo "Stopping..."
-		ssh main "systemctl stop trackerservice"
+		ssh root@213.219.36.37 "systemctl stop trackerservice"
 	fi
 
 	echo "Building..."
 	dotnet publish -c Release -r linux-x64
 
 	echo "Removing..."
-	ssh main "rm -r ~/trackerservice/*"
+	ssh root@213.219.36.37 "rm -r ~/trackerservice/*"
 
 	echo "Copying..."
 	rsync -avzP -e "ssh" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:~/trackerservice/ --info=progress2
 
 	if [ $silent -eq 0 ]; then
 		echo "Enabling..."
-		ssh main "systemctl start trackerservice"
+		ssh root@213.219.36.37 "systemctl start trackerservice"
 	fi
 # type is liveblip
 elif [ $app = "liveblip" ]; then
@@ -55,21 +55,21 @@ elif [ $app = "liveblip" ]; then
 
 	if [ $silent -eq 0 ]; then
 		echo "Stopping..."
-		ssh main "systemctl stop liveblip"
+		ssh root@213.219.36.37 "systemctl stop liveblip"
 	fi
 
 	echo "Building..."
 	dotnet publish -c Release -r linux-x64
 
 	echo "Removing..."
-	ssh main "rm -r ~/liveblip/*"
+	ssh root@213.219.36.37 "rm -r ~/liveblip/*"
 
 	echo "Copying..."
 	rsync -avzP -e "ssh" bin/Release/net8.0/linux-x64/publish/* root@213.219.36.37:~/liveblip/ --info=progress2
 
 	if [ $silent -eq 0 ]; then
 		echo "Enabling..."
-		ssh main "systemctl start liveblip"
+		ssh root@213.219.36.37 "systemctl start liveblip"
 	fi
 # unknown type
 else

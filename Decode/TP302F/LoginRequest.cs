@@ -8,13 +8,13 @@ public class LoginRequest {
 	private readonly byte _majorVersion;
 	private readonly byte _minorVersion;
 	private readonly byte _imeiLength;
-	private readonly string _imei;
+	private readonly byte[] _imei;
 	private readonly byte _modelLength;
-	private readonly string _model;
+	private readonly byte[] _model;
 	private readonly byte _firmwareVersionLength;
-	private readonly string _firmwareVersion;
+	private readonly byte[] _firmwareVersion;
 	private readonly byte _passwordLength;
-	private readonly string _password;
+	private readonly byte[] _password;
 
 	// constructors ----------------------------------------------------------------------------- //
 	/// <summary>
@@ -29,29 +29,29 @@ public class LoginRequest {
 		this._majorVersion = data[index++];
 		this._minorVersion = data[index++];
 		this._imeiLength = data[index++];
-		this._imei = System.Text.Encoding.ASCII.GetString(data, index, this._imeiLength);
+		this._imei = data[index..(index + this._imeiLength)];
 
 		index += this._imeiLength;
 
 		this._modelLength = data[index++];
-		this._model = System.Text.Encoding.ASCII.GetString(data, index, this._modelLength);
+		this._model = data[index..(index + this._modelLength)];
 
 		index += this._modelLength;
 
 		this._firmwareVersionLength = data[index++];
-		this._firmwareVersion = System.Text.Encoding.ASCII.GetString(data, index, this._firmwareVersionLength);
+		this._firmwareVersion = data[index..(index + this._firmwareVersionLength)];
 
 		index += this._firmwareVersionLength;
 
 		this._passwordLength = data[index++];
-		this._password = System.Text.Encoding.ASCII.GetString(data, index, this._passwordLength);
+		this._password = data[index..(index + this._passwordLength)];
 	}
 
 	// properties ------------------------------------------------------------------------------- //
 	/// <summary>
 	/// Gets the firmware version.
 	/// </summary>
-	public string FirmwareVersion => this._firmwareVersion;
+	public string FirmwareVersion => System.Text.Encoding.ASCII.GetString(this._firmwareVersion);
 
 	/// <summary>
 	/// Gets the length of the firmware version.
@@ -61,7 +61,7 @@ public class LoginRequest {
 	/// <summary>
 	/// Gets the IMEI.
 	/// </summary>
-	public string IMEI => this._imei;
+	public string IMEI => System.Text.Encoding.ASCII.GetString(this._imei);
 
 	/// <summary>
 	/// Gets the length of the IMEI.
@@ -81,12 +81,12 @@ public class LoginRequest {
 	/// <summary>
 	/// Gets the model.
 	/// </summary>
-	public string Model => this._model;
+	public string Model => System.Text.Encoding.ASCII.GetString(this._model);
 
 	/// <summary>
 	/// Gets the password.
 	/// </summary>
-	public string Password => this._password;
+	public string Password => System.Text.Encoding.ASCII.GetString(this._password);
 
 	/// <summary>
 	/// Gets the length of the password.
