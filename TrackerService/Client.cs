@@ -68,12 +68,17 @@ public class Client {
 			// Create a new packet object from the data received
 			Packet packet = new(data);
 
+			// Just in case the IMEI is not present or canot be decoded for some reason
 			try {
 				if (imei == "") {
 					imei = new LoginRequest(packet.Payload).IMEI;
 				}
 			} catch (Exception exception) {
-				Console.WriteLine(exception.Message);
+				Console.WriteLine(
+					"ERROR: Unable to get IMEI\n" +
+					$"\tPayload: {packet.Payload}\n" +
+					$"\tException: {exception.Message}"
+				);
 
 				return;
 			}
