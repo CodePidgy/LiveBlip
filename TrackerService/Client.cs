@@ -14,7 +14,7 @@ namespace TrackerService;
 public class Client {
 	// fields ----------------------------------------------------------------------------------- //
 	private readonly TcpClient _client;
-	private readonly bool verbose;
+	private readonly bool _verbose;
 	private readonly Thread _thread;
 
 	// constructors ----------------------------------------------------------------------------- //
@@ -28,7 +28,7 @@ public class Client {
 		Console.WriteLine($"+ Client connected: {client.Client.RemoteEndPoint}");
 
 		this._client = client;
-		this.verbose = verbose;
+		this._verbose = verbose;
 
 		// Start a new thread to handle the client's data, so as to not block the main thread
 		this._thread = new(this.HandleData);
@@ -90,7 +90,7 @@ public class Client {
 				Encoding.UTF8
 			);
 
-			if (this.verbose) {
+			if (this._verbose) {
 				Console.WriteLine($"=== {imei} : {this._client.Client.RemoteEndPoint} ===");
 			}
 
@@ -102,7 +102,7 @@ public class Client {
 					logText.WriteLine("--- Login Request ---");
 					logText.WriteLine(loginRequest.ToString());
 
-					if (this.verbose) {
+					if (this._verbose) {
 						Console.WriteLine("--- Login Request ---");
 						Console.WriteLine(loginRequest.ToString());
 					}
@@ -111,7 +111,7 @@ public class Client {
 				case 3: // Heartbeat request
 					logText.WriteLine("--- Heartbeat Request ---");
 
-					if (this.verbose) {
+					if (this._verbose) {
 						Console.WriteLine("--- Heartbeat Request ---");
 					}
 
@@ -130,7 +130,7 @@ public class Client {
 					logText.WriteLine($"Time Stamp: {timeStamp}");
 					logText.WriteLine($"Record Count: {recordCount}");
 
-					if (this.verbose) {
+					if (this._verbose) {
 						Console.WriteLine("--- Record ---");
 						Console.WriteLine($"Time Stamp: {timeStamp}");
 						Console.WriteLine($"Record Count: {recordCount}");
@@ -148,7 +148,7 @@ public class Client {
 								logText.WriteLine("--- Record: GPS Location ---");
 								logText.WriteLine(gpsLocation.ToString());
 
-								if (this.verbose) {
+								if (this._verbose) {
 									Console.WriteLine("--- Record: GPS Location ---");
 									Console.WriteLine(gpsLocation.ToString());
 								}
@@ -170,7 +170,7 @@ public class Client {
 								logText.WriteLine("--- Record: Battery Voltage ---");
 								logText.WriteLine(batteryVoltage.ToString());
 
-								if (this.verbose) {
+								if (this._verbose) {
 									Console.WriteLine("--- Record: Battery Voltage ---");
 									Console.WriteLine(batteryVoltage.ToString());
 								}
@@ -188,7 +188,7 @@ public class Client {
 								logText.WriteLine("--- Record: CSQ ---");
 								logText.WriteLine(csq.ToString());
 
-								if (this.verbose) {
+								if (this._verbose) {
 									Console.WriteLine("--- Record: CSQ ---");
 									Console.WriteLine(csq.ToString());
 								}
@@ -202,7 +202,7 @@ public class Client {
 								logText.WriteLine("--- Error ---");
 								logText.WriteLine($"Unknown record type: {recordType}");
 
-								if (this.verbose) {
+								if (this._verbose) {
 									Console.WriteLine("--- Error ---");
 									Console.WriteLine($"Unknown record type: {recordType}");
 								}
@@ -212,7 +212,7 @@ public class Client {
 								logText.WriteLine("--- Error ---");
 								logText.WriteLine($"Unknown record type: {recordType}");
 
-								if (this.verbose) {
+								if (this._verbose) {
 									Console.WriteLine("--- Error ---");
 									Console.WriteLine($"Unknown record type: {recordType}");
 								}
@@ -226,7 +226,7 @@ public class Client {
 					logText.WriteLine("--- Error ---");
 					logText.WriteLine($"Unknown message type: {packet.MessageType}");
 
-					if (this.verbose) {
+					if (this._verbose) {
 						Console.WriteLine("--- Error ---");
 						Console.WriteLine($"Unknown message type: {packet.MessageType}");
 					}
