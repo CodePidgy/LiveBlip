@@ -4,27 +4,13 @@ A website that allows for the tracking of select GPS devices
 
 ## Development
 
-### Building
-
-Build the app binaries
-
-`scripts/build.sh`
-
-Arguments:  
-`-a`: App to build, options are `liveblip` and `trackerservice`  
-`-d`: Build the app in development mode
-
-### Publishing
+### Pushing
 
 Publish the app binaries to the server
 
-`scripts/publish.sh`
+`scripts/push.sh`
 
 Arguments:  
-`-a`: App to publish, options are `liveblip` and `trackerservice`  
-`-b`: Build the app before publishing  
-`-c`: Clean the binaries directory after publishing  
-`-d`: Publish the app in development mode  
 `-s`: Skip restarting the services after publishing
 
 ### Cleaning
