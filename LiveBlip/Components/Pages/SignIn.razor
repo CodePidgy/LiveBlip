@@ -5,3 +5,28 @@
 <PageTitle>Sign In</PageTitle>
 
 <h1>Sign In</h1>
+
+
+
+	<EditForm Model="signInModel" OnValidSubmit="HandleValidSubmit">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+			<label for="username" class="form-label">Username</label>
+			<InputText id="username" class="form-control" @bind-Value="signInModel.Username" />
+
+			<label for="password" class="form-label">Password</label>
+			<InputText id="password" type="password" class="form-control" @bind-Value="signInModel.Password" />
+
+		<button type="submit" class="btn btn-primary">Sign In</button>
+	</EditForm>
+
+
+
+@code {
+    private SignInModel signInModel = new SignInModel();
+
+    private async Task HandleValidSubmit()
+    {
+
+    }
+}
