@@ -1,4 +1,4 @@
-@page "/signin"
+﻿@page "/signin"
 @using LiveBlip.Models
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
@@ -26,11 +26,20 @@
 	</div>
 </div>
 
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+	<div class="alert alert-danger">@errorMessage</div>
+}
+
 @code {
     private SignInModel signInModel = new SignInModel();
+	private string errorMessage;
 
     private async Task HandleValidSubmit()
     {
+
+
 		// Simulate sign-in logic for now
         if (signInModel.Username == "username" && signInModel.Password == "password")
         {
