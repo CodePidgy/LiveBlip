@@ -1,4 +1,4 @@
-﻿@page "/signin"
+@page "/signin"
 @using LiveBlip.Models
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
@@ -43,7 +43,7 @@
 		const string hardcodePword = "password";
 
 		// Simulate sign-in logic for now
-        if (signInModel.Username == "username" && signInModel.Password == "password")
+        if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword)
         {
             // Navigate to the home page or a dashboard
             Navigation.NavigateTo("/home");
