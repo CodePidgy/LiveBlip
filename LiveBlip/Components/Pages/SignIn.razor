@@ -20,7 +20,7 @@
 			<label for="password" class="form-label">Password</label>
 			<InputText id="password" type="password" class="form-control" @bind-Value="signInModel.Password" />
 		</div>
-		<button type="submit" class="btn btn-primary">Sign In</button>
+		<button type="submit" class="btn btn-primary"@onclick="HandleValidSubmit">Sign In</button>
 	</EditForm>
 	</div>
 </div>
