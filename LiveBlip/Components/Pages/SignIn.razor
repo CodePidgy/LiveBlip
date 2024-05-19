@@ -30,6 +30,17 @@
 
     private async Task HandleValidSubmit()
     {
-
+		// Simulate sign-in logic for now
+        if (signInModel.Username == "username" && signInModel.Password == "password")
+        {
+            // Navigate to the home page or a dashboard
+            Navigation.NavigateTo("/home");
+        }
+        else
+        {
+            // Display an error message
+            // You can use a toast notification or an alert
+            Console.WriteLine("Invalid credentials");
+        }
     }
 }
