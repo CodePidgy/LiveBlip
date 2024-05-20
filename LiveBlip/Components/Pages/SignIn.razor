@@ -1,4 +1,4 @@
-@page "/signin"
+﻿@page "/signin"
 @using LiveBlip.Models
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
@@ -46,12 +46,12 @@
         if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword)
         {
             // Navigate to the home page or a dashboard
-            Navigation.NavigateTo("/home");
+            Navigation.NavigateTo("/");
         }
         else
         {
             // Display an error message
-            Console.WriteLine("Invalid credentials");
+            errorMessage="Invalid credentials";
         }
     }
 }
