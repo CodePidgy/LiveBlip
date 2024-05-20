@@ -1,4 +1,4 @@
-﻿@page "/signin"
+@page "/signin"
 @using LiveBlip.Models
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
@@ -20,15 +20,20 @@
 
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <InputText id="password" type="password" class="form-control" @bind-Value="signInModel.Password" />
+                <InputText
+					id="password"
+					type="password"
+					class="form-control"
+					@bind-Value="signInModel.Password"
+				/>
             </div>
+
             <button type="submit" class="btn btn-primary">Sign In</button>
         </EditForm>
     </div>
 </div>
 
-@if (!string.IsNullOrEmpty(errorMessage))
-{
+@if (!string.IsNullOrEmpty(errorMessage)) {
 	<div class="alert alert-danger">@errorMessage</div>
 }
 
@@ -37,21 +42,17 @@
     private SignInModel signInModel {get; set;} = new();
     private string errorMessage;
 
-    private async Task HandleValidSubmit()
-    {
-		//Hardcoded credentials
+    private async Task HandleValidSubmit() {
+		// Hardcoded credentials
 		const string hardcodeUname = "testuser";
 		const string hardcodePword = "password";
 
 
         // Simulate sign-in logic for now
-        if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword)
-        {
+        if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword) {
             // Navigate to the home page or a dashboard
             Navigation.NavigateTo("/");
-        }
-        else
-        {
+        } else {
             // Display an error message
             errorMessage = "Invalid username of password.";
         }
