@@ -34,7 +34,7 @@
 
 @code {
 	[SupplyParameterFromForm]
-    public SignInModel signInModel {get; set;} = new();
+    private SignInModel signInModel {get; set;} = new();
     private string errorMessage;
 
     private async Task HandleValidSubmit()
@@ -42,7 +42,7 @@
 		//Hardcoded credentials
 		const string hardcodeUname = "testuser";
 		const string hardcodePword = "password";
-        
+
 
         // Simulate sign-in logic for now
         if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword)
