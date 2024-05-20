@@ -27,7 +27,6 @@
     </div>
 </div>
 
-
 @if (!string.IsNullOrEmpty(errorMessage))
 {
 	<div class="alert alert-danger">@errorMessage</div>
@@ -35,7 +34,7 @@
 
 @code {
 	[SupplyParameterFromForm]
-	private string errorMessage;
+    public SignInModel signInModel {get; set;} = new();
 
     private async Task HandleValidSubmit()
     {
@@ -46,7 +45,7 @@
         Console.WriteLine($"Provided Username: {signInModel.Username}");
         Console.WriteLine($"Provided Password: {signInModel.Password}");
 
-		// Simulate sign-in logic for now
+        // Simulate sign-in logic for now
         if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword)
         {
             // Navigate to the home page or a dashboard
@@ -55,7 +54,7 @@
         else
         {
             // Display an error message
-            errorMessage="Invalid credentials";
+            errorMessage = "Invalid credentials";
         }
     }
 }
