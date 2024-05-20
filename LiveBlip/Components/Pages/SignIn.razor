@@ -34,7 +34,7 @@
 }
 
 @code {
-    private SignInModel signInModel = new SignInModel();
+	[SupplyParameterFromForm]
 	private string errorMessage;
 
     private async Task HandleValidSubmit()
