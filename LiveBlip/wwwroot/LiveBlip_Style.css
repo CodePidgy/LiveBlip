@@ -1,0 +1,317 @@
+body {
+background-image: url('Img/map.png');
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: ;
+
+}
+/* Start of Nav bar */
+nav {
+  background-color: transparent;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+ul li {
+  margin-right: 20px;
+}
+
+ul li:last-child {
+  margin-right: 0;
+}
+
+ul li a {
+  color: white;
+  font-size: 25px;
+  text-shadow: black;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  text-shadow: 2px 2px 6px black;
+}
+
+ul li a img {
+  height: 40px;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+nav :hover {
+  text-shadow: 2px 2px 6px red;
+}
+
+
+/* Start of search bar */
+.MainLogo {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.search-container {
+  position: fixed;
+  top: 57%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  width: 25%;
+  height: 10%;
+  padding: 4px;
+  border-radius: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 10px;
+  margin-left: 35px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+}
+
+
+
+.search-container button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  margin-right: 30px;
+  margin-bottom: 45px;
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: auto;
+  height: 20%; /* Adjust button height if needed */
+}
+
+
+/* Mid section */
+
+.midSection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Heading {
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bolder;
+}
+
+
+/* login section */
+
+.login-form {
+  align-content: center;
+  margin: 20px;
+}
+
+.login-form button{
+  position: absolute;
+  left: 40%;
+}
+/* About Page */
+.MyClass {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px; /* Add padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  max-width: 400px; /* Limit maximum width */
+  text-align: center; /* Center align text */
+  font-family: Arial, sans-serif; /* Specify font */
+  font-size: 18px; /* Set font size */
+  line-height: 1.5; /* Set line height for readability */
+  color: #333333; /* Set text color */
+}
+
+.card {
+  max-width: 300px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: 500px;
+  height: 300px;
+  padding: 35px;
+
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(30px);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.card-footer {
+  font-size: 0.65em;
+  color: #446;
+}
+
+.heading {
+    padding-bottom: 10px ;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000; /* Choose your preferred color */
+}
+
+
+.login-form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d6d6d6;
+    border-radius: 10px;
+}
+
+
+.login-form button[type="submit"] {
+    width: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.login-form button.login-button {
+    width: 25%;
+    padding: 7px;
+    margin-top: -5%;
+    margin-left: -25%;
+    background-color: #f51414;
+    color: #fff;
+}
+
+.login-form button.signup-button {
+    width: 25%;
+    padding: 7px;
+    margin-top: -5%;
+    margin-left: 20%;
+    background-color: #f51414;
+    color: #fff;
+}
+
+.login-form button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+.forgot-password {
+    text-align: center;
+    color: #f51414;
+    font-size: medium;
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+
+/* GPS PAGE */
+
+.logo1 {
+  /* Horizontal gradient background */
+  background-image: linear-gradient(to bottom, gray, transparent); /* Example gradient from white to light gray */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.logo1 img {
+  height: 60px;
+  width: auto;
+
+}
+
+.deviceList {
+  position: fixed;
+  left: 3%;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 20%;
+  height: 70%;
+  padding: 20px;
+  padding-top: 25px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1); /* Adjust the opacity as needed */
+  display: flex;
+  flex-direction: column; /* Display items in column */
+  justify-content: space-between; /* Add space between items */
+}
+
+.deviceBlock {
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Add margin between device blocks */
+}
+
+.deviceBlock img {
+  width: 50px; /* Adjust the width of the image */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add space between image and text */
+}
+
+
+.deviceSettings {
+  margin-top: auto; /* Push deviceSettings to the bottom */
+}
+
+
+
+p {
+  margin: 20px;
+}
