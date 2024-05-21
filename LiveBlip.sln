@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Decode", "Decode\Decode.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackerService", "TrackerService\TrackerService.csproj", "{21DABC2C-B81D-4D2D-AA27-EF65BE823B10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveBlip", "LiveBlip\LiveBlip.csproj", "{9811999A-4094-471B-9D50-217BA1363ADC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveBlip", "LiveBlip\LiveBlip.csproj", "{9811999A-4094-471B-9D50-217BA1363ADC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
