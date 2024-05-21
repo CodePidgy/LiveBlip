@@ -1,4 +1,4 @@
-
+/* Dark mode styles */
 body {
 	background-image: url("/images/map.png");
     background-color: #333;
@@ -43,6 +43,7 @@ body {
     outline: none; /* Removes the default blue outline */
     box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
 }
+
 
 
 .login-form {
@@ -99,3 +100,69 @@ body {
     display: flex;
 }
 
+.register-redirect {
+    padding-bottom: 10px;
+	color: #ffffff;
+}
+
+/* Media Queries */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 350px;
+    }
+
+    .login-card {
+        max-width: 450px;
+    }
+
+    .login-form {
+        max-width: 450px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 400px;
+    }
+
+    .login-card {
+        max-width: 500px;
+    }
+
+    .login-form {
+        max-width: 500px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 450px;
+    }
+
+    .login-card {
+        max-width: 550px;
+    }
+
+    .login-form {
+        max-width: 550px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 500px;
+    }
+
+    .login-card {
+        max-width: 500px;
+    }
+
+    .login-form {
+        max-width: 500px;
+    }
+}
