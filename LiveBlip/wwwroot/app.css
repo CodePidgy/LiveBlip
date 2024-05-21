@@ -1,0 +1,173 @@
+/* Dark mode styles */
+body {
+	background-image: url("/images/map.png");
+    background-color: #333;
+    color: #fff;
+}
+
+.form-control-username, .form-control-password, .btn-primary {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.form-control-username, .form-control-password {
+    margin-bottom: 30px;
+    background-color: #353535;
+    color: #ffffff;
+    border-color: #6b6b6b;
+}
+
+::placeholder {
+    color: #dd7979; /* Bright white color */
+    opacity: 1;
+}
+
+.btn-primary {
+	width: 100%;
+    justify-content: center;
+    display: flex;
+    background-color: #f51414;
+    border-color: #f51414;
+	transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow */
+}
+
+.btn-primary:hover {
+    background-color: #940a0a;
+    border-color: #940a0a;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: #940a0a;
+    border-color: #940a0a;
+    outline: none; /* Removes the default blue outline */
+    box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
+}
+
+.invalid-uname-pword {
+	color:#f51414;
+	padding-bottom: 10%;
+
+}
+
+
+.login-form {
+	backdrop-filter: blur(50px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    border: 1px solid #666666;
+    border-radius: 20px;
+    background-color: #3f3f3f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+	transform: translate(0%, 40%);
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+	background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+}
+
+.signin-heading {
+    padding-top: -10%;
+	padding-bottom: 5%;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row3-forget {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+.forget-redirect {
+    color: #ffffff;
+}
+
+.row4-btn {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row5-col2, .register-redirect {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.register-redirect {
+    padding-bottom: 10px;
+	color: #ffffff;
+}
+
+/* Media Queries */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 350px;
+    }
+
+    .login-card {
+        max-width: 450px;
+    }
+
+    .login-form {
+        max-width: 450px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 400px;
+    }
+
+    .login-card {
+        max-width: 500px;
+    }
+
+    .login-form {
+        max-width: 500px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 450px;
+    }
+
+    .login-card {
+        max-width: 550px;
+    }
+
+    .login-form {
+        max-width: 550px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .form-control-username, .form-control-password, .btn-primary {
+        max-width: 500px;
+    }
+
+    .login-card {
+        max-width: 500px;
+    }
+
+    .login-form {
+        max-width: 500px;
+    }
+}
