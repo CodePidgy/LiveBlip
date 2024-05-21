@@ -12,6 +12,43 @@ body {
 	justify-content: center;
 }
 
+/* navbar --------------------------------------------------------------------------------------- */
+nav {
+	padding-left: 20px;
+	padding-right: 20px;
+
+	display: flex;
+	justify-content: space-between;
+
+	background-color: #3f3f3f;
+
+	border-radius: 20px;
+}
+
+.navbar-brand {
+	font-family: "Roboto", sans-serif;
+	font-size: 2rem;
+	color: #f51414;
+}
+
+.navbar-links {
+	width: 40%;
+
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.navbar-link {
+	font-family: "Roboto", sans-serif;
+	text-decoration: none;
+	color: white;
+}
+
+	.navbar-link:hover {
+		color: #f51414;
+	}
+
 /* sign in page --------------------------------------------------------------------------------- */
 ::placeholder {
     color: #dd7979; /* Bright white color */
