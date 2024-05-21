@@ -4,11 +4,11 @@ namespace LiveBlip.Models;
 
 public class SignUpModel {
 	[Required]
-	public string regUname { get; set; }
+	public string Username { get; set; }
 	[Required]
-	public string regPword { get; set; }
+	public string Password { get; set; }
 	[Required]
-	public string confirmPword { get; set;}
+	public string confirmPassword { get; set; }
 	[Required]
 	public string Email { get; set; }
 
