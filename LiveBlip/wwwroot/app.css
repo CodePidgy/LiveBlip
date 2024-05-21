@@ -26,10 +26,8 @@ nav {
 }
 
 .navbar-brand {
-	font-family: "Roboto", sans-serif;
-	font-size: 2rem;
-	color: #f51414;
-	text-decoration: none;
+	width: 200px;
+	height: 55px;
 }
 
 .navbar-links {
