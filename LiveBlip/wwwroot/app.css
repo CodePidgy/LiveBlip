@@ -75,3 +75,27 @@ body {
     align-items: center;
 }
 
+.row3 {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+.forget-redirect {
+    color: #ffffff;
+}
+
+.row4 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row5, .register-redirect {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
