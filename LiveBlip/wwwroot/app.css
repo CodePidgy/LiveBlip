@@ -88,6 +88,15 @@ body {
     align-items: center;
 }
 
+.signup-heading {
+    padding-top: -10%;
+	padding-bottom: 5%;
+    font-size: small;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .row3-forget {
     display: flex;
     justify-content: center;
@@ -110,6 +119,11 @@ body {
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+.account-sign {
+	justify-content: center;
+	display: flex;
 }
 
 .register-redirect {
