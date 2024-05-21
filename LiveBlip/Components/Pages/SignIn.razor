@@ -6,42 +6,44 @@
 
 <PageTitle>Sign In</PageTitle>
 
-<div class="signin-heading">
-	<h1>Sign In</h1>
-</div>
-
 <div class="login-form">
+	<div class="signin-heading">
+		<h1>Sign In</h1>
+	</div>
 	<EditForm Model="signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
 		<DataAnnotationsValidator />
 		<ValidationSummary class="text-danger" />
 		<div class="row1">
 			<InputText id="username"
-			class="form-control" @bind-Value="signInModel.Username"
+			class="form-control-username" @bind-Value="signInModel.Username"
 			placeholder="Username" />
 		</div>
 
 		<div class="row2">
 			<InputText id="password"
 			type="password"
-			class="form-control"
+			class="form-control-password"
 			@bind-Value="signInModel.Password"
 			placeholder="Password" />
 		</div>
 
-		 <div class="row3">
-            <a href class ="forget-redirect" ="/">Forgot Password?</a>
-        </div>
+		<div class="row3">
+			<a href class ="forget-redirect" ="/">Forgot Password?</a>
+		</div>
 
 		<div class="row4">
 			<button type="submit" class="btn btn-primary">Sign In</button>
 		</div>
 
-		<div class=""
+		<div class="row5">
+			<p>Don't have an account?</p>
 		</div>
 
-
-	</EditForm>
-</div>
+		<div class="row5-col2">
+			<a href class ="register-redirect" ="/">Sign Up</a>
+		</div>
+		</EditForm>
+	</div>
 
 @if (!string.IsNullOrEmpty(errorMessage))
 {
