@@ -6,36 +6,43 @@
 
 <PageTitle>Sign Up</PageTitle>
 
-<h1>Sign Up</h1>
-
 <div class="signup-card">
-    <div class="signup-heading">
-        <h1>Sign Up</h1>
-    </div>
+
     <div class="login-form">
+		<div class="signup-heading">
+        	<h1>Sign Up</h1>
+    	</div>
         <EditForm Model="signUpModel" OnValidSubmit="HandleValidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary class="text-danger" />
 
             <div class="form-group">
-                <InputText id="username" class="form-control" @bind-Value="signUpModel.regUname" placeholder="Username" />
+                <InputText id="username" class="form-control-username" @bind-Value="signUpModel.regUname" placeholder="Username" />
             </div>
 
 			<div class="form-group">
-                <InputText id="email" type="email" class="form-control" @bind-Value="signUpModel.Email" placeholder="Email" />
+                <InputText id="email" type="email" class="form-control-username" @bind-Value="signUpModel.Email" placeholder="Email" />
             </div>
 
             <div class="form-group">
-                <InputText id="password" type="password" class="form-control" @bind-Value="signUpModel.regPword" placeholder="Password" />
+                <InputText id="password" type="password" class="form-control-password" @bind-Value="signUpModel.regPword" placeholder="Password" />
             </div>
 
             <div class="form-group">
-                <InputText id="repeat-password" type="password" class="form-control" @bind-Value="signUpModel.confirmPword" placeholder="Repeat Password" />
+                <InputText id="repeat-password" type="password" class="form-control-password" @bind-Value="signUpModel.confirmPword" placeholder="Confirm Password" />
             </div>
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Sign Up</button>
             </div>
+
+			<div class="row5-col1">
+				<p class="account-sign">Have an account?</p>
+			</div>
+
+			<div class="row5-col2">
+				<a href class ="register-redirect" ="/">Sign Up</a>
+			</div>
         </EditForm>
     </div>
 </div>
