@@ -44,6 +44,11 @@ body {
     box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
 }
 
+.invalid-uname-pword {
+	color:#f51414;
+	padding-bottom: 10%;
+
+}
 
 
 .login-form {
@@ -62,7 +67,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-	transform: translate(5%, 50%);
+	transform: translate(0%, 40%);
 	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
 	background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
 }
