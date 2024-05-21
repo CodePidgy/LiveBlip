@@ -81,7 +81,7 @@ body {
     align-items: center;
 }
 
-.row3 {
+.row3-forget {
     display: flex;
     justify-content: center;
     color: #fff;
@@ -91,7 +91,7 @@ body {
     color: #ffffff;
 }
 
-.row4 {
+.row4-btn {
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
@@ -99,7 +99,7 @@ body {
     align-items: center;
 }
 
-.row5, .register-redirect {
+.row5-col2, .register-redirect {
     justify-content: center;
     align-items: center;
     display: flex;
