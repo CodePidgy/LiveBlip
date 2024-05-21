@@ -44,3 +44,25 @@ body {
     box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
 }
 
+
+.login-form {
+	backdrop-filter: blur(50px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    border: 1px solid #666666;
+    border-radius: 20px;
+    background-color: #3f3f3f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+	transform: translate(5%, 50%);
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+	background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+}
+
