@@ -114,6 +114,11 @@ body {
     display: flex;
 }
 
+.account-sign {
+	justify-content: center;
+	display: flex;
+}
+
 .register-redirect {
     padding-bottom: 10px;
 	color: #ffffff;
