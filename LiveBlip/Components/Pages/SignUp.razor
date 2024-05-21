@@ -2,7 +2,7 @@
 @using LiveBlip.Models
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
-@rendermode InteractiveServer
+
 
 <PageTitle>Sign Up</PageTitle>
 
@@ -17,7 +17,7 @@
             <ValidationSummary class="text-danger" />
 
             <div class="form-group">
-                <InputText id="username" class="form-control-username" @bind-Value="signUpModel.regUname" placeholder="Username" />
+                <InputText id="username" class="form-control-username" @bind-Value="signUpModel.Username" placeholder="Username" />
             </div>
 
 			<div class="form-group">
@@ -25,11 +25,11 @@
             </div>
 
             <div class="form-group">
-                <InputText id="password" type="password" class="form-control-password" @bind-Value="signUpModel.regPword" placeholder="Password" />
+                <InputText id="password" type="password" class="form-control-password" @bind-Value="signUpModel.Password" placeholder="Password" />
             </div>
 
             <div class="form-group">
-                <InputText id="repeat-password" type="password" class="form-control-password" @bind-Value="signUpModel.confirmPword" placeholder="Confirm Password" />
+                <InputText id="repeat-password" type="password" class="form-control-password" @bind-Value="signUpModel.confirmPassword" placeholder="Confirm Password" />
             </div>
 
             <div class="form-group">
@@ -62,7 +62,7 @@
         // Add your sign-up logic here
         // For example, validate the data, save to the database, etc.
 
-        if (signUpModel.regPword != signUpModel.regPword)
+        if (signUpModel.Password != signUpModel.Password)
         {
             errorMessage = "Passwords do not match.";
             return;
