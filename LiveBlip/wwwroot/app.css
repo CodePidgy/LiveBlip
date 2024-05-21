@@ -22,3 +22,25 @@ body {
     color: #dd7979; /* Bright white color */
     opacity: 1;
 }
+
+.btn-primary {
+	width: 100%;
+    justify-content: center;
+    display: flex;
+    background-color: #f51414;
+    border-color: #f51414;
+	transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow */
+}
+
+.btn-primary:hover {
+    background-color: #940a0a;
+    border-color: #940a0a;
+}
+
+.btn-primary:focus, .btn-primary:active {
+    background-color: #940a0a;
+    border-color: #940a0a;
+    outline: none; /* Removes the default blue outline */
+    box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
+}
+
