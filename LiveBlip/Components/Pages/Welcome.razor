@@ -1,16 +1,17 @@
 ﻿@page "/welcome"
-<head>
+
 <PageTitle>Welcome</PageTitle>
-</head>
-<body>
 
-<div class="welcometxt" style="text-align: center;">
-	<h1 style="font-size: 150px">Welcome</h1>
-	<h2 style="font-size: 50px">To LiveBlip!</h2>
+<div class="welcome-card">
+	<div class="page-heading">
+		<h1>Welcome</h1>
+	</div>
 
-	<a href = "#">
-		<button height="350" width="350"> Get Started</button>
-	</a>
+	<div class="input-imei">
+		<input type="text" id="imei" class="form-control-imei" placeholder="Tracker IMEI" />
+	</div>
+
+	<div class="submit-imei">
+		<a href="/"><button type="submit" class="submit-imei-button">Track</button></a>
+	</div>
 </div>
-
-</body>
