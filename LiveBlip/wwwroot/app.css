@@ -63,7 +63,7 @@ nav {
 .form-control-username, .form-control-password {
     margin-bottom: 30px;
     background-color: #242323;
-    color: #000000;
+    color: #ffffff;
     border-color: #ffffff;
 }
 
@@ -74,6 +74,7 @@ nav {
     background-color: #f51414;
     border-color: #f51414;
 	transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow */
+	color: #fff;
 }
 
 .btn-primary:hover {
