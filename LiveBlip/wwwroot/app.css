@@ -93,9 +93,16 @@ nav {
     box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
 }
 
+.text-danger {
+	color:#f51414;
+	padding-bottom: 10%;
+}
+
 .invalid-uname-pword {
 	color:#f51414;
 	padding-bottom: 10%;
+	display: flex;
+	justify-content: center;
 
 }
 
