@@ -311,6 +311,7 @@ nav {
 }
 
 .btn-save {
+
     display: flex;
 	justify-content: center;
     padding: 10px 20px;
@@ -320,7 +321,7 @@ nav {
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
-	width: 100%;
+	width: 104%;
 }
 
 .btn-save:hover {
