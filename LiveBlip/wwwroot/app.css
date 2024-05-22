@@ -48,6 +48,64 @@ nav {
 		color: #f51414;
 	}
 
+/* welcome page --------------------------------------------------------------------------------- */
+.welcome-card {
+	width: 100%;
+
+    max-width: 600px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+	padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    border: 1px solid #666666;
+    border-radius: 20px;
+
+    background-color: #3f3f3f;
+	background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+	backdrop-filter: blur(50px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+	transform: translate(0%, 40%);
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+}
+
+.form-control-imei {
+	width: 300px;
+
+	border-radius: 10px;
+	margin-bottom: 10px;
+
+	background-color: #242323;
+}
+
+.submit-imei {
+	padding-top: 10px;
+
+	display: flex;
+	justify-content: center;
+}
+
+.submit-imei-button {
+	width: 100px;
+
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+
+	background-color: #f51414;
+
+	color: #fff;
+
+	cursor: pointer;
+}
+
 /* sign in page --------------------------------------------------------------------------------- */
 ::placeholder {
     color: #dd7979; /* Bright white color */
@@ -325,6 +383,13 @@ nav {
 /* media queries -------------------------------------------------------------------------------- */
 /* Small devices (landscape phones, 576px and down) */
 @media screen and (max-width: 576px) {
+	.form-control-imei {
+		width: 100px;
+
+		border-radius: 10px;
+		margin-bottom: 10px;
+	}
+
 	.contact-info {
 		flex-direction: column;
 	}
