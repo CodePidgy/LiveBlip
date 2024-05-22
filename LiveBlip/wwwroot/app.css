@@ -72,7 +72,7 @@ nav {
 }
 
 .btn-primary {
-	width: 100%;
+	width: 106%;
     justify-content: center;
     display: flex;
     background-color: #f51414;
@@ -281,6 +281,8 @@ nav {
     margin-bottom: 20px;
     font-size: 24px;
     color: #ffffff;
+	display: flex;
+	justify-content: center;
 }
 
 .form-group {
