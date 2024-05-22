@@ -1,5 +1,45 @@
 ﻿@page "/account"
+@using LiveBlip.Models
+@code {
+    private UserModel user = new UserModel
+    {
+        Username = "testuser",
+        Email = "test.user@example.com",
+        FirstName = "test",
+        LastName = "user",
+        Location = "Joahannesburg, South Africa",
 
-<PageTitle>Account</PageTitle>
+    };
 
-<h1>Account</h1>
+    private void SaveProfile()
+    {
+        // Implement your save logic here
+        Console.WriteLine("Profile saved");
+    }
+}
+
+<div class="profile-settings-container">
+    <h2>Edit Profile</h2>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <InputText id="username" @bind-Value="user.Username" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="user.Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <InputText id="firstName" @bind-Value="user.FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <InputText id="lastName" @bind-Value="user.LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="location">Location</label>
+        <InputText id="location" @bind-Value="user.Location" class="form-control" />
+    </div>
+
+    <button @onclick="SaveProfile" class="btn btn-save">Save</button>
+</div>
