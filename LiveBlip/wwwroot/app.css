@@ -19,6 +19,7 @@ nav {
 
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 
 	background-color: #3f3f3f;
 
@@ -31,7 +32,7 @@ nav {
 }
 
 .navbar-links {
-	width: 40%;
+	width: 60%;
 
 	display: flex;
 	justify-content: space-evenly;
@@ -48,9 +49,12 @@ nav {
 		color: #f51414;
 	}
 
+	.navbar-links.collapsed {
+		display: none;
+	}
 /* welcome page --------------------------------------------------------------------------------- */
 .welcome-card {
-	width: 100%;
+	width: 80%;
 
     max-width: 600px;
 
@@ -78,7 +82,7 @@ nav {
 
 .form-control-imei {
 	width: 300px;
-
+	color: #fff;
 	border-radius: 10px;
 	margin-bottom: 10px;
 
@@ -393,6 +397,18 @@ nav {
 
 .btn-save:hover {
     background-color: #940a0a;
+}
+
+/* Add a media query to adjust the navbar layout for smaller devices */
+@media screen and (max-width: 576px) {
+	.navbar-links {
+		flex-direction: column; /* Stack navbar links vertically */
+		align-items: stretch; /* Stretch navbar links to fill the entire width */
+	}
+
+	.navbar-link {
+		margin-bottom: 10px; /* Add some spacing between navbar links */
+	}
 }
 
 /* media queries -------------------------------------------------------------------------------- */
