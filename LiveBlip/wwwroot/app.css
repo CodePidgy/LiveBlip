@@ -62,9 +62,9 @@ nav {
 
 .form-control-username, .form-control-password {
     margin-bottom: 30px;
-    background-color: #353535;
-    color: #ffffff;
-    border-color: #6b6b6b;
+    background-color: #242323;
+    color: #000000;
+    border-color: #ffffff;
 }
 
 .btn-primary {
@@ -259,6 +259,67 @@ nav {
 	backdrop-filter: blur(50px);
 
 	text-align: center;
+}
+
+.profile-settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #353535;
+    border: 1px solid #d1d5da;
+    border-radius: 20px;
+	color: #fff;
+	transform: translate(0%, 20%);
+}
+
+.profile-settings-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.form-group .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+	background-color: #242323;
+	color: #ffffff;
+	border-radius: 20px;
+}
+
+.form-group .form-control:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 3px rgba(214, 3, 3, 0.3);
+    outline: none;
+}
+
+.btn-save {
+    display: flex;
+	justify-content: center;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #f51414;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+	width: 100%;
+}
+
+.btn-save:hover {
+    background-color: #940a0a;
 }
 
 /* media queries -------------------------------------------------------------------------------- */
