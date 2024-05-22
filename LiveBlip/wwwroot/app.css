@@ -114,24 +114,29 @@ nav {
 
 .form-control-username, .form-control-password, .btn-primary {
     width: 100%;
+	height: 30px;
     max-width: 400px;
     border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .form-control-username, .form-control-password {
     margin-bottom: 30px;
     background-color: #242323;
-    color: #000000;
+    color: #ffffff;
     border-color: #ffffff;
 }
 
 .btn-primary {
-	width: 100%;
+	width: 106%;
     justify-content: center;
     display: flex;
     background-color: #f51414;
     border-color: #f51414;
 	transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow */
+	color: #fff;
 }
 
 .btn-primary:hover {
@@ -146,16 +151,23 @@ nav {
     box-shadow: 0 0 0 3px rgba(149, 10, 10, 0.5); /* Adds a custom focus shadow */
 }
 
+.text-danger {
+	color:#f51414;
+	padding-bottom: 10%;
+}
+
 .invalid-uname-pword {
 	color:#f51414;
 	padding-bottom: 10%;
+	display: flex;
+	justify-content: center;
 
 }
 
 .login-form {
 	backdrop-filter: blur(50px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    width: 50%;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -322,7 +334,7 @@ nav {
 .profile-settings-container {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 50px;
     background-color: #353535;
     border: 1px solid #d1d5da;
     border-radius: 20px;
@@ -334,6 +346,8 @@ nav {
     margin-bottom: 20px;
     font-size: 24px;
     color: #ffffff;
+	display: flex;
+	justify-content: center;
 }
 
 .form-group {
@@ -364,6 +378,7 @@ nav {
 }
 
 .btn-save {
+
     display: flex;
 	justify-content: center;
     padding: 10px 20px;
@@ -373,7 +388,7 @@ nav {
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
-	width: 100%;
+	width: 104%;
 }
 
 .btn-save:hover {
