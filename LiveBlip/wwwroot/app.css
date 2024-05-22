@@ -19,9 +19,8 @@ nav {
 
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 
-	background-color: #3f3f3f;
+	background-color: #3f3f3f96;
 
 	border-radius: 20px;
 }
@@ -32,7 +31,7 @@ nav {
 }
 
 .navbar-links {
-	width: 60%;
+	width: 40%;
 
 	display: flex;
 	justify-content: space-evenly;
@@ -49,12 +48,16 @@ nav {
 		color: #f51414;
 	}
 
-	.navbar-links.collapsed {
-		display: none;
-	}
+/* Active link style */
+.navbar-link.active {
+    color: #f51414;
+    font-weight: bold;
+    border-bottom: 2px solid #f51414;
+}
+
 /* welcome page --------------------------------------------------------------------------------- */
 .welcome-card {
-	width: 80%;
+	width: 100%;
 
     max-width: 600px;
 
@@ -80,13 +83,21 @@ nav {
 	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
 }
 
+.logo {
+	height:10%;
+	width:30%;
+	padding-top: 2.4%;
+}
+
 .form-control-imei {
 	width: 300px;
-	color: #fff;
+	height: 40px;
+
 	border-radius: 10px;
 	margin-bottom: 10px;
 
-	background-color: #242323;
+	background-color: #161515;
+	color: #fff;
 }
 
 .submit-imei {
@@ -410,6 +421,7 @@ nav {
 		margin-bottom: 10px; /* Add some spacing between navbar links */
 	}
 }
+
 
 /* media queries -------------------------------------------------------------------------------- */
 /* Small devices (landscape phones, 576px and down) */
