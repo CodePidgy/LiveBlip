@@ -20,7 +20,7 @@ nav {
 	display: flex;
 	justify-content: space-between;
 
-	background-color: #3f3f3f;
+	background-color: #3f3f3f96;
 
 	border-radius: 20px;
 }
@@ -47,6 +47,13 @@ nav {
 	.navbar-link:hover {
 		color: #f51414;
 	}
+
+/* Active link style */
+.navbar-link.active {
+    color: #f51414;
+    font-weight: bold;
+    border-bottom: 2px solid #f51414;
+}
 
 /* welcome page --------------------------------------------------------------------------------- */
 .welcome-card {
@@ -76,13 +83,21 @@ nav {
 	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
 }
 
+.logo {
+	height:10%;
+	width:30%;
+	padding-top: 2.4%;
+}
+
 .form-control-imei {
 	width: 300px;
+	height: 40px;
 
 	border-radius: 10px;
 	margin-bottom: 10px;
 
-	background-color: #242323;
+	background-color: #161515;
+	color: #fff;
 }
 
 .submit-imei {
@@ -394,6 +409,19 @@ nav {
 .btn-save:hover {
     background-color: #940a0a;
 }
+
+/* Add a media query to adjust the navbar layout for smaller devices */
+@media screen and (max-width: 576px) {
+	.navbar-links {
+		flex-direction: column; /* Stack navbar links vertically */
+		align-items: stretch; /* Stretch navbar links to fill the entire width */
+	}
+
+	.navbar-link {
+		margin-bottom: 10px; /* Add some spacing between navbar links */
+	}
+}
+
 
 /* media queries -------------------------------------------------------------------------------- */
 /* Small devices (landscape phones, 576px and down) */
