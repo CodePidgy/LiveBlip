@@ -313,7 +313,7 @@ nav {
 
 /* about page ----------------------------------------------------------------------------------- */
 .about-card {
-    width: 100%;
+    width: 300px;
 
     max-width: 600px;
 
@@ -350,16 +350,19 @@ nav {
     max-width: 600px;
     margin: 0 auto;
     padding: 50px;
+
     background-color: #353535;
     border: 1px solid #d1d5da;
-    border-radius: 20px;
 	color: #fff;
+    border-radius: 20px;
+
 	transform: translate(0%, 20%);
 }
 
 .profile-settings-container h2 {
     margin-bottom: 20px;
     font-size: 24px;
+
     color: #ffffff;
 	display: flex;
 	justify-content: center;
@@ -379,6 +382,7 @@ nav {
 .form-group .form-control {
     width: 100%;
     padding: 10px;
+
     border: 1px solid #ffffff;
     border-radius: 4px;
 	background-color: #242323;
