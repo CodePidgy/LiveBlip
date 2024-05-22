@@ -26,9 +26,9 @@ body {
 
 .form-control-username, .form-control-password {
     margin-bottom: 30px;
-    background-color: #353535;
+    background-color: #242323;
     color: #000000;
-    border-color: #6b6b6b;
+    border-color: #ffffff;
 }
 
 .btn-primary {
@@ -258,6 +258,9 @@ body {
     padding: 10px;
     border: 1px solid #ffffff;
     border-radius: 4px;
+	background-color: #242323;
+	color: #ffffff;
+	border-radius: 20px;
 }
 
 .form-group .form-control:focus {
@@ -273,7 +276,7 @@ body {
     color: #fff;
     background-color: #f51414;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     text-align: center;
 	width: 100%;
