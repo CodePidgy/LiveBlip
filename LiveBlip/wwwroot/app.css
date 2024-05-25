@@ -183,7 +183,7 @@ nav {
 	backdrop-filter: blur(50px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     width: 50%;
-    max-width: 500px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     padding-top: 20px;
@@ -413,6 +413,7 @@ nav {
 .btn-save:hover {
     background-color: #940a0a;
 }
+/* media queries -------------------------------------------------------------------------------- */
 
 /* Add a media query to adjust the navbar layout for smaller devices */
 @media screen and (max-width: 576px) {
@@ -426,10 +427,8 @@ nav {
 	}
 }
 
-
-/* media queries -------------------------------------------------------------------------------- */
 /* Small devices (landscape phones, 576px and down) */
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 876px) {
 	.form-control-imei {
 		width: 100px;
 
@@ -450,6 +449,9 @@ nav {
 
 		height: auto;
 	}
+	.login-form{
+		width: 340px;
+	}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -463,7 +465,7 @@ nav {
     }
 
     .login-form {
-        max-width: 450px;
+        max-width: 650px;
     }
 }
 
