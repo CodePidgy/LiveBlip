@@ -218,6 +218,10 @@ nav {
     align-items: center;
 }
 
+.ml-auto {
+	transform: translate(-60%);
+}
+
 .row3-forget {
     display: flex;
     justify-content: center;
