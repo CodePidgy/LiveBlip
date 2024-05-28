@@ -13,6 +13,12 @@
     </div>
     <EditForm Model="@signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
         <DataAnnotationsValidator/>
+		@if (!string.IsNullOrEmpty(errorMessage))
+		{
+			<div
+				class="invalid-uname-pword">@errorMessage
+			</div>
+		}
         <MudGrid>
             <MudItem xs="12" sm="7">
                 <MudCard>
