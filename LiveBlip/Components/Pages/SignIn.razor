@@ -6,57 +6,67 @@
 
 <PageTitle>Sign In</PageTitle>
 
-<div class="login-form">
-	<div class="signin-heading">
-		<h1>Sign In</h1>
-	</div>
-	<EditForm Model="signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
-		@if (!string.IsNullOrEmpty(errorMessage))
-		{
-			<div
-			class="invalid-uname-pword">@errorMessage
-			</div>
-		}
-		<DataAnnotationsValidator />
-		<ValidationSummary class="text-danger" />
-		<div class="row1-uname">
-			<InputText id="username"
-			class="form-control-username" @bind-Value="signInModel.Username"
-			placeholder="Username" />
-		</div>
 
-		<div class="row2-pword">
-			<InputText id="password"
-			type="password"
-			class="form-control-password"
-			@bind-Value="signInModel.Password"
-			placeholder="Password" />
-		</div>
+	<div class="login-form">
+    <div class="signin-heading">
+        <h1>Sign Up</h1>
+    </div>
+    <EditForm Model="@signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
+        <DataAnnotationsValidator/>
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Username" HelperText="Max. 8 characters"
+                                    @bind-Value="signInModel.Username"
+                                    For="@(() => signInModel.Username)"/>
 
-		<div class="row3-forget">
-			<a href class ="forget-redirect" ="/">Forgot Password?</a>
-		</div>
+                        <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
+                                    @bind-Value="signInModel.Password"
+                                    For="@(() => signInModel.Password)"
+                                    InputType="InputType.Password"/>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit"
+                        Variant="Variant.Filled"
+                        Color="Color.Primary"
+                        Class="ml-auto">Register</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="5">
+                <MudPaper Class="pa-4 mud-height-full">
+                    <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+                    @if (success)
+                    {
+                        <MudText Color="Color.Success">Success</MudText>
+                    }
+                    else
+                    {
+                        <MudText Color="@Color.Error">
+                            <ValidationSummary />
+                        </MudText>
+                    }
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12">
+				 <div class="row5-col1">
+					<p class="account-sign">Don't have an account?</p>
+				</div>
 
-		<div class="row4-btn">
-			<button type="submit" class="btn btn-primary">Sign In</button>
-		</div>
-
-		<div class="row5-col1">
-			<p class="account-sign">Don't have an account?</p>
-		</div>
-
-		<div class="row5-col2">
-			<a href class ="register-redirect" ="/signup">Sign Up</a>
-		</div>
-		</EditForm>
-	</div>
-
-
+				<div class="row5-col2">
+					<a href class ="register-redirect" ="/signup">Sign Up</a>
+				</div>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+</div>
 
 @code {
 	[SupplyParameterFromForm]
     private SignInModel signInModel {get; set;} = new();
     private string errorMessage;
+	bool success;
 
     private async Task HandleValidSubmit() {
 		// Hardcoded credentials
