@@ -222,8 +222,12 @@ nav {
 	transform: translate(-60%);
 }
 
+.ml-auto1 {
+	transform: translate(100%);
+}
+
 .row3-forget {
-    display: flex;
+    display: flex;	
     justify-content: center;
     color: #fff;
 }
