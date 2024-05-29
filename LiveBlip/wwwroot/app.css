@@ -13,47 +13,6 @@ body {
 }
 
 /* navbar --------------------------------------------------------------------------------------- */
-nav {
-	padding-left: 20px;
-	padding-right: 20px;
-
-	display: flex;
-	justify-content: space-between;
-
-	background-color: #3f3f3f96;
-
-	border-radius: 20px;
-}
-
-.navbar-brand {
-	width: 200px;
-	height: 55px;
-}
-
-.navbar-links {
-	width: 40%;
-
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
-.navbar-link {
-	font-family: "Roboto", sans-serif;
-	text-decoration: none;
-	color: white;
-}
-
-	.navbar-link:hover {
-		color: #f51414;
-	}
-
-/* Active link style */
-.navbar-link.active {
-    color: #f51414;
-    font-weight: bold;
-    border-bottom: 2px solid #f51414;
-}
 
 /* welcome page --------------------------------------------------------------------------------- */
 .welcome-card {
