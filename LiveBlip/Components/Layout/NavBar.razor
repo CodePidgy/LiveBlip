@@ -1,10 +1,62 @@
-<nav>
-	<NavLink href="#"><img class="navbar-brand" src="images/logo.png" /></NavLink>
+@inject Settings Settings
 
-	<div class="navbar-links">
-		<NavLink class="navbar-link" href="#">Home</NavLink>
-		<NavLink class="navbar-link" href="contact">Contact Us</NavLink>
-		<NavLink class="navbar-link" href="about">About Us</NavLink>
-		<NavLink class="navbar-link" href="account">Account</NavLink>
-	</div>
-</nav>
+<MudAppBar Color="Color.Secondary" Elevation="1">
+	<MudLink Href="#" Color="Color.Primary" Typo="Typo.h4" Underline="Underline.None">
+		LiveBlip
+	</MudLink>
+
+	<MudSpacer />
+
+	<MudMenu>
+		<ActivatorContent>
+			<MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary"/>
+		</ActivatorContent>
+
+		<ChildContent>
+			<MudMenuItem>
+				<MudLink
+					Href="/about"
+					Color="Color.Primary"
+					Typo="Typo.h6"
+					Underline="Underline.None"
+				>
+					About Us
+				</MudLink>
+			</MudMenuItem>
+			<MudMenuItem>
+				<MudLink
+					Href="/contact"
+					Color="Color.Primary"
+					Typo="Typo.h6"
+					Underline="Underline.None"
+				>
+					Contact Us
+				</MudLink>
+			</MudMenuItem>
+		</ChildContent>
+	</MudMenu>
+
+	@if (Settings.DarkMode) {
+		<MudIconButton
+			Icon="@Icons.Material.Filled.WbSunny"
+			Color="Color.Primary"
+			OnClick="DarkModeToggleChanged"
+		/>
+	} else {
+		<MudIconButton
+			Icon="@Icons.Material.Filled.DarkMode"
+			Color="Color.Primary"
+			OnClick="DarkModeToggleChanged"
+		/>
+	}
+
+	<MudLink Href="/account">
+		<MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
+	</MudLink>
+</MudAppBar>
+
+@code {
+	// fields ----------------------------------------------------------------------------------- //
+	[Parameter]
+	public EventCallback DarkModeToggleChanged { get; set; }
+}

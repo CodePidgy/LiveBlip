@@ -1,17 +1,49 @@
-﻿@inherits LayoutComponentBase
+﻿@using MudBlazor.Utilities
+@inherits LayoutComponentBase
+@inject Settings Settings
 
-<div class="page">
-	<header>
-		<MudThemeProvider />
-		<MudDialogProvider />
-		<MudSnackbarProvider />
+<MudThemingProvider @bind-IsDarkMode="Settings.DarkMode" Theme="theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudPopoverProvider />
 
-		<NavBar />
-	</header>
+<style>
+	body {
+		@if (Settings.DarkMode) {
+			@:background-image: url(/images/map-dark.png);
+		} else {
+			@:background-image: url(/images/map-light.png);
+		}
+	}
+</style>
 
-    <main>
-		<div class="container-fluid px-4">
-			@Body
-		</div>
-    </main>
-</div>
+<MudLayout>
+	<NavBar DarkModeToggleChanged="DarkModeToggleChanged" />
+
+	<MudMainContent Class="mt-16 pa-4">
+		@Body
+	</MudMainContent>
+</MudLayout>
+
+@code {
+	// fields ----------------------------------------------------------------------------------- //
+    private MudTheme theme = new MudTheme() {
+		Palette = new PaletteLight() {
+			Primary = new MudColor("#0F6681"), // MTB P-40
+			Secondary = new MudColor("#FFFFFF"), // MTB P-100
+			Tertiary = new MudColor("#D0E6f2"), // MTB S-90
+			Dark = new MudColor("#D6DBDE") // MTB N-87
+		},
+		PaletteDark = new PaletteDark() {
+			Primary = new MudColor("#9CCBFB"), // MTB P-80
+			Secondary = new MudColor("#003354"), // MTB P-20
+			Tertiary = new MudColor("#3A4857"), // MTB S-30
+			Dark = new MudColor("#101418") // MTB N-6
+		}
+	};
+
+	// methods ---------------------------------------------------------------------------------- //
+	private void DarkModeToggleChanged() {
+		Settings.DarkMode = !Settings.DarkMode;
+	}
+}
