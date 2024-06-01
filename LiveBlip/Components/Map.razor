@@ -1,0 +1,14 @@
+@inject IJSRuntime JSRuntime
+
+<div id="map"></div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
+        if (firstRender) {
+            await JSRuntime.InvokeVoidAsync("InitMap");
+			await JSRuntime.InvokeVoidAsync(
+				"AddMarker", new { latitude = -26.080730, longitude = 27.878570 }
+			);
+        }
+    }
+}
