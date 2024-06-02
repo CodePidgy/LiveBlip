@@ -1,5 +1,6 @@
 ﻿@using MudBlazor.Utilities
 @inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
 @inject Settings Settings
 
 <MudThemingProvider @bind-IsDarkMode="Settings.DarkMode" Theme="theme" />
@@ -43,7 +44,24 @@
 	};
 
 	// methods ---------------------------------------------------------------------------------- //
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		// Unsure why, but despite the page being rendered, a wait is needed for the theme to be set
+		await Task.Delay(1);
+
+		SetMapTheme();
+	}
+
 	private void DarkModeToggleChanged() {
 		Settings.DarkMode = !Settings.DarkMode;
+
+		SetMapTheme();
+	}
+
+	private void SetMapTheme() {
+		if (Settings.DarkMode) {
+			JSRuntime.InvokeVoidAsync("SetDarkMode");
+		} else {
+			JSRuntime.InvokeVoidAsync("SetLightMode");
+		}
 	}
 }
