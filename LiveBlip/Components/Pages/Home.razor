@@ -1,6 +1,23 @@
-﻿@inject IJSRuntime JSRuntime
-@page "/"
+﻿@page "/"
+@inject IJSRuntime JSRuntime
 
-<PageTitle>Home</PageTitle>
+<div class="container">
+    <div class="sidebar">
+        <h3>Home</h3>
+        <button @onclick="AddNewMarker">Add Marker</button>
+    </div>
+    <div class="map-container">
+        <Map />
+    </div>
+</div>
 
-<Map />
+@code {
+    private int markerIndex = 0;
+
+    private async Task AddNewMarker()
+    {
+        var newMarker = new { latitude = -33.8688 + markerIndex * 0.01, longitude = 151.2093 + markerIndex * 0.01 };
+        await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
+        markerIndex++;
+    }
+}
