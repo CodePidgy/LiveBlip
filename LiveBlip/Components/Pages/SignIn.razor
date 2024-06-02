@@ -1,5 +1,6 @@
 @page "/signin"
 @using LiveBlip.Models
+@using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
@@ -25,11 +26,13 @@
                     <MudCardContent>
                         <MudTextField Label="Username" HelperText="Max. 8 characters"
                                     @bind-Value="signInModel.Username"
-                                    For="@(() => signInModel.Username)"/>
+                                    For="@(() => signInModel.Username)"
+									Immediate="true"/>
 
                         <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
                                     @bind-Value="signInModel.Password"
                                     For="@(() => signInModel.Password)"
+									Immediate="true"
                                     InputType="InputType.Password"/>
                     </MudCardContent>
                     <MudCardActions>
@@ -59,7 +62,6 @@
 				 <div class="row5-col1">
 					<p class="account-sign">Don't have an account?</p>
 				</div>
-
 				<div class="row5-col2">
 					<a href class ="register-redirect" ="/signup">Sign Up</a>
 				</div>
