@@ -1,18 +1,64 @@
-﻿@page "/welcome"
+﻿
+@page "/welcome"
+@inject NavigationManager NavManager
 
 <PageTitle>Welcome</PageTitle>
 
-<div class="welcome-card">
-	<div class="page-heading">
-		<h1>Welcome to</h1>
-		<img src="images/logo.png" class="logo"
-	</div>
 
-	<div class="input-imei">
-		<input type="text" class="form-control-imei" placeholder="Please input tracker IMEI" />
-	</div>
 
-	<div class="submit-imei">
-		<a href="/"><button type="submit" class="submit-imei-button">Track</button></a>
-	</div>
-</div>
+
+<MudPaper Class="mx-auto my-16 pa-6 mud-theme-dark " Height="230px" Width="50%" Elevation="22" Outlined="true" >
+    <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-content-center flex-wrap flex-grow-1 gap-4 ">
+        <MudText Class=" pa-4 pl-14 " Color="Color.Secondary" Typo="Typo.h4"><b>Welcome to</b > </MudText>
+		<MudImage Class="ml-n9"  Src="images\logo.png" Width="250" Height="70"/>
+     </MudContainer>
+
+<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+     <MudContainer  Class="d-flex align-content-center flex-wrap flex-grow-1 gap-4 ">
+
+          <MudTextField @bind-Value="HelperText"  Label="Please input tracker IMEI" Variant="Variant.Outlined" Margin="Margin.Dense"  @ref="pwField1" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true" RequiredError="Correct IMEI number is required!"/>
+              <MudPaper Elevation="0" Class=" mud-theme-dark">
+                   <MudButton Variant="Variant.Filled" Color="Color.Error"   OnClick="@(()=>form.Validate())" ><MudImage  Src="images\search.png" Width="30" Height="30"/></MudButton>
+             </MudPaper>
+
+      </MudContainer>
+</MudForm>
+</MudPaper>
+
+
+@code {
+    public string HelperText { get; set; }
+}
+
+
+@code
+{
+	string pass = "12345";
+ bool success;
+    string[] errors = { };
+	MudForm form = new MudForm();
+    MudTextField<string> pwField1;
+
+ private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "IMEI number is required!";
+            yield break;
+        }
+
+		if (pwField1.Value != pass)
+          yield  return "Invalid IMEI number";
+
+		if (pwField1.Value == pass)
+             NavManager.NavigateTo("/");
+}
+
+
+
+}
+
+
+
+
+
