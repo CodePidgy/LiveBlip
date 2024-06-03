@@ -1,23 +1,51 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
 
-<div class="container">
-    <div class="sidebar">
-        <h3>Home</h3>
-        <button @onclick="AddNewMarker">Add Marker</button>
-    </div>
-    <div class="map-container">
-        <Map />
-    </div>
-</div>
+<body scroll="no" style="overflow: hidden">
+	<div class="container">
+		<div class="sidebar">
+			<MudPaper Width="100%">
+				<MudList Clickable="true">
+					<MudListItem Icon="@Icons.Material.Filled.Api"   Title="Device" Text="Devices" InitiallyExpanded="true">
+						<NestedList>
+							<MudListItem Icon="@Icons.Material.Filled.Api" Title="Device" >
+								Samsung S21 FE
+							</MudListItem>
+							<MudListItem Icon="@Icons.Material.Filled.WatchLater">
+								Snoozed
+							</MudListItem>
+						</NestedList>
+					</MudListItem>
+					<MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
+						<NestedList>
+							<MudListItem Icon="@Icons.Material.Filled.AddCircle" Title="Add A Device">
+								<button @onclick="AddNewMarker">Add A Device</button>
+							</MudListItem>
+							<MudListItem Icon="@Icons.Material.Filled.WatchLater">
+								Turn Device Off
+							</MudListItem>
+						</NestedList>
+					</MudListItem>
+				</MudList>
+			</MudPaper>
 
-@code {
-    private int markerIndex = 0;
+			<h3>Home</h3>
+		</div>
+		<div class="map-container">
+			<Map />
+		</div>
+	</div>
 
-    private async Task AddNewMarker()
-    {
-        var newMarker = new { latitude = -33.8688 + markerIndex * 0.01, longitude = 151.2093 + markerIndex * 0.01 };
-        await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
-        markerIndex++;
-    }
-}
+	@code {
+		private int markerIndex = 0;
+
+		private async Task AddNewMarker()
+
+		{
+			var newMarker = new { latitude = -33.8688 + markerIndex * 0.01, longitude = 151.2093 + markerIndex * 0.01 };
+			await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
+			markerIndex++;
+		}
+	}
+
+</body>
