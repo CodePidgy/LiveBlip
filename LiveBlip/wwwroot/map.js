@@ -6,7 +6,7 @@ function InitMap() {
     map = new atlas.Map("map", {
         view: "Auto",
         center: [27, -26],
-        zoom: 3,
+        zoom: 8,
         language: "en-GB",
         authOptions: {
             authType: "subscriptionKey",

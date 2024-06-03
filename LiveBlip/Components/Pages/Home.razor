@@ -1,51 +1,82 @@
 ﻿@page "/"
 @inject IJSRuntime JSRuntime
+@inject MudBlazor.IDialogService DialogService
+@using LiveBlip.Models
 
-<body scroll="no" style="overflow: hidden">
-	<div class="container">
-		<div class="sidebar">
-			<MudPaper Width="100%">
-				<MudList Clickable="true">
-					<MudListItem Icon="@Icons.Material.Filled.Api"   Title="Device" Text="Devices" InitiallyExpanded="true">
-						<NestedList>
-							<MudListItem Icon="@Icons.Material.Filled.Api" Title="Device" >
-								Samsung S21 FE
-							</MudListItem>
-							<MudListItem Icon="@Icons.Material.Filled.WatchLater">
-								Snoozed
-							</MudListItem>
-						</NestedList>
-					</MudListItem>
-					<MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
-						<NestedList>
-							<MudListItem Icon="@Icons.Material.Filled.AddCircle" Title="Add A Device">
-								<button @onclick="AddNewMarker">Add A Device</button>
-							</MudListItem>
-							<MudListItem Icon="@Icons.Material.Filled.WatchLater">
-								Turn Device Off
-							</MudListItem>
-						</NestedList>
-					</MudListItem>
-				</MudList>
-			</MudPaper>
+<div class="container">
+    <div class="sidebar">
+        <MudPaper Width="100%">
+            <MudList Clickable="true">
+                <MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
+                    <NestedList>
+                        @foreach (var device in devices)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
+                                @device.Name
+                            </MudListItem>
+                        }
+                    </NestedList>
+                </MudListItem>
+                <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
+                    <NestedList>
+                        <MudListItem Icon="@Icons.Material.Filled.AddCircle" Title="Add A Device">
+                            <MudButton OnClick="ShowAddDeviceDialog">Add A Device</MudButton>
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.WatchLater">
+                            Turn Device Off
+                        </MudListItem>
+                    </NestedList>
+                </MudListItem>
+            </MudList>
+        </MudPaper>
 
-			<h3>Home</h3>
-		</div>
-		<div class="map-container">
-			<Map />
-		</div>
-	</div>
+        <h3>Home</h3>
+    </div>
+    <div class="map-container">
+        <Map />
+    </div>
+</div>
 
-	@code {
-		private int markerIndex = 0;
+@code {
+    private List<Device> devices = new List<Device>
+    {
+        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570 },
+        new Device { Name = "Device 2", Latitude = -25.747867, Longitude = 28.229271 }
+    };
 
-		private async Task AddNewMarker()
+    private int markerIndex = 0;
 
-		{
-			var newMarker = new { latitude = -33.8688 + markerIndex * 0.01, longitude = 151.2093 + markerIndex * 0.01 };
-			await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
-			markerIndex++;
-		}
-	}
+    private async Task ShowAddDeviceDialog()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<AddMarkerDialog>("Add Device", parameters, options);
+        var result = await dialog.Result;
 
-</body>
+        if (!result.Cancelled)
+        {
+            var (deviceName, deviceNumber) = ((string, int))result.Data;
+            var newDevice = new Device
+            {
+                Name = deviceName,
+                Latitude = -33.8688 + markerIndex * 0.01,
+                Longitude = 151.2093 + markerIndex * 0.01
+            };
+            devices.Add(newDevice);
+            await AddNewMarker(newDevice);
+        }
+    }
+
+    private async Task AddNewMarker(Device device)
+    {
+        var newMarker = new { latitude = device.Latitude, longitude = device.Longitude };
+        await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
+        markerIndex++;
+    }
+
+    private async Task ShowDeviceOnMap(Device device)
+    {
+        var coords = new { latitude = device.Latitude, longitude = device.Longitude };
+        await JSRuntime.InvokeVoidAsync("AddMarker", coords);
+    }
+}
