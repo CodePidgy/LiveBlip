@@ -2,29 +2,49 @@
 
 <PageTitle>Contact Us</PageTitle>
 
-<div class="contact-card">
-	<div class="page-heading">
-		<h1>Contact Us</h1>
-	</div>
+<MudContainer MaxWidth="MaxWidth.Medium" Class="my-16">
+	<MudCard Class="mud-theme-dark rounded-xl">
+		<MudCardHeader Class="d-flex justify-center ">
+			<MudText Color="Color.Secondary" Typo="Typo.h6">Contact Us</MudText>
+		</MudCardHeader>
 
-	<div class="contact-info">
-		<div class="contact-info-card">
-			<a href="tel:011-595-9730"><img src="images/phone.png" class="contact-image"/></a>
-			<p class="contact-text">(011) 595 9730</p>
-		</div>
+		<MudDivider DividerType="DividerType.Middle" />
 
-		<div class="contact-info-card">
-			<a href="mailto:liveblip@ithegi.co.za">
-				<img src="images/email.png" class="contact-image"/>
-			</a>
-			<p class="contact-text">liveblip@ithegi.co.za</p>
-		</div>
+		<MudCardContent Class="d-flex justify-space-evenly pa-16">
+			<MudContainer Class="d-flex justify-space-evenly">
+				<MudContainer>
+					<MudLink
+						Href="tel:011-595-9730"
+						Style="margin-left: calc(50% - 50px); margin-right: calc(50% - 50px)"
+					>
+						<MudIcon Icon="@Icons.Material.Filled.Phone" Style="font-size: 100px;" />
+					</MudLink>
 
-		<div class="contact-info-card">
-			<a href="https://maps.app.goo.gl/q9DRmHqSRhYKuXKg7">
-				<img src="images/location.png" class="contact-image"/>
-			</a>
-			<p class="contact-text">91 Vlagskip St, Laser Park, Roodepoort, 2040</p>
-		</div>
-	</div>
-</div>
+					<MudText Align="Align.Center">(011) 595 9730</MudText>
+				</MudContainer>
+
+				<MudContainer>
+					<MudLink
+						Href="mailto:liveblip@ithegi.co.za"
+						Style="margin-left: calc(50% - 50px); margin-right: calc(50% - 50px)"
+					>
+						<MudIcon Icon="@Icons.Material.Filled.Email" Style="font-size: 100px;" />
+					</MudLink>
+
+					<MudText Align="Align.Center">liveblip@ithegi.co.za</MudText>
+				</MudContainer>
+
+				<MudContainer>
+					<MudLink
+						Href="https://maps.app.goo.gl/q9DRmHqSRhYKuXKg7"
+						Style="margin-left: calc(50% - 50px); margin-right: calc(50% - 50px)"
+					>
+						<MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="font-size: 100px;" />
+					</MudLink>
+
+					<MudText Align="Align.Center">91 Vlagskip St, Laser Park, Roodepoort, 2040</MudText>
+				</MudContainer>
+			</MudContainer>
+		</MudCardContent>
+	</MudCard>
+</MudContainer>
