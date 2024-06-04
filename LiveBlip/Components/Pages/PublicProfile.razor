@@ -4,7 +4,6 @@
 @inject NavigationManager Navigation
 @using LiveBlip.Models
 
-
 <EditForm Model="@user" OnValidSubmit="SaveProfile"  FormName="ProfileForm">
         <DataAnnotationsValidator/>
         <MudGrid>
@@ -16,7 +15,6 @@
                                     @bind-Value="user.Username"
                                     For="@(() => user.Username)"
 									Immediate="true"/>
-
                         <MudTextField Label="Email" Class="mt-3"
                                     @bind-Value="user.Email"
                                     For="@(() => user.Email)"
@@ -54,7 +52,6 @@
         FirstName = "test",
         LastName = "user",
         Location = "Johannesburg, South Africa",
-
     };
 
 	 bool success;
