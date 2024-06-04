@@ -1,0 +1,87 @@
+@page "/publicprofile"
+@using System.ComponentModel.DataAnnotations
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+@using LiveBlip.Models
+
+
+<EditForm Model="@user" OnValidSubmit="SaveProfile" FormName="ProfileForm">
+        <DataAnnotationsValidator/>
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Username"
+						HelperText="This name will be how you are adressed"
+                                    @bind-Value="user.Username"
+                                    For="@(() => user.Username)"/>
+                        <MudTextField Label="Email" Class="mt-3"
+                                    @bind-Value="user.Email"
+                                    For="@(() => user.Email)"
+                                    InputType="InputType.Email"/>
+                        <MudTextField Label="First Name" Class="mt-3"
+                                    @bind-Value="user.FirstName"
+                                    For="@(() => user.FirstName)"/>
+                        <MudTextField Label="Last Name" Class="mt-3"
+                                    @bind-Value="user.LastName"
+                                    For="@(() => user.LastName)"/>
+						<MudTextField Label="Location" Class="mt-3"
+                                    @bind-Value="user.Location"
+                                    For="@(() => user.Location)"/>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit"
+                        Variant="Variant.Filled"
+                        Color="Color.Primary"
+                        Class="ml-auto">Register</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="12" sm="5">
+                <MudPaper Class="pa-4 mud-height-full">
+                    <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+                    @if (success)
+                    {
+                        <MudText Color="Color.Success">Success</MudText>
+                    }
+                    else
+                    {
+                        <MudText Color="@Color.Error">
+                            <ValidationSummary />
+                        </MudText>
+                    }
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.body2" Align="Align.Center">
+                    Fill out the form correctly to see the success message.
+                </MudText>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+
+@code {
+    private UserModel user = new UserModel
+    {
+        Username = "testuser",
+        Email = "test.user@example.com",
+        FirstName = "test",
+        LastName = "user",
+        Location = "Johannesburg, South Africa",
+
+    };
+
+	 bool success;
+	private string errorMessage;
+    private void OnValidSubmit(EditContext context)
+    {
+        success = true;
+        StateHasChanged();
+    }
+	
+    private void SaveProfile()
+    {
+        // Implement your save logic here
+        Console.WriteLine("Profile saved");
+    }
+}
