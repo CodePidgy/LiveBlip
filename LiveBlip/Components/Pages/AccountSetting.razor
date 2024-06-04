@@ -1,0 +1,147 @@
+﻿@using System.ComponentModel.DataAnnotations
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+@using LiveBlip.Models
+<div class="d-flex flex-column gap-2">
+
+
+	<MudContainer Class="mt-16">
+	<MudCard Height="100%" Width="220%" Class="mud-theme-dark rounded-xl">
+		<MudCardHeader Class="d-flex justify-center ">
+			<MudText Color="Color.Secondary" Typo="Typo.h4">Change Email</MudText>
+
+		</MudCardHeader>
+
+		<MudDivider DividerType="DividerType.Middle" />
+
+		<MudCardContent>
+			<MudText
+				Color="Color.Secondary"
+				Typo="Typo.body1"
+				Class="px-16 mt-16 align-self-center"
+			>
+
+			<MudText>Changing your username can have unintended side effects.</MudText>
+    <div class="flex-grow-0">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(()=>showChangeEmailDialog=true)">Change email</MudButton>
+    </div>
+
+
+
+			</MudText>
+		</MudCardContent>
+	</MudCard>
+</MudContainer>
+
+
+
+
+    <MudText Typo="Typo.h4" Color="Color.Secondary" Class="mt-4">Delete account</MudText>
+    <MudDivider />
+    <MudText>You must remove yourself, transfer ownership, or delete these organizations before you can delete your user.</MudText>
+    <div class="flex-grow-0">
+        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(()=>showDeleteAccountDialog=true)">Delete your account</MudButton>
+    </div>
+</div>
+
+<MudDialog @bind-Visible="showChangeEmailDialog" Options="dialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3" Size="Size.Small" /> Change Your Email
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm   @bind-IsValid="@success" >
+            <MudTextField T="string" Label="New email address" Placeholder="Enter your new email address" @bind-Value="@newEmailAddress" Required="true" RequiredError="Email is required!"
+                          Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})"></MudTextField>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" OnClick="OnChangeMyEmail" Class="px-10">Change my email</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<MudDialog @bind-Visible="showDeleteAccountDialog" Options="dialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3" Size="Size.Small" /> Delete Your Account
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body1">
+            Are you sure you want to delete your account? This action cannot be undone.
+        </MudText>
+        <div>
+            <span class="mud-typography mud-typography-body2 mud-secondary-text">
+                Please type your username to confirm. Your current username is:
+            </span>
+            <span class="mud-typography mud-typography-caption mud-error-text" style="font-weight:500">
+                @userInfo?.Username
+            </span>
+        </div>
+
+        <MudForm   @bind-IsValid="@deleteSuccess">
+            <MudTextField T="string" Label="Username" Placeholder="Enter your username" @bind-Value="@confirmUsername" Required="true" RequiredError="Username is required!"
+                          Validation="@(new Func<string, string>(userNameMatch))"></MudTextField>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Error" Disabled="@(!deleteSuccess)" OnClick="OnDeleteAccount" Class="px-10">Delete my account</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    bool success;
+    private bool showChangeEmailDialog;
+    private string? confirmUsername;
+    private bool showDeleteAccountDialog;
+    private bool deleteSuccess;
+    private string? newEmailAddress;
+
+    private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.ExtraSmall, CloseOnEscapeKey=true, CloseButton=true};
+    private UserModel? userInfo;
+    protected override async Task OnInitializedAsync()
+    {
+        @* userInfo = await LiveBlip.GetCurrentUserAsync(); *@
+    }
+    private async Task OnChangeMyEmail()
+    {
+        if (success)
+        {
+            try
+            {
+                @* await LiveBlip.Auth.User.RequestEmailChangeAsync(newEmailAddress!); *@
+                showChangeEmailDialog = false;
+                Snackbar.Add("Email change request sent successfully. Please check your new email for confirmation.", Severity.Info);
+            }
+            catch (Exception)
+            {
+                Snackbar.Add("An error occurred while trying to change your email. Please try again later.", Severity.Error);
+            }
+        }
+    }
+    private async Task OnDeleteAccount()
+    {
+        if (deleteSuccess)
+        {
+            try
+            {
+                Navigation.NavigateTo("/signin");
+                showDeleteAccountDialog = false;
+                Snackbar.Add("Your account has been deleted successfully.", Severity.Info);
+            }
+            catch (Exception)
+            {
+                Snackbar.Add("An error occurred while trying to delete your account. Please try again later.", Severity.Error);
+            }
+        }
+    }
+
+    private string? userNameMatch(string arg)
+    {
+        if (userInfo?.Username!= arg)
+            return "Username does not match";
+        return null;
+    }
+}
