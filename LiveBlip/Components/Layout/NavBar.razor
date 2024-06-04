@@ -7,34 +7,10 @@
 
 	<MudSpacer />
 
-	<MudMenu>
-		<ActivatorContent>
-			<MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary"/>
-		</ActivatorContent>
-
-		<ChildContent>
-			<MudMenuItem>
-				<MudLink
-					Href="/about"
-					Color="Color.Primary"
-					Typo="Typo.h6"
-					Underline="Underline.None"
-				>
-					About Us
-				</MudLink>
-			</MudMenuItem>
-			<MudMenuItem>
-				<MudLink
-					Href="/contact"
-					Color="Color.Primary"
-					Typo="Typo.h6"
-					Underline="Underline.None"
-				>
-					Contact Us
-				</MudLink>
-			</MudMenuItem>
-		</ChildContent>
-	</MudMenu>
+	<MudIconButton Icon="@Icons.Material.Filled.Info" Href="/about" Color="Color.Primary" />
+	<MudIconButton
+		Icon="@Icons.Material.Filled.PermPhoneMsg" Href="/contact" Color="Color.Primary"
+	/>
 
 	@if (Settings.DarkMode) {
 		<MudIconButton
