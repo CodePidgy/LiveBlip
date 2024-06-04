@@ -1,4 +1,4 @@
-@using System.ComponentModel.DataAnnotations
+﻿@using System.ComponentModel.DataAnnotations
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
 @using LiveBlip.Models
@@ -21,14 +21,17 @@
 				Class="px-16 mt-16 align-self-center"
 			>
 
-			<MudText>Changing your username can have unintended side effects.</MudText>
+			<MudText>Changing your email can have unintended side effects.</MudText>
     <div class="flex-grow-0">
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(()=>showChangeEmailDialog=true)">Change email</MudButton>
+        <MudButton Variant="Variant.Filled"  Color="Color.Primary" OnClick="@(()=>showChangeEmailDialog=true)">Change email</MudButton>
     </div>
-
-
-
 			</MudText>
+			<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Secondary" Class="mt-4">Delete account</MudText>
+			  <MudDivider />
+    <MudText>You must remove yourself, transfer ownership, or delete these organizations before you can delete your user.</MudText>
+    <div class="flex-grow-0">
+        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(()=>showDeleteAccountDialog=true)">Delete your account</MudButton>
+    </div>
 		</MudCardContent>
 	</MudCard>
 </MudContainer>
@@ -36,12 +39,8 @@
 
 
 
-    <MudText Typo="Typo.h4" Color="Color.Secondary" Class="mt-4">Delete account</MudText>
-    <MudDivider />
-    <MudText>You must remove yourself, transfer ownership, or delete these organizations before you can delete your user.</MudText>
-    <div class="flex-grow-0">
-        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(()=>showDeleteAccountDialog=true)">Delete your account</MudButton>
-    </div>
+
+
 </div>
 
 <MudDialog @bind-Visible="showChangeEmailDialog" Options="dialogOptions">
