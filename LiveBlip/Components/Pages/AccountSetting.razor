@@ -2,14 +2,14 @@
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
 @using LiveBlip.Models
-<div class="d-flex flex-column gap-2">
 
 
-	<MudContainer Class="mt-16">
-	<MudCard Height="100%" Width="100%" Class="mud-theme-dark rounded-xl">
+
+	<MudContainer Class="mt-1">
+	<MudCard Height="200%" Width="100%" Class="mud-theme-dark rounded-xl">
+
 		<MudCardHeader Class="d-flex justify-center ">
 			<MudText Color="Color.Secondary" Typo="Typo.h4">Change Email</MudText>
-
 		</MudCardHeader>
 
 		<MudDivider DividerType="DividerType.Middle" />
@@ -18,30 +18,54 @@
 			<MudText
 				Color="Color.Secondary"
 				Typo="Typo.body1"
-				Class="px-16 mt-16 align-self-center"
+				Class="px-16"
 			>
 
-			<MudText>Changing your email can have unintended side effects.</MudText>
-    <div class="flex-grow-0">
-        <MudButton Variant="Variant.Filled"  Color="Color.Primary" OnClick="@(()=>showChangeEmailDialog=true)">Change email</MudButton>
-    </div>
-			</MudText>
-			<MudText Align="Align.Center" Typo="Typo.h4" Color="Color.Secondary" Class="mt-4">Delete account</MudText>
-			  <MudDivider />
-    <MudText>You must remove yourself, transfer ownership, or delete these organizations before you can delete your user.</MudText>
-    <div class="flex-grow-0">
-        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(()=>showDeleteAccountDialog=true)">Delete your account</MudButton>
-    </div>
+            <MudText
+                Class="mt-4 mb-5"
+                Align="Align.Center">
+                Change Email Address
+            </MudText>
+
+            <MudGrid Justify="Justify.Center">
+                <MudItem>
+                    <MudButton
+                        Variant="Variant.Filled"
+                        Color="Color.Primary"
+                        OnClick="@(()=>showChangeEmailDialog=true)">
+                        Change email
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+
+            </MudText>
+                <MudText
+                Align="Align.Center"
+                Typo="Typo.h4"
+                Color="Color.Secondary"
+                Class="mt-8">Delete account</MudText>
+                    <MudDivider />
+
+            <MudText
+            Class="mt-10 mb-5"
+            Align="Align.Center">
+            Once you delete your account, there is no going back. Please be certain.
+            </MudText>
+
+            <MudGrid Justify="Justify.Center">
+                <MudItem>
+                    <MudButton
+                        Variant="Variant.Filled"
+                        Color="Color.Error"
+                        OnClick="@(()=>showDeleteAccountDialog=true)">
+                        Delete your account
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
 		</MudCardContent>
 	</MudCard>
 </MudContainer>
 
-
-
-
-
-
-</div>
 
 <MudDialog @bind-Visible="showChangeEmailDialog" Options="dialogOptions">
     <TitleContent>
