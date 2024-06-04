@@ -5,24 +5,37 @@
 <PageTitle>Welcome</PageTitle>
 
 
+<MudPaper Class="mx-auto my-16 pa-6 mud-theme-dark border-solid border-2 mud-border-primary pa-4 " Height="230px" Width="50%" Elevation="22" Outlined="true" >
 
 
-<MudPaper Class="mx-auto my-16 pa-6 mud-theme-dark " Height="230px" Width="50%" Elevation="22" Outlined="true" >
     <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-content-center flex-wrap flex-grow-1 gap-4 ">
         <MudText Class=" pa-4 pl-14 " Color="Color.Secondary" Typo="Typo.h4"><b>Welcome to</b > </MudText>
 		<MudImage Class="ml-n9"  Src="images\logo.png" Width="250" Height="70"/>
      </MudContainer>
 
-<MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-     <MudContainer  Class="d-flex align-content-center flex-wrap flex-grow-1 gap-4 ">
 
-          <MudTextField @bind-Value="HelperText"  Label="Please input tracker IMEI" Variant="Variant.Outlined" Margin="Margin.Dense"  @ref="pwField1" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true" RequiredError="Correct IMEI number is required!"/>
+
+<MudForm  @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
+     <MudContainer  Class=" ml-7 d-flex align-content-center flex-wrap flex-grow-1 gap-4" >
+
+          <MudTextField  @bind-Value="HelperText" Label="Please input tracker IMEI"  Variant="Variant.Outlined" Margin="Margin.Dense"   @ref="imeiField1" Validation="@(new Func<string, IEnumerable<string>>(ImeiValidation))" Required="true" RequiredError="Correct IMEI number is required!"/>
               <MudPaper Elevation="0" Class=" mud-theme-dark">
-                   <MudButton Variant="Variant.Filled" Color="Color.Error"   OnClick="@(()=>form.Validate())" ><MudImage  Src="images\search.png" Width="30" Height="30"/></MudButton>
+                   <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(()=>form.Validate())" ><MudImage  Src="images\search.png" Width="30" Height="30"/></MudButton>
+				   <MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary" OnClick="ShowInfo"/>
              </MudPaper>
 
       </MudContainer>
 </MudForm>
+
+@if (isInfoVisible)
+{
+	<MudChip Class="ml-8 ">
+		The IMEI number is a unique 15-digit serial number
+		for identifying a device.
+		 <MudIconButton Icon="@Icons.Material.Filled.Close"  Color="Color.Primary" OnClick="ExitInfo"/>
+	</MudChip>
+}
+
 </MudPaper>
 
 
@@ -33,32 +46,43 @@
 
 @code
 {
-	string pass = "12345";
- bool success;
+    string IMEI = "350123451234560";
+    bool success;
     string[] errors = { };
 	MudForm form = new MudForm();
-    MudTextField<string> pwField1;
+    MudTextField<string> imeiField1;
 
- private IEnumerable<string> PasswordStrength(string pw)
+ private IEnumerable<string> ImeiValidation(string imei)
     {
-        if (string.IsNullOrWhiteSpace(pw))
+        if (string.IsNullOrWhiteSpace(imei))
         {
-            yield return "IMEI number is required!";
+            yield return " ";
             yield break;
         }
 
-		if (pwField1.Value != pass)
+		if (imeiField1.Value != IMEI){
           yield  return "Invalid IMEI number";
+		  yield break;
+        }
 
-		if (pwField1.Value == pass)
+		if (imeiField1.Value == IMEI)
              NavManager.NavigateTo("/");
+       }
 }
 
-
-
+@code
+{
+private bool isInfoVisible = false;
+private void ShowInfo()
+{
+isInfoVisible = true;
+}
+private void ExitInfo()
+{
+isInfoVisible = false;
 }
 
-
+}
 
 
 
