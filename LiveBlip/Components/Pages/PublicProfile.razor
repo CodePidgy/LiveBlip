@@ -4,34 +4,61 @@
 @inject NavigationManager Navigation
 @using LiveBlip.Models
 
-<EditForm Model="@user" OnValidSubmit="SaveProfile"  FormName="ProfileForm">
+<EditForm Model="@user" OnValidSubmit="OnValidSubmit"  FormName="ProfileForm">
         <DataAnnotationsValidator/>
         <MudGrid>
-            <MudItem xs="12" sm="7">
+            <MudItem xs="12" sm="12">
                 <MudCard>
                     <MudCardContent>
                         <MudTextField Label="Username"
-						HelperText="This name will be how you are adressed"
-                                    @bind-Value="user.Username"
-                                    For="@(() => user.Username)"
-									Immediate="true"/>
+						HelperText="Max. 8 characters"
+							@bind-Value="user.Username"
+							For="@(() => user.Username)"
+							Immediate="true"/>
+
                         <MudTextField Label="Email" Class="mt-3"
-                                    @bind-Value="user.Email"
-                                    For="@(() => user.Email)"
-                                    InputType="InputType.Email"
-									Immediate="true"/>
+							@bind-Value="user.Email"
+							For="@(() => user.Email)"
+							InputType="InputType.Email"
+							Immediate="true"/>
+
+						<MudTextField Label="Password"
+						HelperText="Choose a strong password" Class="mt-3"
+							@bind-Value="user.Password"
+							For="@(() => user.Password)"
+							Adornment="Adornment.End"
+							AdornmentIcon="@passwordAdornmentIcon"
+							OnAdornmentClick="TogglePasswordVisibility"
+							AdornmentAriaLabel="Show Password"
+							InputType="@passwordInputType" T="string"
+							Immediate="true"/>
+
+                        <MudTextField Label="Confirm Password"
+						HelperText="Repeat the password" Class="mt-3"
+                            @bind-Value="user.Password2"
+                            For="@(() => user.Password2)"
+							Adornment="Adornment.End"
+							AdornmentIcon="@confirmPasswordAdornmentIcon"
+							OnAdornmentClick="ToggleConfirmPasswordVisibility"
+							AdornmentAriaLabel="Show Password"
+                            InputType="@confirmPasswordInputType" T="string"
+							Immediate="true"/>
+
                         <MudTextField Label="First Name" Class="mt-3"
-                                    @bind-Value="user.FirstName"
-                                    For="@(() => user.FirstName)"
-									Immediate="true"/>
+                            @bind-Value="user.FirstName"
+                            For="@(() => user.FirstName)"
+							Immediate="true"/>
+
                         <MudTextField Label="Last Name" Class="mt-3"
-                                    @bind-Value="user.LastName"
-                                    For="@(() => user.LastName)"
-									Immediate="true"/>
+                            @bind-Value="user.LastName"
+                            For="@(() => user.LastName)"
+							Immediate="true"/>
+
 						<MudTextField Label="Location" Class="mt-3"
-                                    @bind-Value="user.Location"
-                                    For="@(() => user.Location)"
-									Immediate="true"/>
+                            @bind-Value="user.Location"
+                            For="@(() => user.Location)"
+							Immediate="true"/>
+
                     </MudCardContent>
                     <MudCardActions>
                         <MudButton ButtonType="ButtonType.Submit"
@@ -45,26 +72,63 @@
     </EditForm>
 
 @code {
+
+ 	private InputType passwordInputType = InputType.Password;
+    private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+    private InputType confirmPasswordInputType = InputType.Password;
+    private string confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+
     private UserModel user = new UserModel
     {
         Username = "testuser",
         Email = "test.user@example.com",
+		Password = "Password",
+		Password2 = "Password",
         FirstName = "test",
         LastName = "user",
-        Location = "Johannesburg, South Africa",
+        Location = "Johannesburg, South Africa"
     };
 
-	 bool success;
-	private string errorMessage;
-    private void OnValidSubmit(EditContext context)
+	  private async Task OnValidSubmit(EditContext context)
     {
-        success = true;
-        StateHasChanged();
+		bool success=true;
+        if(success!=true)
+		{
+            Snackbar.Add("User profile updated successfully.", Severity.Info);
+            StateHasChanged();
+        }
+        else
+        {
+            Snackbar.Add("Error updating user profile. The database is not connected.", Severity.Error);
+        }
+
     }
 
-    private void SaveProfile()
+    private void TogglePasswordVisibility()
     {
-        // Implement your save logic here
-        Console.WriteLine("Profile saved");
+        if (passwordInputType == InputType.Password)
+        {
+            passwordInputType = InputType.Text;
+            passwordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else
+        {
+            passwordInputType = InputType.Password;
+            passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+        }
+    }
+
+    private void ToggleConfirmPasswordVisibility()
+    {
+        if (confirmPasswordInputType == InputType.Password)
+        {
+            confirmPasswordInputType = InputType.Text;
+            confirmPasswordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else
+        {
+            confirmPasswordInputType = InputType.Password;
+            confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+        }
     }
 }
