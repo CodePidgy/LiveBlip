@@ -1,9 +1,16 @@
-﻿@page "/"
+@page "/"
 @inject IJSRuntime JSRuntime
 @inject MudBlazor.IDialogService DialogService
 @using LiveBlip.Models
 
 <div class="container">
+
+    <h3>Home</h3>
+
+    
+
+   
+
     <div class="sidebar">
         <MudPaper Width="100%">
             <MudList Clickable="true">
@@ -30,17 +37,21 @@
             </MudList>
         </MudPaper>
 
-        <h3>Home</h3>
     </div>
     <div class="map-container">
         <Map />
     </div>
+
+    
+
 </div>
 
+
 @code {
+
     private List<Device> devices = new List<Device>
     {
-        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570 },
+        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570,BatteryPerc =20 },
         new Device { Name = "Device 2", Latitude = -25.747867, Longitude = 28.229271 }
     };
 
@@ -79,4 +90,19 @@
         var coords = new { latitude = device.Latitude, longitude = device.Longitude };
         await JSRuntime.InvokeVoidAsync("AddMarker", coords);
     }
+
+
+    private bool isVisible;
+
+    public void OpenOverlay()
+    {
+        isVisible = true;
+        StateHasChanged();
+    }
+
+    public bool AlarmOn { get; set; }
+    
+    private bool isPowerSavingMode = false;
+    
+
 }
