@@ -7,7 +7,6 @@
 @using LiveBlip.Models
 
 <div class="container">
-
     <h3>Home</h3>
 
     <div class="sidebar">
@@ -15,7 +14,7 @@
             <MudList Clickable="true">
                 <MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
                     <NestedList>
-                        @foreach (var device in devices)
+                        @foreach (var device in devicesList)
                         {
                             <MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
                                 @device.Name
@@ -35,11 +34,14 @@
                 </MudListItem>
             </MudList>
         </MudPaper>
+    </div>
 
-    </div>
     <div class="map-container">
-        <Map />
+       <Map /> 
     </div>
+
+    
+
 </div>
 
 @code {
@@ -51,7 +53,7 @@
 
     private List<Device> devices = new List<Device>
     {
-        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570,BatteryPerc =20 },
+        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570, BatteryPerc = 20 },
         new Device { Name = "Device 2", Latitude = -25.747867, Longitude = 28.229271 }
     };
 
@@ -71,9 +73,10 @@
             {
                 Name = deviceName,
                 Latitude = -33.8688 + markerIndex * 0.01,
-                Longitude = 151.2093 + markerIndex * 0.01
+                Longitude = 151.2093 + markerIndex * 0.01,
+                BatteryPerc = 40
             };
-            devices.Add(newDevice);
+            devicesList.Add(newDevice);
             await AddNewMarker(newDevice);
         }
     }
@@ -85,22 +88,32 @@
         markerIndex++;
     }
 
+    private Device selectedDevice = null;
+    private bool isPowerSavingMode = false;
+
     private async Task ShowDeviceOnMap(Device device)
     {
-        var coords = new { latitude = device.Latitude, longitude = device.Longitude };
+        selectedDevice = device;
+
+         var coords = new { latitude = device.Latitude, longitude = device.Longitude };
+
+        int zoomLevel = 12;
+
+        await JSRuntime.InvokeVoidAsync("setMapView", device.Latitude, device.Longitude, zoomLevel);
         await JSRuntime.InvokeVoidAsync("AddMarker", coords);
     }
+
 
     private bool isVisible;
 
     public void OpenOverlay()
     {
-        isVisible = true;
-        StateHasChanged();
+        selectedDevice = null;
     }
 
     public bool AlarmOn { get; set; }
     
     private bool isPowerSavingMode = false;
     
+
 }
