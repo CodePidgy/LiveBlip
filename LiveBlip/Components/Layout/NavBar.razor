@@ -12,19 +12,11 @@
 		Icon="@Icons.Material.Filled.PermPhoneMsg" Href="/contact" Color="Color.Primary"
 	/>
 
-	@if (Settings.DarkMode) {
-		<MudIconButton
-			Icon="@Icons.Material.Filled.WbSunny"
-			Color="Color.Primary"
-			OnClick="DarkModeToggleChanged"
-		/>
-	} else {
-		<MudIconButton
-			Icon="@Icons.Material.Filled.DarkMode"
-			Color="Color.Primary"
-			OnClick="DarkModeToggleChanged"
-		/>
-	}
+	<MudIconButton
+		Icon="@(Settings.DarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.DarkMode)"
+		Color="Color.Primary"
+		OnClick="DarkModeToggleChanged"
+	/>
 
 	<MudLink Href="/account">
 		<MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
