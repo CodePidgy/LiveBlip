@@ -12,18 +12,22 @@
                     <MudCardContent>
                         <MudTextField Label="Username"
 						HelperText="Max. 8 characters"
+							Variant="Variant.Outlined"
 							@bind-Value="user.Username"
 							For="@(() => user.Username)"
 							Immediate="true"/>
 
                         <MudTextField Label="Email" Class="mt-3"
+							Variant="Variant.Outlined"
 							@bind-Value="user.Email"
 							For="@(() => user.Email)"
 							InputType="InputType.Email"
-							Immediate="true"/>
+							Immediate="true"
+							Disabled="true"/>
 
 						<MudTextField Label="Password"
 						HelperText="Choose a strong password" Class="mt-3"
+							Variant="Variant.Outlined"
 							@bind-Value="user.Password"
 							For="@(() => user.Password)"
 							Adornment="Adornment.End"
@@ -35,6 +39,7 @@
 
                         <MudTextField Label="Confirm Password"
 						HelperText="Repeat the password" Class="mt-3"
+							Variant="Variant.Outlined"
                             @bind-Value="user.Password2"
                             For="@(() => user.Password2)"
 							Adornment="Adornment.End"
@@ -45,16 +50,19 @@
 							Immediate="true"/>
 
                         <MudTextField Label="First Name" Class="mt-3"
+							Variant="Variant.Outlined"
                             @bind-Value="user.FirstName"
                             For="@(() => user.FirstName)"
 							Immediate="true"/>
 
                         <MudTextField Label="Last Name" Class="mt-3"
+							Variant="Variant.Outlined"
                             @bind-Value="user.LastName"
                             For="@(() => user.LastName)"
 							Immediate="true"/>
 
 						<MudTextField Label="Location" Class="mt-3"
+							Variant="Variant.Outlined"
                             @bind-Value="user.Location"
                             For="@(() => user.Location)"
 							Immediate="true"/>
