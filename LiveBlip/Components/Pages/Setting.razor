@@ -5,12 +5,14 @@
 
 
 <PageTitle>Setting</PageTitle>
-<MudText Align="Align.Center" Color ="Color.Secondary"  Typo="Typo.h2">Settings</MudText>
-<MudTabs Style="width: 70%; margin: 0 auto;" Class="mt-2 " Rounded="true" ApplyEffectsToContainer="false">
-    <MudTabPanel Text="Profile">
-        <PublicProfile />
-    </MudTabPanel>
-    <MudTabPanel Text="Account">
-        <AccountSetting></AccountSetting>
-    </MudTabPanel>
-</MudTabs>
+<MudContainer MaxWidth="MaxWidth.Large" Class="d-flex flex-column justify-center align-center" >
+		<MudText Align="Align.Center" Color ="Color.Secondary"  Typo="Typo.h2">Settings</MudText>
+			<MudTabs Style="width: 85%; margin: 0 auto;" Class="mt-2" Rounded="true" ApplyEffectsToContainer="false">
+    			<MudTabPanel Text="Profile">
+        			<PublicProfile />
+    			</MudTabPanel>
+    			<MudTabPanel Text="Account">
+        			<AccountSetting></AccountSetting>
+    			</MudTabPanel>
+			</MudTabs>
+</MudContainer>
