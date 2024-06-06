@@ -114,7 +114,7 @@
         else {
 			this.Snackbar.Clear();
         	this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
-            Snackbar.Add("The database is not connected, coming soon.", Severity.Error, (options) =>
+            Snackbar.Add("Database not connected. This feature is in development.", Severity.Error, (options) =>
         {
             options.CloseAfterNavigation = true;
         });
