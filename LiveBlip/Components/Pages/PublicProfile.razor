@@ -112,9 +112,12 @@
             StateHasChanged();
         }
         else {
-			 this.Snackbar.Clear();
+			this.Snackbar.Clear();
         	this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
-            Snackbar.Add("The database is not connected. Coming Soon.", Severity.Error);
+            Snackbar.Add("The database is not connected, coming soon.", Severity.Error, (options) =>
+        {
+            options.CloseAfterNavigation = true;
+        });
         }
 
     }
