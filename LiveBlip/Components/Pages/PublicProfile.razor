@@ -4,7 +4,7 @@
 @inject NavigationManager Navigation
 @using LiveBlip.Models
 
-<EditForm Model="@user" OnValidSubmit="SaveProfile"  FormName="ProfileForm">
+<EditForm Model="@user" OnValidSubmit="SaveProfile" FormName="ProfileForm">
         <DataAnnotationsValidator/>
         <MudGrid>
             <MudItem xs="12" sm="12">
@@ -104,34 +104,30 @@
             StateHasChanged();
         }
         else {
-            Snackbar.Add("Error updating user profile. The database is not connected.", Severity.Error);
+			 this.Snackbar.Clear();
+        	this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+            Snackbar.Add("The database is not connected. Coming Soon.", Severity.Error);
         }
 
     }
 
-    private void TogglePasswordVisibility()
-    {
-        if (passwordInputType == InputType.Password)
-        {
+    private void TogglePasswordVisibility() {
+        if (passwordInputType == InputType.Password) {
             passwordInputType = InputType.Text;
             passwordAdornmentIcon = Icons.Material.Filled.Visibility;
         }
-        else
-        {
+        else {
             passwordInputType = InputType.Password;
             passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
     }
 
-    private void ToggleConfirmPasswordVisibility()
-    {
-        if (confirmPasswordInputType == InputType.Password)
-        {
+    private void ToggleConfirmPasswordVisibility() {
+        if (confirmPasswordInputType == InputType.Password) {
             confirmPasswordInputType = InputType.Text;
             confirmPasswordAdornmentIcon = Icons.Material.Filled.Visibility;
         }
-        else
-        {
+        else {
             confirmPasswordInputType = InputType.Password;
             confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
