@@ -66,7 +66,7 @@
 </MudContainer>
 
 
-<MudDialog @bind-Visible="showChangeEmailDialog" Options="dialogOptions">
+@* <MudDialog @bind-Visible="showChangeEmailDialog" Options="dialogOptions">
     <TitleContent>
         <MudText Typo="Typo.h6">
             <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3" Size="Size.Small" /> Change Your Email
@@ -110,7 +110,7 @@
     <DialogActions>
         <MudButton Variant="Variant.Filled" Color="Color.Error" Disabled="@(!deleteSuccess)" OnClick="OnDeleteAccount" Class="px-10">Delete my account</MudButton>
     </DialogActions>
-</MudDialog>
+</MudDialog> *@
 
 
 @code {
@@ -121,11 +121,11 @@
     private bool deleteSuccess;
     private string? newEmailAddress;
 
-    private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.ExtraSmall, CloseOnEscapeKey=true, CloseButton=true};
+    @* private DialogOptions dialogOptions = new() { MaxWidth = MaxWidth.ExtraSmall, CloseOnEscapeKey=true, CloseButton=true};
     private UserModel? userInfo;
     protected override async Task OnInitializedAsync()
     {
-        @* userInfo = await LiveBlip.GetCurrentUserAsync(); *@
+        userInfo = await LiveBlip.GetCurrentUserAsync();
     }
     private async Task OnChangeMyEmail()
     {
@@ -133,7 +133,7 @@
         {
             try
             {
-                @* await LiveBlip.Auth.User.RequestEmailChangeAsync(newEmailAddress!); *@
+                await LiveBlip.Auth.User.RequestEmailChangeAsync(newEmailAddress!);
                 showChangeEmailDialog = false;
                 Snackbar.Add("Email change request sent successfully. Please check your new email for confirmation.", Severity.Info);
             }
@@ -165,5 +165,5 @@
         if (userInfo?.Username!= arg)
             return "Username does not match";
         return null;
-    }
+    } *@
 }
