@@ -4,7 +4,7 @@
 @inject NavigationManager Navigation
 @using LiveBlip.Models
 
-<EditForm Model="@user" OnValidSubmit="OnValidSubmit"  FormName="ProfileForm">
+<EditForm Model="@user" OnValidSubmit="SaveProfile"  FormName="ProfileForm">
         <DataAnnotationsValidator/>
         <MudGrid>
             <MudItem xs="12" sm="12">
@@ -60,12 +60,19 @@
 							Immediate="true"/>
 
                     </MudCardContent>
-                    <MudCardActions>
-                        <MudButton ButtonType="ButtonType.Submit"
-                        Variant="Variant.Filled"
-                        Color="Color.Primary"
-                        Class="ml-auto">Save Profile</MudButton>
-                    </MudCardActions>
+
+					<MudCardActions>
+						<MudGrid Justify="Justify.Center">
+                			<MudItem>
+                    			<MudButton ButtonType="ButtonType.Submit"
+                        		Variant="Variant.Filled"
+                        		Color="Color.Primary"
+                        		Class="ml-auto">
+								Save Profile
+                    			</MudButton>
+                			</MudItem>
+            			</MudGrid>
+					</MudCardActions>
                 </MudCard>
             </MudItem>
         </MudGrid>
@@ -89,16 +96,14 @@
         Location = "Johannesburg, South Africa"
     };
 
-	  private async Task OnValidSubmit(EditContext context)
+	  private async Task SaveProfile(EditContext context)
     {
 		bool success=true;
-        if(success!=true)
-		{
+        if(success!=true) {
             Snackbar.Add("User profile updated successfully.", Severity.Info);
             StateHasChanged();
         }
-        else
-        {
+        else {
             Snackbar.Add("Error updating user profile. The database is not connected.", Severity.Error);
         }
 
