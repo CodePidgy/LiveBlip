@@ -1,20 +1,30 @@
 ﻿@page "/account"
-@inject NavigationManager Navigation
 @using LiveBlip.Models
+@inject NavigationManager Navigation
 
 <PageTitle>Setting</PageTitle>
+
 <MudContainer MaxWidth="MaxWidth.Large" Class="d-flex flex-column justify-center align-center">
-	<MudCard Style="object-position: center;" Class="pa-8 rounded-xl" Width="100%"  >
-		<MudText Align="Align.Center" Color ="Color.Secondary"  Typo="Typo.h2" Class="mb-4">Settings</MudText>
-			<MudDivider DividerType="DividerType.Middle" />
-			<MudTabs Style="width: 100%; margin: 0 auto;" Class="mt-2 " Rounded="true"
-				ApplyEffectsToContainer="false">
-    			<MudTabPanel Text="Profile">
-        			<AccountProfile />
-    			</MudTabPanel>
-    			<MudTabPanel Text="Account">
-        			<AccountSetting></AccountSetting>
-    			</MudTabPanel>
-			</MudTabs>
+	<MudCard Width="100%" Class="pa-8 rounded-xl" Style="object-position: center;">
+		<MudText Align="Align.Center" Color="Color.Secondary" Typo="Typo.h2" Class="mb-4">
+			Settings
+		</MudText>
+
+		<MudDivider DividerType="DividerType.Middle" />
+
+		<MudTabs
+			ApplyEffectsToContainer="false"
+			Rounded="true"
+			Class="mt-2"
+			Style="width: 100%; margin: 0 auto;"
+		>
+			<MudTabPanel Text="Profile">
+				<AccountProfile />
+			</MudTabPanel>
+
+			<MudTabPanel Text="Account">
+				<AccountSetting />
+			</MudTabPanel>
+		</MudTabs>
 	</MudCard>
 </MudContainer>

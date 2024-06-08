@@ -1,100 +1,120 @@
-@page "/accountprofile"
 @using System.ComponentModel.DataAnnotations
+@using LiveBlip.Models
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
-@using LiveBlip.Models
 
-<EditForm Model="@user" OnValidSubmit="SaveProfile" FormName="ProfileForm">
-        <DataAnnotationsValidator/>
-        <MudGrid>
-            <MudItem xs="12" sm="12">
-                <MudCard Elevation="0">
-                    <MudCardContent>
-                        <MudTextField Label="Username"
+<EditForm FormName="ProfileForm" Model="@user" OnValidSubmit="SaveProfile">
+	<DataAnnotationsValidator/>
+
+	<MudGrid>
+		<MudItem sm="12" xs="12">
+			<MudCard Elevation="0">
+				<MudCardContent>
+					<MudTextField
+						@bind-Value="user.Username"
+						For="@(() => user.Username)"
 						HelperText="Max. 8 characters"
-							Variant="Variant.Outlined"
-							@bind-Value="user.Username"
-							For="@(() => user.Username)"
-							Immediate="true"/>
+						Immediate="true"
+						Label="Username"
+						Variant="Variant.Outlined"
+					/>
 
-                        <MudTextField Label="Email" Class="mt-3"
-							Variant="Variant.Outlined"
-							@bind-Value="user.Email"
-							For="@(() => user.Email)"
-							InputType="InputType.Email"
-							Immediate="true"
-							Disabled="true"/>
+					<MudTextField
+						@bind-Value="user.Email"
+						For="@(() => user.Email)"
+						Disabled="true"
+						Immediate="true"
+						InputType="InputType.Email"
+						Label="Email"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
 
-						<MudTextField Label="Password"
-						HelperText="Choose a strong password" Class="mt-3"
-							Variant="Variant.Outlined"
-							@bind-Value="user.Password"
-							For="@(() => user.Password)"
-							Adornment="Adornment.End"
-							AdornmentIcon="@passwordAdornmentIcon"
-							OnAdornmentClick="TogglePasswordVisibility"
-							AdornmentAriaLabel="Show Password"
-							InputType="@passwordInputType" T="string"
-							Immediate="true"/>
+					<MudTextField
+						T="string"
+						@bind-Value="user.Password"
+						For="@(() => user.Password)"
+						Adornment="Adornment.End"
+						AdornmentIcon="@passwordAdornmentIcon"
+						HelperText="Choose a strong password"
+						Immediate="true"
+						InputType="@passwordInputType"
+						Label="Password"
+						AdornmentAriaLabel="Show Password"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+						OnAdornmentClick="TogglePasswordVisibility"
+					/>
 
-                        <MudTextField Label="Confirm Password"
+					<MudTextField
+						T="string"
+						@bind-Value="user.Password2"
+						For="@(() => user.Password2)"
+						Adornment="Adornment.End"
+						AdornmentIcon="@confirmPasswordAdornmentIcon"
 						HelperText="Repeat the password" Class="mt-3"
-							Variant="Variant.Outlined"
-                            @bind-Value="user.Password2"
-                            For="@(() => user.Password2)"
-							Adornment="Adornment.End"
-							AdornmentIcon="@confirmPasswordAdornmentIcon"
-							OnAdornmentClick="ToggleConfirmPasswordVisibility"
-							AdornmentAriaLabel="Show Password"
-                            InputType="@confirmPasswordInputType" T="string"
-							Immediate="true"/>
+						Immediate="true"
+						InputType="@confirmPasswordInputType"
+						Label="Confirm Password"
+						AdornmentAriaLabel="Show Password"
+						Variant="Variant.Outlined"
+						OnAdornmentClick="ToggleConfirmPasswordVisibility"
+					/>
 
-                        <MudTextField Label="First Name" Class="mt-3"
-							Variant="Variant.Outlined"
-                            @bind-Value="user.FirstName"
-                            For="@(() => user.FirstName)"
-							Immediate="true"/>
+					<MudTextField
+						@bind-Value="user.FirstName"
+						For="@(() => user.FirstName)"
+						Immediate="true"
+						Label="First Name"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
 
-                        <MudTextField Label="Last Name" Class="mt-3"
-							Variant="Variant.Outlined"
-                            @bind-Value="user.LastName"
-                            For="@(() => user.LastName)"
-							Immediate="true"/>
+					<MudTextField
+						@bind-Value="user.LastName"
+						For="@(() => user.LastName)"
+						Immediate="true"
+						Label="Last Name"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
 
-						<MudTextField Label="Location" Class="mt-3"
-							Variant="Variant.Outlined"
-                            @bind-Value="user.Location"
-                            For="@(() => user.Location)"
-							Immediate="true"/>
+					<MudTextField
+						@bind-Value="user.Location"
+						For="@(() => user.Location)"
+						Immediate="true"
+						Label="Location"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
+				</MudCardContent>
 
-                    </MudCardContent>
-
-					<MudCardActions>
-						<MudGrid Justify="Justify.Center">
-                			<MudItem>
-                    			<MudButton ButtonType="ButtonType.Submit"
-                        		Variant="Variant.Filled"
-                        		Color="Color.Primary"
-                        		Class="ml-auto">
+				<MudCardActions>
+					<MudGrid Justify="Justify.Center">
+						<MudItem>
+							<MudButton
+								ButtonType="ButtonType.Submit"
+								Color="Color.Primary"
+								Variant="Variant.Filled"
+								Class="ml-auto"
+							>
 								Save Profile
-                    			</MudButton>
-                			</MudItem>
-            			</MudGrid>
-					</MudCardActions>
-                </MudCard>
-            </MudItem>
-        </MudGrid>
-    </EditForm>
+							</MudButton>
+						</MudItem>
+					</MudGrid>
+				</MudCardActions>
+			</MudCard>
+		</MudItem>
+	</MudGrid>
+</EditForm>
 
 @code {
-
+	// fields ----------------------------------------------------------------------------------- //
  	private InputType passwordInputType = InputType.Password;
     private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
     private InputType confirmPasswordInputType = InputType.Password;
     private string confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
-
-    private UserModel user = new UserModel
-    {
+    private UserModel user = new UserModel {
         Username = "testuser",
         Email = "test.user@example.com",
 		Password = "Password",
@@ -104,22 +124,37 @@
         Location = "Johannesburg, South Africa"
     };
 
-	  private async Task SaveProfile(EditContext context)
-    {
-		bool success=true;
-        if(success!=true) {
-            Snackbar.Add("User profile updated successfully.", Severity.Info);
-            StateHasChanged();
+	// methods ---------------------------------------------------------------------------------- //
+	private void SaveProfile(EditContext context) {
+		bool success = true;
+
+		if(!success) {
+			Snackbar.Add("User profile updated successfully.", Severity.Info);
+
+			StateHasChanged();
+		} else {
+			this.Snackbar.Clear();
+			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+
+			Snackbar.Add(
+				"Database not connected. This feature is in development.",
+				Severity.Error,
+				(options) => {
+					options.CloseAfterNavigation = true;
+				}
+			);
+		}
+    }
+
+	private void ToggleConfirmPasswordVisibility() {
+        if (confirmPasswordInputType == InputType.Password) {
+            confirmPasswordInputType = InputType.Text;
+            confirmPasswordAdornmentIcon = Icons.Material.Filled.Visibility;
         }
         else {
-			this.Snackbar.Clear();
-        	this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
-            Snackbar.Add("Database not connected. This feature is in development.", Severity.Error, (options) =>
-        {
-            options.CloseAfterNavigation = true;
-        });
+            confirmPasswordInputType = InputType.Password;
+            confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
-
     }
 
     private void TogglePasswordVisibility() {
@@ -130,17 +165,6 @@
         else {
             passwordInputType = InputType.Password;
             passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
-        }
-    }
-
-    private void ToggleConfirmPasswordVisibility() {
-        if (confirmPasswordInputType == InputType.Password) {
-            confirmPasswordInputType = InputType.Text;
-            confirmPasswordAdornmentIcon = Icons.Material.Filled.Visibility;
-        }
-        else {
-            confirmPasswordInputType = InputType.Password;
-            confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
     }
 }
