@@ -1,81 +1,98 @@
 ﻿@page "/signup"
-@using LiveBlip.Models
-@using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components
-@rendermode InteractiveServer
+@using System.ComponentModel.DataAnnotations
+@using LiveBlip.Models
 @inject NavigationManager Navigation
-
 
 <PageTitle>Sign Up</PageTitle>
 
-<div class="login-form">
-    <div class="signup-heading">
-        <h1>Register</h1>
-    </div>
-    <EditForm Model="@signUpModel" OnValidSubmit="OnValidSubmit" FormName="signupForm">
-        <DataAnnotationsValidator/>
-        <MudGrid>
-            <MudItem xs="12" sm="7">
-                <MudCard>
-                    <MudCardContent>
-                        <MudTextField Label="Username" HelperText="Max. 8 characters"
-                                    @bind-Value="signUpModel.Username"
-                                    For="@(() => signUpModel.Username)"/>
-                        <MudTextField Label="Email" Class="mt-3"
-                                    @bind-Value="signUpModel.Email"
-                                    For="@(() => signUpModel.Email)"
-                                    InputType="InputType.Email"/>
-                        <MudTextField Label="Password" HelperText="Choose a strong password" Class="mt-3"
-                                    @bind-Value="signUpModel.Password"
-                                    For="@(() => signUpModel.Password)"
-                                    InputType="InputType.Password"/>
-                        <MudTextField Label="Password" HelperText="Repeat the password" Class="mt-3"
-                                    @bind-Value="signUpModel.Password2"
-                                    For="@(() => signUpModel.Password2)"
-                                    InputType="InputType.Password"/>
-                    </MudCardContent>
-                    <MudCardActions>
-                        <MudButton ButtonType="ButtonType.Submit"
-                        Variant="Variant.Filled"
-                        Color="Color.Primary"
-                        Class="ml-auto">Register</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="12" sm="5">
-                <MudPaper Class="pa-4 mud-height-full">
-                    <MudText Typo="Typo.subtitle2">Validation Summary</MudText>
-                    @if (success)
-                    {
-                        <MudText Color="Color.Success">Success</MudText>
-                    }
-                    else
-                    {
-                        <MudText Color="@Color.Error">
-                            <ValidationSummary />
-                        </MudText>
-                    }
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="12">
-                <MudText Typo="Typo.body2" Align="Align.Center">
-                    Fill out the form correctly to see the success message.
-                </MudText>
-            </MudItem>
-        </MudGrid>
-    </EditForm>
-</div>
+<h1>Register</h1>
 
+<EditForm FormName="signupForm" Model="@signUpModel" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator/>
 
+	<MudGrid>
+		<MudItem sm="7" xs="12">
+			<MudCard>
+				<MudCardContent>
+					<MudTextField
+						@bind-Value="signUpModel.Username"
+						For="@(() => signUpModel.Username)"
+						HelperText="Max. 8 characters"
+						Label="Username"
+					/>
+
+					<MudTextField
+						@bind-Value="signUpModel.Email"
+						For="@(() => signUpModel.Email)"
+						InputType="InputType.Email"
+						Label="Email"
+						Class="mt-3"
+					/>
+
+					<MudTextField
+						@bind-Value="signUpModel.Password"
+						For="@(() => signUpModel.Password)"
+						HelperText="Choose a strong password"
+						InputType="InputType.Password"
+						Label="Password"
+						Class="mt-3"
+					/>
+
+					<MudTextField
+						@bind-Value="signUpModel.Password2"
+						For="@(() => signUpModel.Password2)"
+						HelperText="Repeat the password"
+						InputType="InputType.Password"
+						Label="Confirm Password"
+						Class="mt-3"
+					/>
+				</MudCardContent>
+
+				<MudCardActions>
+					<MudButton
+						ButtonType="ButtonType.Submit"
+						Color="Color.Primary"
+						Variant="Variant.Filled"
+						Class="ml-auto"
+					>
+						Register
+					</MudButton>
+				</MudCardActions>
+			</MudCard>
+		</MudItem>
+
+		<MudItem sm="5" xs="12">
+			<MudPaper Class="pa-4 mud-height-full">
+				<MudText Typo="Typo.subtitle2">Validation Summary</MudText>
+				@if (success) {
+					<MudText Color="Color.Success">Success</MudText>
+				} else {
+					<MudText Color="@Color.Error">
+						<ValidationSummary />
+					</MudText>
+				}
+			</MudPaper>
+		</MudItem>
+
+		<MudItem xs="12">
+			<MudText Align="Align.Center" Typo="Typo.body2">
+				Fill out the form correctly to see the success message.
+			</MudText>
+		</MudItem>
+	</MudGrid>
+</EditForm>
 
 @code {
-    SignUpModel signUpModel {get; set;} = new();
-    bool success;
-	private string errorMessage;
-    private void OnValidSubmit(EditContext context)
-    {
+	// fields ----------------------------------------------------------------------------------- //
+    private SignUpModel signUpModel {get; set;} = new();
+    private bool success;
+	private string? errorMessage;
+
+	// methods ---------------------------------------------------------------------------------- //
+    private void OnValidSubmit(EditContext context) {
         success = true;
+
         StateHasChanged();
     }
-
 }
