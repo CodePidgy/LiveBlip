@@ -1,60 +1,41 @@
 @inject Settings Settings
 
 <MudAppBar Color="Color.Dark" Elevation="1">
-	<MudLink Href="#" Color="Color.Primary" Typo="Typo.h4" Underline="Underline.None">
-		LiveBlip
-	</MudLink>
+	<MudTooltip Text="Home" Delay="500">
+		<MudLink Href="#" Color="Color.Primary" Typo="Typo.h4" Underline="Underline.None">
+			LiveBlip
+		</MudLink>
+	</MudTooltip>
 
 	<MudSpacer />
 
-	<MudMenu>
-		<ActivatorContent>
-			<MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary"/>
-		</ActivatorContent>
+	<MudTooltip Text="About Us" Delay="500">
+		<MudIconButton Icon="@Icons.Material.Filled.Info" Href="/about" Color="Color.Primary" />
+	</MudTooltip>
 
-		<ChildContent>
-			<MudMenuItem>
-				<MudLink
-					Href="/about"
-					Color="Color.Primary"
-					Typo="Typo.h6"
-					Underline="Underline.None"
-				>
-					About Us
-				</MudLink>
-			</MudMenuItem>
-			<MudMenuItem>
-				<MudLink
-					Href="/contact"
-					Color="Color.Primary"
-					Typo="Typo.h6"
-					Underline="Underline.None"
-				>
-					Contact Us
-				</MudLink>
-			</MudMenuItem>
-		</ChildContent>
-	</MudMenu>
-
-	@if (Settings.DarkMode) {
+	<MudTooltip Text="Contact Us" Delay="500">
 		<MudIconButton
-			Icon="@Icons.Material.Filled.WbSunny"
+			Icon="@Icons.Material.Filled.PermPhoneMsg" Href="/contact" Color="Color.Primary"
+		/>
+	</MudTooltip>
+
+	<MudTooltip
+		Text="@(Settings.DarkMode ? "Switch to Light Mode" : "Switch to Dark Mode")" Delay="500"
+	>
+		<MudIconButton
+			Icon="@(
+				Settings.DarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.DarkMode
+			)"
 			Color="Color.Primary"
 			OnClick="DarkModeToggleChanged"
 		/>
-	} else {
-		<MudIconButton
-			Icon="@Icons.Material.Filled.DarkMode"
-			Color="Color.Primary"
-			OnClick="DarkModeToggleChanged"
-		/>
-	}
+	</MudTooltip>
 
-	<MudLink Href="/account">
-	<MudTooltip Text="Account" Color="Color.Primary" Placement="Placement.Top">
-		<MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
-		</MudTooltip>
-	</MudLink>
+	<MudTooltip Text="Account" Delay="500">
+		<MudIconButton
+			Icon="@Icons.Material.Filled.AccountCircle" Href="/account" Color="Color.Primary"
+		/>
+	</MudTooltip>
 </MudAppBar>
 
 @code {
