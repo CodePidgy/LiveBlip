@@ -53,19 +53,6 @@
 			</MudCard>
 		</MudItem>
 
-		<MudItem xs="12" sm="5">
-			<MudPaper Class="pa-4 mud-height-full">
-				<MudText Typo="Typo.subtitle2">Validation Summary</MudText>
-				@if (success) {
-					<MudText Color="Color.Success">Success</MudText>
-				} else {
-					<MudText Color="@Color.Error">
-						<ValidationSummary />
-					</MudText>
-				}
-			</MudPaper>
-		</MudItem>
-
 		<MudItem xs="12">
 			<div>
 				<p>Don't have an account?</p>
