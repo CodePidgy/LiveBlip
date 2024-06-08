@@ -1,4 +1,4 @@
-@page "/publicprofile"
+@page "/accountprofile"
 @using System.ComponentModel.DataAnnotations
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
@@ -8,7 +8,7 @@
         <DataAnnotationsValidator/>
         <MudGrid>
             <MudItem xs="12" sm="12">
-                <MudCard>
+                <MudCard Elevation="0">
                     <MudCardContent>
                         <MudTextField Label="Username"
 						HelperText="Max. 8 characters"

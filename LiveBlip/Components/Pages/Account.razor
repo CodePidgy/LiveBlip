@@ -4,15 +4,17 @@
 
 <PageTitle>Setting</PageTitle>
 <MudContainer MaxWidth="MaxWidth.Large" Class="d-flex flex-column justify-center align-center">
-	<MudPaper Style="object-position: center;" Elevation="3" Class="pa-8" Width="100%" >
+	<MudCard Style="object-position: center;" Class="pa-8 rounded-xl" Width="100%"  >
 		<MudText Align="Align.Center" Color ="Color.Secondary"  Typo="Typo.h2">Settings</MudText>
-			<MudTabs Style="width: 100%; margin: 0 auto;" Class="mt-2 " Rounded="true" ApplyEffectsToContainer="false">
+			<MudDivider DividerType="DividerType.Middle" />
+			<MudTabs Style="width: 100%; margin: 0 auto;" Class="mt-2 " Rounded="true"
+				ApplyEffectsToContainer="false">
     			<MudTabPanel Text="Profile">
-        			<PublicProfile />
+        			<AccountProfile />
     			</MudTabPanel>
     			<MudTabPanel Text="Account">
         			<AccountSetting></AccountSetting>
     			</MudTabPanel>
 			</MudTabs>
-	</MudPaper>
+	</MudCard>
 </MudContainer>
