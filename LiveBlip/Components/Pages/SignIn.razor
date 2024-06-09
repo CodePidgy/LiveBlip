@@ -30,13 +30,19 @@
 						/>
 
 						<MudTextField
+							T="string"
 							@bind-Value="signInModel.Password"
 							For="@(() => signInModel.Password)"
+							Adornment="Adornment.End"
+							AdornmentIcon="@passwordAdornmentIcon"
+							HelperText="Choose a strong password"
 							Immediate="true"
-							InputType="InputType.Password"
+							InputType="@passwordInputType"
 							Label="Password"
-							Class="mt-3"
+							AdornmentAriaLabel="Show Password"
 							Variant="Variant.Outlined"
+							Class="mt-3"
+							OnAdornmentClick="TogglePasswordVisibility"
 						/>
 					</MudCardContent>
 
@@ -70,6 +76,8 @@
 	// fields ----------------------------------------------------------------------------------- //
 	[SupplyParameterFromForm]
     private SignInModel signInModel { get; set; } = new();
+	private InputType passwordInputType = InputType.Password;
+    private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
 	// methods ---------------------------------------------------------------------------------- //
     private async Task HandleValidSubmit() {
 		// Hardcoded credentials
@@ -101,6 +109,17 @@
 					options.CloseAfterNavigation = true;
 				}
 			);
+        }
+    }
+
+	private void TogglePasswordVisibility() {
+        if (passwordInputType == InputType.Password) {
+            passwordInputType = InputType.Text;
+            passwordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else {
+            passwordInputType = InputType.Password;
+            passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
     }
 }
