@@ -16,7 +16,7 @@ public class UserModel {
 	public string? Password { get; set; }
 	[Required]
 	[Compare(nameof(Password))]
-	public string? Password2 { get; set; }
+	public string? ConfirmPassword { get; set; }
 	[Required]
 	public string? FirstName { get; set; }
 	[Required]
