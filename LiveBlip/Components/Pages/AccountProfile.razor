@@ -17,6 +17,7 @@
 						Immediate="true"
 						Label="Username"
 						Variant="Variant.Outlined"
+						Class="mt-3"
 					/>
 
 					<MudTextField
@@ -48,11 +49,12 @@
 
 					<MudTextField
 						T="string"
-						@bind-Value="user.Password2"
-						For="@(() => user.Password2)"
+						@bind-Value="user.ConfirmPassword"
+						For="@(() => user.ConfirmPassword)"
 						Adornment="Adornment.End"
 						AdornmentIcon="@confirmPasswordAdornmentIcon"
-						HelperText="Repeat the password" Class="mt-3"
+						HelperText="Repeat the password"
+						Class="mt-3"
 						Immediate="true"
 						InputType="@confirmPasswordInputType"
 						Label="Confirm Password"
@@ -118,7 +120,7 @@
         Username = "testuser",
         Email = "test.user@example.com",
 		Password = "Password",
-		Password2 = "Password",
+		ConfirmPassword = "Password",
         FirstName = "test",
         LastName = "user",
         Location = "Johannesburg, South Africa"
@@ -135,6 +137,7 @@
 		} else {
 			this.Snackbar.Clear();
 			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+			this.Snackbar.Configuration.VisibleStateDuration = 2000;
 
 			Snackbar.Add(
 				"Database not connected. This feature is in development.",
