@@ -70,9 +70,6 @@
 	// fields ----------------------------------------------------------------------------------- //
 	[SupplyParameterFromForm]
     private SignInModel signInModel { get; set; } = new();
-    private string errorMessage;
-	private bool success;
-
 	// methods ---------------------------------------------------------------------------------- //
     private async Task HandleValidSubmit() {
 		// Hardcoded credentials
@@ -85,7 +82,7 @@
             // Navigate to the home page or a dashboard
 			this.Snackbar.Clear();
 			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
-			this.Snackbar.Configuration.VisibleStateDuration = 0;
+			this.Snackbar.Configuration.VisibleStateDuration = 2;
 			Snackbar.Add(
 				"Login Successful.",
 				Severity.Success
