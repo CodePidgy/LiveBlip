@@ -2,78 +2,154 @@
 @using Microsoft.AspNetCore.Components
 @using System.ComponentModel.DataAnnotations
 @using LiveBlip.Models
+@inject ISnackbar Snackbar
 @inject NavigationManager Navigation
 
 <PageTitle>Sign Up</PageTitle>
 
-<h1>Register</h1>
-
+<MudContainer MaxWidth="MaxWidth.Medium"
+ Class="mt-12 d-flex flex-column justify-center align-center">
 <EditForm FormName="signupForm" Model="@signUpModel" OnValidSubmit="OnValidSubmit">
 	<DataAnnotationsValidator/>
-
-	<MudGrid>
-		<MudItem sm="7" xs="12">
-			<MudCard>
+	<MudGrid Class="justify-center align-center" Style="width: 100%; margin: 0 auto; ">
+		<MudItem xs="25" sm="12">
+			<MudCard Elevation="0" Class="pa-8 rounded-xl">
+				<MudText Align="Align.Center" Color="Color.Secondary" Typo="Typo.h3" Class="mb-4">
+						Sign Up
+					</MudText>
 				<MudCardContent>
 					<MudTextField
 						@bind-Value="signUpModel.Username"
 						For="@(() => signUpModel.Username)"
 						HelperText="Max. 8 characters"
+						Immediate="true"
 						Label="Username"
+						Variant="Variant.Outlined"
+						Class="mt-3"
 					/>
 
 					<MudTextField
 						@bind-Value="signUpModel.Email"
 						For="@(() => signUpModel.Email)"
+						Immediate="true"
 						InputType="InputType.Email"
 						Label="Email"
+						Variant="Variant.Outlined"
 						Class="mt-3"
 					/>
 
 					<MudTextField
+						T="string"
 						@bind-Value="signUpModel.Password"
 						For="@(() => signUpModel.Password)"
+						Adornment="Adornment.End"
+						AdornmentIcon="@passwordAdornmentIcon"
 						HelperText="Choose a strong password"
-						InputType="InputType.Password"
+						Immediate="true"
+						InputType="@passwordInputType"
 						Label="Password"
+						AdornmentAriaLabel="Show Password"
+						Variant="Variant.Outlined"
 						Class="mt-3"
+						OnAdornmentClick="TogglePasswordVisibility"
 					/>
 
 					<MudTextField
-						@bind-Value="signUpModel.Password2"
-						For="@(() => signUpModel.Password2)"
+						T="string"
+						@bind-Value="signUpModel.ConfirmPassword"
+						For="@(() => signUpModel.ConfirmPassword)"
+						Adornment="Adornment.End"
+						AdornmentIcon="@confirmPasswordAdornmentIcon"
 						HelperText="Repeat the password"
-						InputType="InputType.Password"
-						Label="Confirm Password"
 						Class="mt-3"
+						Immediate="true"
+						InputType="@confirmPasswordInputType"
+						Label="Confirm Password"
+						AdornmentAriaLabel="Show Password"
+						Variant="Variant.Outlined"
+						OnAdornmentClick="ToggleConfirmPasswordVisibility"
 					/>
 				</MudCardContent>
 
-				<MudCardActions>
-					<MudButton
-						ButtonType="ButtonType.Submit"
-						Color="Color.Primary"
-						Variant="Variant.Filled"
-						Class="ml-auto"
-					>
-						Register
-					</MudButton>
-				</MudCardActions>
+					<MudCardActions>
+						<MudGrid Justify="Justify.Center">
+							<MudItem>
+								<MudButton
+									ButtonType="ButtonType.Submit"
+									Color="Color.Primary"
+									Variant="Variant.Filled"
+									Class="ml-auto"
+									Style="width: 150px;"
+								>
+									Register
+								</MudButton>
+							</MudItem>
+						</MudGrid>
+					</MudCardActions>
+
+					<MudContainer MaxWidth="MaxWidth.Small" Style="text-align: center;">
+						<MudText>Have an account?</MudText> <MudLink Href="/signin">Sign In</MudLink>
+					</MudContainer>
+
 			</MudCard>
 		</MudItem>
 	</MudGrid>
 </EditForm>
+</MudContainer>
 
 @code {
 	// fields ----------------------------------------------------------------------------------- //
     private SignUpModel signUpModel {get; set;} = new();
     private bool success;
 	private string? errorMessage;
+	private InputType passwordInputType = InputType.Password;
+    private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+    private InputType confirmPasswordInputType = InputType.Password;
+    private string confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
 
 	// methods ---------------------------------------------------------------------------------- //
     private void OnValidSubmit(EditContext context) {
-        success = true;
+        bool success = true;
 
-        StateHasChanged();
+		if(!success) {
+			Snackbar.Add("User profile updated successfully.", Severity.Info);
+
+			StateHasChanged();
+		} else {
+			this.Snackbar.Clear();
+			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+			this.Snackbar.Configuration.VisibleStateDuration = 2000;
+
+			Snackbar.Add(
+				"Database not connected. This feature is in development.",
+				Severity.Error,
+				(options) => {
+					options.CloseAfterNavigation = true;
+				}
+			);
+		}
+    }
+    
+
+	private void ToggleConfirmPasswordVisibility() {
+        if (confirmPasswordInputType == InputType.Password) {
+            confirmPasswordInputType = InputType.Text;
+            confirmPasswordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else {
+            confirmPasswordInputType = InputType.Password;
+            confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+        }
+    }
+
+    private void TogglePasswordVisibility() {
+        if (passwordInputType == InputType.Password) {
+            passwordInputType = InputType.Text;
+            passwordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else {
+            passwordInputType = InputType.Password;
+            passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+        }
     }
 }
