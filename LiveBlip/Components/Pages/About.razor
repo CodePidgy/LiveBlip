@@ -2,21 +2,29 @@
 
 <PageTitle>About Us</PageTitle>
 
-<div class="about-card">
-	<div class="page-heading">
-		<h1>About Us</h1>
-	</div>
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16">
+	<MudCard Height="385px" Class="mud-theme-dark rounded-xl">
+		<MudCardHeader Class="d-flex justify-center">
+			<MudText Color="Color.Secondary" Typo="Typo.h6">About Us</MudText>
+		</MudCardHeader>
 
-	<div class="about-info">
-		<p>
-			Welcome to <strong>LiveBlip</strong>, a GPS tracking service created by a team of
-			developers from <strong>IIE MSA</strong>. <br>
-			<br>
-			LiveBlip was created for <strong>Marc d’Hotman</strong> from
-			<strong>Ithegi Electronics</strong><br>
-			<br>
-			Created by Aidan Venter, Robert Burston, Ciaran Mc Cabe,
-			Nefale Nefale and Greg Kalunta.
-		</p>
-	</div>
-</div>
+		<MudDivider DividerType="DividerType.Middle" />
+
+		<MudCardContent Class="pa-16">
+			<MudText
+				Align="Align.Center"
+				Color="Color.Secondary"
+				Typo="Typo.body1"
+			>
+				Welcome to <strong>LiveBlip</strong>, a GPS tracking service created by a team of
+				developers from <strong>IIE MSA</strong>.<br />
+				<br />
+				LiveBlip was created for <strong>Marc d'Hotman</strong> from
+				<strong>Ithegi Electronics</strong><br />
+				<br />
+				Created by Aidan Venter, Robert Burston, Ciaran Mc Cabe, Nefale Nefale and Greg
+				Kalunta.
+			</MudText>
+		</MudCardContent>
+	</MudCard>
+</MudContainer>

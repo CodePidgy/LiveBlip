@@ -1,26 +1,18 @@
-﻿@page "/signup"
-@using Microsoft.AspNetCore.Components
 @using System.ComponentModel.DataAnnotations
 @using LiveBlip.Models
 @inject ISnackbar Snackbar
 @inject NavigationManager Navigation
 
-<PageTitle>Sign Up</PageTitle>
-
-<MudContainer MaxWidth="MaxWidth.Medium"
- Class="mt-12 d-flex flex-column justify-center align-center">
-<EditForm FormName="signupForm" Model="@signUpModel" OnValidSubmit="OnValidSubmit">
+<EditForm FormName="ProfileForm" Model="@user" OnValidSubmit="SaveProfile">
 	<DataAnnotationsValidator/>
-	<MudGrid Class="justify-center align-center" Style="width: 100%; margin: 0 auto; ">
-		<MudItem xs="25" sm="12">
-			<MudCard Elevation="0" Class="pa-8 rounded-xl">
-				<MudText Align="Align.Center" Color="Color.Secondary" Typo="Typo.h3" Class="mb-4">
-						Sign Up
-					</MudText>
+
+	<MudGrid>
+		<MudItem sm="12" xs="12">
+			<MudCard Elevation="0">
 				<MudCardContent>
 					<MudTextField
-						@bind-Value="signUpModel.Username"
-						For="@(() => signUpModel.Username)"
+						@bind-Value="user.Username"
+						For="@(() => user.Username)"
 						HelperText="Max. 8 characters"
 						Immediate="true"
 						Label="Username"
@@ -29,8 +21,9 @@
 					/>
 
 					<MudTextField
-						@bind-Value="signUpModel.Email"
-						For="@(() => signUpModel.Email)"
+						@bind-Value="user.Email"
+						For="@(() => user.Email)"
+						Disabled="true"
 						Immediate="true"
 						InputType="InputType.Email"
 						Label="Email"
@@ -40,8 +33,8 @@
 
 					<MudTextField
 						T="string"
-						@bind-Value="signUpModel.Password"
-						For="@(() => signUpModel.Password)"
+						@bind-Value="user.Password"
+						For="@(() => user.Password)"
 						Adornment="Adornment.End"
 						AdornmentIcon="@passwordAdornmentIcon"
 						HelperText="Choose a strong password"
@@ -56,8 +49,8 @@
 
 					<MudTextField
 						T="string"
-						@bind-Value="signUpModel.ConfirmPassword"
-						For="@(() => signUpModel.ConfirmPassword)"
+						@bind-Value="user.ConfirmPassword"
+						For="@(() => user.ConfirmPassword)"
 						Adornment="Adornment.End"
 						AdornmentIcon="@confirmPasswordAdornmentIcon"
 						HelperText="Repeat the password"
@@ -69,47 +62,73 @@
 						Variant="Variant.Outlined"
 						OnAdornmentClick="ToggleConfirmPasswordVisibility"
 					/>
+
+					<MudTextField
+						@bind-Value="user.FirstName"
+						For="@(() => user.FirstName)"
+						Immediate="true"
+						Label="First Name"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
+
+					<MudTextField
+						@bind-Value="user.LastName"
+						For="@(() => user.LastName)"
+						Immediate="true"
+						Label="Last Name"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
+
+					<MudTextField
+						@bind-Value="user.Location"
+						For="@(() => user.Location)"
+						Immediate="true"
+						Label="Location"
+						Variant="Variant.Outlined"
+						Class="mt-3"
+					/>
 				</MudCardContent>
 
-					<MudCardActions>
-						<MudGrid Justify="Justify.Center">
-							<MudItem>
-								<MudButton
-									ButtonType="ButtonType.Submit"
-									Color="Color.Primary"
-									Variant="Variant.Filled"
-									Class="ml-auto"
-									Style="width: 150px;"
-								>
-									Register
-								</MudButton>
-							</MudItem>
-						</MudGrid>
-					</MudCardActions>
-
-					<MudContainer MaxWidth="MaxWidth.Small" Style="text-align: center;">
-						<MudText>Have an account?</MudText> <MudLink Href="/signin">Sign In</MudLink>
-					</MudContainer>
-
+				<MudCardActions>
+					<MudGrid Justify="Justify.Center">
+						<MudItem>
+							<MudButton
+								ButtonType="ButtonType.Submit"
+								Color="Color.Primary"
+								Variant="Variant.Filled"
+								Class="ml-auto"
+							>
+								Save Profile
+							</MudButton>
+						</MudItem>
+					</MudGrid>
+				</MudCardActions>
 			</MudCard>
 		</MudItem>
 	</MudGrid>
 </EditForm>
-</MudContainer>
 
 @code {
 	// fields ----------------------------------------------------------------------------------- //
-    private SignUpModel signUpModel {get; set;} = new();
-    private bool success;
-	private string? errorMessage;
-	private InputType passwordInputType = InputType.Password;
+ 	private InputType passwordInputType = InputType.Password;
     private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
     private InputType confirmPasswordInputType = InputType.Password;
     private string confirmPasswordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
+    private UserModel user = new UserModel {
+        Username = "testuser",
+        Email = "test.user@example.com",
+		Password = "Password",
+		ConfirmPassword = "Password",
+        FirstName = "test",
+        LastName = "user",
+        Location = "Johannesburg, South Africa"
+    };
 
 	// methods ---------------------------------------------------------------------------------- //
-    private void OnValidSubmit(EditContext context) {
-        bool success = true;
+	private void SaveProfile(EditContext context) {
+		bool success = true;
 
 		if(!success) {
 			Snackbar.Add("User profile updated successfully.", Severity.Info);
@@ -129,7 +148,6 @@
 			);
 		}
     }
-    
 
 	private void ToggleConfirmPasswordVisibility() {
         if (confirmPasswordInputType == InputType.Password) {

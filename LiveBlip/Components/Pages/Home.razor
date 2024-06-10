@@ -1,4 +1,7 @@
 @page "/"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject NavigationManager NavigationManager
+@inject ProtectedLocalStorage LocalStorage
 @inject IJSRuntime JSRuntime
 @inject MudBlazor.IDialogService DialogService
 @using LiveBlip.Models
@@ -6,10 +9,6 @@
 <div class="container">
 
     <h3>Home</h3>
-
-    
-
-   
 
     <div class="sidebar">
         <MudPaper Width="100%">
@@ -41,13 +40,14 @@
     <div class="map-container">
         <Map />
     </div>
-
-    
-
 </div>
 
-
 @code {
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (!(await LocalStorage.GetAsync<bool>("UserLoggedIn")).Value) {
+			NavigationManager.NavigateTo("/welcome");
+		}
+	}
 
     private List<Device> devices = new List<Device>
     {
@@ -91,7 +91,6 @@
         await JSRuntime.InvokeVoidAsync("AddMarker", coords);
     }
 
-
     private bool isVisible;
 
     public void OpenOverlay()
@@ -104,5 +103,4 @@
     
     private bool isPowerSavingMode = false;
     
-
 }

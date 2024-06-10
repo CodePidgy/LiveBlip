@@ -2,90 +2,86 @@
 @using LiveBlip.Models
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject NavigationManager Navigation
+@inject ProtectedLocalStorage LocalStorage
+@inject ISnackbar Snackbar
 
 <PageTitle>Sign In</PageTitle>
 
-<h1>Login</h1>
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-12 d-flex flex-column justify-center align-center">
+	<EditForm Model="@signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
+		<DataAnnotationsValidator />
+		<MudGrid Class="justify-center align-center" Style="width: 100%; margin: 0 auto; ">
+			<MudItem xs="12" sm="25">
+				<MudCard Elevation="0" Class="pa-8 rounded-xl">
 
-<EditForm Model="@signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
-	<DataAnnotationsValidator />
-
-	@if (!string.IsNullOrEmpty(errorMessage)) {
-		<div>
-			@errorMessage
-		</div>
-	}
-
-	<MudGrid>
-		<MudItem xs="12" sm="7">
-			<MudCard>
-				<MudCardContent>
-					<MudTextField
-						@bind-Value="signInModel.Username"
-						For="@(() => signInModel.Username)"
-						HelperText="Max. 8 characters"
-						Immediate="true"
-						Label="Username"
-					/>
-
-					<MudTextField
-						@bind-Value="signInModel.Password"
-						For="@(() => signInModel.Password)"
-						HelperText="Choose a strong password"
-						Immediate="true"
-						InputType="InputType.Password"
-						Label="Password"
-						Class="mt-3"
-					/>
-				</MudCardContent>
-
-				<MudCardActions>
-					<MudButton
-						ButtonType="ButtonType.Submit"
-						Color="Color.Primary"
-						Variant="Variant.Filled"
-						Class="ml-auto1"
-					>
-						Login
-					</MudButton>
-				</MudCardActions>
-			</MudCard>
-		</MudItem>
-
-		<MudItem xs="12" sm="5">
-			<MudPaper Class="pa-4 mud-height-full">
-				<MudText Typo="Typo.subtitle2">Validation Summary</MudText>
-				@if (success) {
-					<MudText Color="Color.Success">Success</MudText>
-				} else {
-					<MudText Color="@Color.Error">
-						<ValidationSummary />
+					<MudText Align="Align.Center" Color="Color.Secondary" Typo="Typo.h3" Class="mb-4">
+						Sign In
 					</MudText>
-				}
-			</MudPaper>
-		</MudItem>
 
-		<MudItem xs="12">
-			<div>
-				<p>Don't have an account?</p>
-			</div>
-			<div>
-				<a href="/signup">Sign Up</a>
-			</div>
-		</MudItem>
-	</MudGrid>
-</EditForm>
+					<MudCardContent>
+						<MudTextField
+							@bind-Value="signInModel.Username"
+							For="@(() => signInModel.Username)"
+							Immediate="true"
+							Label="Username"
+							Class="mt-3 "
+							Variant="Variant.Outlined"
+
+						/>
+
+						<MudTextField
+							T="string"
+							@bind-Value="signInModel.Password"
+							For="@(() => signInModel.Password)"
+							Adornment="Adornment.End"
+							AdornmentIcon="@passwordAdornmentIcon"
+							HelperText="Choose a strong password"
+							Immediate="true"
+							InputType="@passwordInputType"
+							Label="Password"
+							AdornmentAriaLabel="Show Password"
+							Variant="Variant.Outlined"
+							Class="mt-3"
+							OnAdornmentClick="TogglePasswordVisibility"
+						/>
+					</MudCardContent>
+
+					<MudCardActions>
+						<MudGrid Justify="Justify.Center">
+							<MudItem>
+								<MudButton
+									ButtonType="ButtonType.Submit"
+									Color="Color.Primary"
+									Variant="Variant.Filled"
+									Class="ml-auto"
+									Style="width: 150px;"
+								>
+									Login
+								</MudButton>
+							</MudItem>
+						</MudGrid>
+					</MudCardActions>
+
+					<MudContainer MaxWidth="MaxWidth.Small" Style="text-align: center;">
+						<MudText>Don't have an account?</MudText> <MudLink Href="/signup">Sign Up</MudLink>
+					</MudContainer>
+
+				</MudCard>
+			</MudItem>
+		</MudGrid>
+	</EditForm>
+</MudContainer>
 
 @code {
 	// fields ----------------------------------------------------------------------------------- //
 	[SupplyParameterFromForm]
     private SignInModel signInModel { get; set; } = new();
-    private string errorMessage;
-	private bool success;
-
+	private InputType passwordInputType = InputType.Password;
+    private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
 	// methods ---------------------------------------------------------------------------------- //
-    private async Task HandleValidSubmit() {
+    private void HandleValidSubmit() {
 		// Hardcoded credentials
 		const string hardcodeUname = "testuser";
 		const string hardcodePword = "password";
@@ -94,10 +90,42 @@
         // Simulate sign-in logic for now
         if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword) {
             // Navigate to the home page or a dashboard
+			this.Snackbar.Clear();
+			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+			this.Snackbar.Configuration.VisibleStateDuration = 2;
+
+			LocalStorage.SetAsync("UserLoggedIn", true);
+
+			Snackbar.Add(
+				"Login Successful.",
+				Severity.Success
+			);
+
             Navigation.NavigateTo("/");
         } else {
             // Display an error message
-            errorMessage = "Invalid username of password.";
+            this.Snackbar.Clear();
+			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+			this.Snackbar.Configuration.VisibleStateDuration = 2000;
+
+			Snackbar.Add(
+				"Invalid Username or Password.",
+				Severity.Error,
+				(options) => {
+					options.CloseAfterNavigation = true;
+				}
+			);
+        }
+    }
+
+	private void TogglePasswordVisibility() {
+        if (passwordInputType == InputType.Password) {
+            passwordInputType = InputType.Text;
+            passwordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else {
+            passwordInputType = InputType.Password;
+            passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
     }
 }
