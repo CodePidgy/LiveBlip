@@ -1,10 +1,15 @@
 @inject Settings Settings
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedLocalStorage LocalStorage
+@inject NavigationManager NavigationManager
+@using LiveBlip.Models
 
 <MudAppBar Color="Color.Dark" Elevation="1">
 	<MudTooltip Text="Home" Delay="500">
 		<MudLink Href="#" Color="Color.Primary" Typo="Typo.h4" Underline="Underline.None">
 			LiveBlip
 		</MudLink>
+
 	</MudTooltip>
 
 	<MudSpacer />
@@ -32,14 +37,62 @@
 	</MudTooltip>
 
 	<MudTooltip Text="Account" Delay="500">
-		<MudIconButton
-			Icon="@Icons.Material.Filled.AccountCircle" Href="/account" Color="Color.Primary"
-		/>
-	</MudTooltip>
+        <MudMenu PositionAtCursor="false" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense>
+            <ActivatorContent>
+                <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
+            </ActivatorContent>
+            <ChildContent>
+				@if (Settings.isUserLoggedIn) {
+					<MudMenuItem Href="/account">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+                         		Icon="@Icons.Material.Filled.ManageAccounts" />
+							<MudText Align="Align.Center">Settings</MudText>
+						</div>
+					</MudMenuItem>
+
+					<MudMenuItem OnClick="OnSignOut">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+								Icon="@Icons.Material.Filled.Logout" />
+							<MudText Align="Align.Center">Logout</MudText>
+						</div>
+					</MudMenuItem>
+
+				} else {
+
+					<MudMenuItem Href="/signup">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+								Icon="@Icons.Material.Filled.PersonAddAlt1" />
+							<MudText Align="Align.Center">Sign Up</MudText>
+						</div>
+					</MudMenuItem>
+
+					<MudMenuItem Href="/signin">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+								Icon="@Icons.Material.Filled.Login" />
+							<MudText Align="Align.Center">Sign In</MudText>
+						</div>
+					</MudMenuItem>
+				}
+            </ChildContent>
+        </MudMenu>
+    </MudTooltip>
 </MudAppBar>
 
 @code {
 	// fields ----------------------------------------------------------------------------------- //
 	[Parameter]
 	public EventCallback DarkModeToggleChanged { get; set; }
+	private bool isUserLoggedIn;
+	// Methods ---------------------------------------------------------------------------------- //
+
+	private void OnSignOut() {
+		Settings.isUserLoggedIn=false;
+		NavigationManager.NavigateTo("Welcome");
+	}
+
+
 }

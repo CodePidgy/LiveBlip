@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject NavigationManager NavigationManager
 @inject ProtectedLocalStorage LocalStorage
+@inject Settings Settings
 
 <PageTitle>Home</PageTitle>
 
@@ -9,8 +10,8 @@
 
 @code {
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		if (!(await LocalStorage.GetAsync<bool>("UserLoggedIn")).Value) {
-			NavigationManager.NavigateTo("/welcome");
+		if (Settings.isUserLoggedIn=true) {
+			NavigationManager.NavigateTo("/");
 		}
 	}
 }
