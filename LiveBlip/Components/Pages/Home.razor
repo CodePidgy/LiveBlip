@@ -1,16 +1,116 @@
-﻿@page "/"
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@inject NavigationManager NavigationManager
-@inject ProtectedLocalStorage LocalStorage
+@page "/"
+@inject IJSRuntime JSRuntime
+@inject MudBlazor.IDialogService DialogService
+@using LiveBlip.Models
 
-<PageTitle>Home</PageTitle>
+<div class="container">
+    <h3>Home</h3>
 
-<Map />
+    <div class="sidebar">
+        <MudPaper Width="100%">
+            <MudList Clickable="true">
+                <MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
+                    <NestedList>
+                        @foreach (var device in devicesList)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
+                                @device.Name
+                            </MudListItem>
+                        }
+                    </NestedList>
+                </MudListItem>
+                <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
+                    <NestedList>
+                        <MudListItem Icon="@Icons.Material.Filled.AddCircle" Title="Add A Device">
+                            <MudButton OnClick="ShowAddDeviceDialog">Add A Device</MudButton>
+                        </MudListItem>
+                        <MudListItem Icon="@Icons.Material.Filled.WatchLater">
+                            Turn Device Off
+                        </MudListItem>
+                    </NestedList>
+                </MudListItem>
+            </MudList>
+        </MudPaper>
+    </div>
+
+    <div class="map-container">
+        <Map />
+    </div>
+
+    @if (selectedDevice != null)
+    {
+        <MudCard Class="about-device">
+            <MudCardContent>
+                <MudText Typo="Typo.h6">@selectedDevice.Name</MudText>
+                <MudText Typo="Typo.body2">Last seen Wednesday 22 May at 04:37 (UTC)</MudText>
+                <MudText Typo="Typo.body2">Battery at @selectedDevice.BatteryPerc%</MudText>
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2">Power saving mode</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch @bind-Checked="isPowerSavingMode" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudIconButton Class="close-button" Icon="@Icons.Material.Filled.Close" Color="Color.Secondary" OnClick="CloseDeviceCard" />
+        </MudCard>
+    }
+</div>
 
 @code {
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		if (!(await LocalStorage.GetAsync<bool>("UserLoggedIn")).Value) {
-			NavigationManager.NavigateTo("/welcome");
-		}
-	}
+    private List<Device> devicesList = new List<Device>
+    {
+        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570, BatteryPerc = 20 },
+        new Device { Name = "Device 2", Latitude = -25.747867, Longitude = 28.229271 }
+    };
+
+    private int markerIndex = 0;
+
+    private async Task ShowAddDeviceDialog()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<AddMarkerDialog>("Add Device", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            var (deviceName, deviceNumber) = ((string, int))result.Data;
+            var newDevice = new Device
+            {
+                Name = deviceName,
+                Latitude = -33.8688 + markerIndex * 0.01,
+                Longitude = 151.2093 + markerIndex * 0.01,
+                BatteryPerc = 40
+            };
+            devicesList.Add(newDevice);
+            await AddNewMarker(newDevice);
+        }
+    }
+
+    private async Task AddNewMarker(Device device)
+    {
+        var newMarker = new { latitude = device.Latitude, longitude = device.Longitude };
+        await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
+        markerIndex++;
+    }
+
+    private Device selectedDevice = null;
+    private bool isPowerSavingMode = false;
+
+    private async Task ShowDeviceOnMap(Device device)
+    {
+        var coords = new { latitude = device.Latitude, longitude = device.Longitude };
+        selectedDevice = device;
+        int zoomLevel = 12;
+
+        await JSRuntime.InvokeVoidAsync("setMapView", device.Latitude, device.Longitude, zoomLevel);
+        await JSRuntime.InvokeVoidAsync("AddMarker", coords);
+    }
+
+    private void CloseDeviceCard()
+    {
+        selectedDevice = null;
+    }
 }
