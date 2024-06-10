@@ -38,15 +38,6 @@ function RemoveMarker(index) {
     }
 }
 
-function setMapView(latitude, longitude, zoomLevel) {
-	if (map) {
-		map.setCamera({
-			center: [longitude, latitude],
-			zoom: zoomLevel
-		});
-	}
-}
-
 function SetDarkMode() {
     map.setStyle({ style: "night" });
 }
