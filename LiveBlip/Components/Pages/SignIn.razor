@@ -2,8 +2,10 @@
 @using LiveBlip.Models
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components
-@inject ISnackbar Snackbar
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject NavigationManager Navigation
+@inject ProtectedLocalStorage LocalStorage
+@inject ISnackbar Snackbar
 
 <PageTitle>Sign In</PageTitle>
 
@@ -30,13 +32,19 @@
 						/>
 
 						<MudTextField
+							T="string"
 							@bind-Value="signInModel.Password"
 							For="@(() => signInModel.Password)"
+							Adornment="Adornment.End"
+							AdornmentIcon="@passwordAdornmentIcon"
+							HelperText="Choose a strong password"
 							Immediate="true"
-							InputType="InputType.Password"
+							InputType="@passwordInputType"
 							Label="Password"
-							Class="mt-3"
+							AdornmentAriaLabel="Show Password"
 							Variant="Variant.Outlined"
+							Class="mt-3"
+							OnAdornmentClick="TogglePasswordVisibility"
 						/>
 					</MudCardContent>
 
@@ -70,8 +78,10 @@
 	// fields ----------------------------------------------------------------------------------- //
 	[SupplyParameterFromForm]
     private SignInModel signInModel { get; set; } = new();
+	private InputType passwordInputType = InputType.Password;
+    private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
 	// methods ---------------------------------------------------------------------------------- //
-    private async Task HandleValidSubmit() {
+    private void HandleValidSubmit() {
 		// Hardcoded credentials
 		const string hardcodeUname = "testuser";
 		const string hardcodePword = "password";
@@ -83,10 +93,14 @@
 			this.Snackbar.Clear();
 			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
 			this.Snackbar.Configuration.VisibleStateDuration = 2;
+
+			LocalStorage.SetAsync("UserLoggedIn", true);
+
 			Snackbar.Add(
 				"Login Successful.",
 				Severity.Success
 			);
+
             Navigation.NavigateTo("/");
         } else {
             // Display an error message
@@ -101,6 +115,17 @@
 					options.CloseAfterNavigation = true;
 				}
 			);
+        }
+    }
+
+	private void TogglePasswordVisibility() {
+        if (passwordInputType == InputType.Password) {
+            passwordInputType = InputType.Text;
+            passwordAdornmentIcon = Icons.Material.Filled.Visibility;
+        }
+        else {
+            passwordInputType = InputType.Password;
+            passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
         }
     }
 }
