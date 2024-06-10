@@ -23,7 +23,14 @@ map.controls.add(new atlas.control.StyleControl({
   });
 }
 
-
+function setMapView(latitude, longitude, zoomLevel) {
+	if (map) {
+		map.setCamera({
+			center: [longitude, latitude],
+			zoom: zoomLevel
+		});
+	}
+}
 
 function AddMarker(coords) {
     const marker = new atlas.HtmlMarker({ position: [coords.longitude, coords.latitude] });

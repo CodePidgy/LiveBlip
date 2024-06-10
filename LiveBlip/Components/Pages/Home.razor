@@ -1,13 +1,9 @@
 @page "/"
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@inject NavigationManager NavigationManager
-@inject ProtectedLocalStorage LocalStorage
 @inject IJSRuntime JSRuntime
 @inject MudBlazor.IDialogService DialogService
 @using LiveBlip.Models
 
 <div class="container">
-
     <h3>Home</h3>
 
     <div class="sidebar">
@@ -15,7 +11,7 @@
             <MudList Clickable="true">
                 <MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
                     <NestedList>
-                        @foreach (var device in devices)
+                        @foreach (var device in devicesList)
                         {
                             <MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
                                 @device.Name
@@ -35,23 +31,37 @@
                 </MudListItem>
             </MudList>
         </MudPaper>
-
     </div>
+
     <div class="map-container">
         <Map />
     </div>
+
+    @if (selectedDevice != null)
+    {
+        <MudCard Class="about-device">
+            <MudCardContent>
+                <MudText Typo="Typo.h6">@selectedDevice.Name</MudText>
+                <MudText Typo="Typo.body2">Last seen Wednesday 22 May at 04:37 (UTC)</MudText>
+                <MudText Typo="Typo.body2">Battery at @selectedDevice.BatteryPerc%</MudText>
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudText Typo="Typo.body2">Power saving mode</MudText>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSwitch @bind-Checked="isPowerSavingMode" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudIconButton Class="close-button" Icon="@Icons.Material.Filled.Close" Color="Color.Secondary" OnClick="CloseDeviceCard" />
+        </MudCard>
+    }
 </div>
 
 @code {
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		if (!(await LocalStorage.GetAsync<bool>("UserLoggedIn")).Value) {
-			NavigationManager.NavigateTo("/welcome");
-		}
-	}
-
-    private List<Device> devices = new List<Device>
+    private List<Device> devicesList = new List<Device>
     {
-        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570,BatteryPerc =20 },
+        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570, BatteryPerc = 20 },
         new Device { Name = "Device 2", Latitude = -25.747867, Longitude = 28.229271 }
     };
 
@@ -71,9 +81,10 @@
             {
                 Name = deviceName,
                 Latitude = -33.8688 + markerIndex * 0.01,
-                Longitude = 151.2093 + markerIndex * 0.01
+                Longitude = 151.2093 + markerIndex * 0.01,
+                BatteryPerc = 40
             };
-            devices.Add(newDevice);
+            devicesList.Add(newDevice);
             await AddNewMarker(newDevice);
         }
     }
@@ -85,22 +96,21 @@
         markerIndex++;
     }
 
+    private Device selectedDevice = null;
+    private bool isPowerSavingMode = false;
+
     private async Task ShowDeviceOnMap(Device device)
     {
         var coords = new { latitude = device.Latitude, longitude = device.Longitude };
+        selectedDevice = device;
+        int zoomLevel = 12;
+
+        await JSRuntime.InvokeVoidAsync("setMapView", device.Latitude, device.Longitude, zoomLevel);
         await JSRuntime.InvokeVoidAsync("AddMarker", coords);
     }
 
-    private bool isVisible;
-
-    public void OpenOverlay()
+    private void CloseDeviceCard()
     {
-        isVisible = true;
-        StateHasChanged();
+        selectedDevice = null;
     }
-
-    public bool AlarmOn { get; set; }
-    
-    private bool isPowerSavingMode = false;
-    
 }
