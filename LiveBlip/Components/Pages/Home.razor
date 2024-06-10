@@ -1,7 +1,8 @@
 @page "/"
-@inject IJSRuntime JSRuntime
-@inject MudBlazor.IDialogService DialogService
 @using LiveBlip.Models
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@inject Settings Settings
 
 <div class="container">
     <h3>Home</h3>
@@ -59,6 +60,11 @@
 </div>
 
 @code {
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (Settings.isUserLoggedIn=true) {
+			NavigationManager.NavigateTo("/");
+		}
+	}
     private List<Device> devicesList = new List<Device>
     {
         new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570, BatteryPerc = 20 },

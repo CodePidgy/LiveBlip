@@ -47,15 +47,24 @@
 		// 1 millisecond delay, ensures dark mode and light mode work
 		await Task.Delay(1);
 
+		SetLogoTheme();
 		SetMapTheme();
 	}
 
 	private void DarkModeToggleChanged() {
 		Settings.DarkMode = !Settings.DarkMode;
 
+		SetLogoTheme();
 		SetMapTheme();
 	}
+	private void SetLogoTheme() {
+		if (Settings.DarkMode) {
+			JSRuntime.InvokeVoidAsync("SetDarkMode");
+		} else {
+			JSRuntime.InvokeVoidAsync("SetLightMode");
+		}
 
+	}
 	private void SetMapTheme() {
 		if (Settings.DarkMode) {
 			JSRuntime.InvokeVoidAsync("SetDarkMode");

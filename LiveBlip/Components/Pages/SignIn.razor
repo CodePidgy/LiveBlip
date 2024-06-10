@@ -6,6 +6,7 @@
 @inject NavigationManager Navigation
 @inject ProtectedLocalStorage LocalStorage
 @inject ISnackbar Snackbar
+@inject Settings Settings
 
 <PageTitle>Sign In</PageTitle>
 
@@ -15,7 +16,6 @@
 		<MudGrid Class="justify-center align-center" Style="width: 100%; margin: 0 auto; ">
 			<MudItem xs="12" sm="25">
 				<MudCard Elevation="0" Class="pa-8 rounded-xl">
-
 					<MudText Align="Align.Center" Color="Color.Secondary" Typo="Typo.h3" Class="mb-4">
 						Sign In
 					</MudText>
@@ -87,14 +87,14 @@
 		const string hardcodePword = "password";
 
 
-        // Simulate sign-in logic for now
+        // Sign-in logic using hardcoded values
         if (signInModel.Username == hardcodeUname && signInModel.Password == hardcodePword) {
             // Navigate to the home page or a dashboard
 			this.Snackbar.Clear();
 			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
 			this.Snackbar.Configuration.VisibleStateDuration = 2;
 
-			LocalStorage.SetAsync("UserLoggedIn", true);
+			Settings.isUserLoggedIn=true;
 
 			Snackbar.Add(
 				"Login Successful.",
