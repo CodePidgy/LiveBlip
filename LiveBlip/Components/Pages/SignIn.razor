@@ -2,8 +2,10 @@
 @using LiveBlip.Models
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components
-@inject ISnackbar Snackbar
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject NavigationManager Navigation
+@inject ProtectedLocalStorage LocalStorage
+@inject ISnackbar Snackbar
 
 <PageTitle>Sign In</PageTitle>
 
@@ -79,7 +81,7 @@
 	private InputType passwordInputType = InputType.Password;
     private string passwordAdornmentIcon = Icons.Material.Filled.VisibilityOff;
 	// methods ---------------------------------------------------------------------------------- //
-    private async Task HandleValidSubmit() {
+    private void HandleValidSubmit() {
 		// Hardcoded credentials
 		const string hardcodeUname = "testuser";
 		const string hardcodePword = "password";
@@ -91,10 +93,14 @@
 			this.Snackbar.Clear();
 			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
 			this.Snackbar.Configuration.VisibleStateDuration = 2;
+
+			LocalStorage.SetAsync("UserLoggedIn", true);
+
 			Snackbar.Add(
 				"Login Successful.",
 				Severity.Success
 			);
+
             Navigation.NavigateTo("/");
         } else {
             // Display an error message
