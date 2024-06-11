@@ -6,14 +6,11 @@
 
 <MudAppBar Color="Color.Dark" Elevation="1">
 	<MudTooltip Text="Home" Delay="500">
-		<MudLink
-			Href="@(Settings.User == string.Empty ? "/welcome" : "/")"
+		<MudLink Href="#">
 			@if (Settings.DarkMode) {
-				<MudImage Src="images/logo-light.png" Fluid="true"
-					ObjectFit="ObjectFit.ScaleDown" />
+				<MudImage Src="images/logo-light.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown" />
 			} else {
-				<MudImage Src="images/logo-dark.png" Fluid="true"
-					ObjectFit="ObjectFit.ScaleDown" />
+				<MudImage Src="images/logo-dark.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown" />
 			}
 		</MudLink>
 	</MudTooltip>
