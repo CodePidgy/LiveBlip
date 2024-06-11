@@ -8,7 +8,9 @@
 	<MudTooltip Text="Home" Delay="500">
 		<MudLink Href="#">
 			@if (Settings.DarkMode) {
-				<MudImage Src="images/logo-light.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown" />
+				<MudImage
+					Src="images/logo-light.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown"
+				/>
 			} else {
 				<MudImage Src="images/logo-dark.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown" />
 			}
@@ -40,7 +42,12 @@
 	</MudTooltip>
 
 	<MudTooltip Text="Account" Delay="500">
-        <MudMenu PositionAtCursor="false" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense>
+        <MudMenu
+			PositionAtCursor="false"
+			AnchorOrigin="Origin.BottomRight"
+			TransformOrigin="Origin.TopRight"
+			Dense
+		>
             <ActivatorContent>
                 <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
             </ActivatorContent>
