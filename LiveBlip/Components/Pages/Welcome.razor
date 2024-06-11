@@ -1,99 +1,83 @@
-﻿
-@page "/welcome"
+﻿@page "/welcome"
 @inject NavigationManager NavManager
+@inject Settings Settings
 
 <PageTitle>Welcome</PageTitle>
 
-
 <MudGrid Class="xs=12">
 
-
 <MudPaper Class="mx-auto my-16 pa-6 mud-theme-dark border-solid border-2 pa-4 " Height="230px" Width="50%" Elevation="22" Outlined="true">
-
-
     <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-content-center flex-wrap flex-grow-1 gap-4">
         <MudText Class=" pa-4 pl-14 " Color="Color.Secondary" Typo="Typo.h4"><b>Welcome to</b > </MudText>
 		<MudImage Class="ml-n9"  Src="images\logo.png" Width="250" Height="70"/>
      </MudContainer>
 
+	<MudForm  @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
+		<MudContainer  Class=" ml-7 d-flex align-content-center flex-wrap flex-grow-1 gap-4">
+			<MudTextField  @bind-Value="HelperText" Label="Please input tracker IMEI" Variant="Variant.Filled " Margin="Margin.Dense" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" OnAdornmentClick="@(()=>form.Validate())" AdornmentColor="Color.Primary" @ref="imeiField1" Validation="@(new Func<string, IEnumerable<string>>(ImeiValidation))" Required="true" RequiredError="Correct IMEI number is required!"/>
+				<MudPaper Elevation="0" Class=" mud-theme-dark">
 
-
-<MudForm  @ref="form" @bind-IsValid="@success" @bind-Errors="@errors" >
-     <MudContainer  Class=" ml-7 d-flex align-content-center flex-wrap flex-grow-1 gap-4">
-
-          <MudTextField  @bind-Value="HelperText" Label="Please input tracker IMEI" Variant="Variant.Filled " Margin="Margin.Dense" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" OnAdornmentClick="@(()=>form.Validate())" AdornmentColor="Color.Primary" @ref="imeiField1" Validation="@(new Func<string, IEnumerable<string>>(ImeiValidation))" Required="true" RequiredError="Correct IMEI number is required!"/>
-              <MudPaper Elevation="0" Class=" mud-theme-dark">
-
-				   <MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary" OnClick="ShowInfo"/>
-             </MudPaper>
-
-      </MudContainer>
-</MudForm>
-
+					<MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary" OnClick="ShowInfo"/>
+				</MudPaper>
+		</MudContainer>
+	</MudForm>
 </MudPaper>
-@if (isInfoVisible)
-{
-    <MudPaper Class="pt-9  border-solid border-2 mud-theme-dark">
-	<MudText Class="ml-8 pr-5 "  Color="Color.Secondary">
-		 Ithegi Electronics, a prominent IoT security solutions<br>
-         provider, is launching a new GPS tracking product. The aim<br>
-         of this software is to enhance the user experience by<br>
-         providing seamless access and usability for businesses,<br>
-         private individuals, and other end-users Design, development,<br>
-         testing, and implementation of GPS tracking software for<br>
-         Ithegi Electronics' new product. Software will be tailored<br>
-         to ensure ease of use and accessibility for end-users across<br>
-         various platforms. The tracker will include real-time tracking,<br>
-         reporting functionalities, user-friendly interface, and<br>
-         scalability to accommodate future enhancements.<br>
 
-        <MudIconButton Class="mx-n5" Icon="@Icons.Material.Filled.Close"  Color="Color.Primary" OnClick="ExitInfo"/>
-	</MudText>
+@if (isInfoVisible) {
+    <MudPaper Class="pt-9  border-solid border-2 mud-theme-dark">
+		<MudText Class="ml-8 pr-5 "  Color="Color.Secondary">
+			Ithegi Electronics, a prominent IoT security solutions<br>
+			provider, is launching a new GPS tracking product. The aim<br>
+			of this software is to enhance the user experience by<br>
+			providing seamless access and usability for businesses,<br>
+			private individuals, and other end-users Design, development,<br>
+			testing, and implementation of GPS tracking software for<br>
+			Ithegi Electronics' new product. Software will be tailored<br>
+			to ensure ease of use and accessibility for end-users across<br>
+			various platforms. The tracker will include real-time tracking,<br>
+			reporting functionalities, user-friendly interface, and<br>
+			scalability to accommodate future enhancements.<br>
+
+			<MudIconButton Class="mx-n5" Icon="@Icons.Material.Filled.Close"  Color="Color.Primary" OnClick="ExitInfo"/>
+		</MudText>
     </MudPaper>
 }
 </MudGrid>
 
+@code {
+	private bool isInfoVisible = false;
+	public string HelperText { get; set; }
+	string IMEI = "000000000000000";
+	bool success;
+	string[] errors = { };
+	MudForm form = new MudForm();
+	MudTextField<string> imeiField1;
 
+	private IEnumerable<string> ImeiValidation(string imei) {
+		if (string.IsNullOrWhiteSpace(imei)) {
+			yield return " ";
+			yield break;
+		}
 
+		if (imeiField1.Value != IMEI) {
+			yield  return "Invalid IMEI number";
+			yield break;
+		}
 
+		if (imeiField1.Value == IMEI) {
+			Settings.User = "temp";
 
+			NavManager.NavigateTo("/");
+		}
+	}
 
+	private void ShowInfo() {
+		isInfoVisible = true;
+	}
 
-@code
-{
-private bool isInfoVisible = false;
-public string HelperText { get; set; }
-string IMEI = "000000000000000";
-bool success;
-string[] errors = { };
-MudForm form = new MudForm();
-MudTextField<string> imeiField1;
-
-private IEnumerable<string> ImeiValidation(string imei)
-{
-if (string.IsNullOrWhiteSpace(imei))
-{
-yield return " ";
-yield break;
-}
-if (imeiField1.Value != IMEI){
-yield  return "Invalid IMEI number";
-yield break;
-}
-
-if (imeiField1.Value == IMEI)
- NavManager.NavigateTo("/");
-}
-
- private void ShowInfo()
-{
-isInfoVisible = true;
-}
-private void ExitInfo()
-{
-isInfoVisible = false;
-}
-
+	private void ExitInfo() {
+		isInfoVisible = false;
+	}
 }
 
 

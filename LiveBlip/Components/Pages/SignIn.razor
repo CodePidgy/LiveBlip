@@ -2,21 +2,23 @@
 @using LiveBlip.Models
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject NavigationManager Navigation
-@inject ProtectedLocalStorage LocalStorage
 @inject ISnackbar Snackbar
 @inject Settings Settings
 
 <PageTitle>Sign In</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-12 d-flex flex-column justify-center align-center">
+<MudContainer
+	MaxWidth="MaxWidth.Medium" Class="mt-12 d-flex flex-column justify-center align-center"
+>
 	<EditForm Model="@signInModel" OnValidSubmit="HandleValidSubmit" FormName="signinForm">
 		<DataAnnotationsValidator />
 		<MudGrid Class="justify-center align-center" Style="width: 100%; margin: 0 auto; ">
 			<MudItem xs="12" sm="25">
 				<MudCard Elevation="0" Class="pa-8 rounded-xl">
-					<MudText Align="Align.Center" Color="Color.Secondary" Typo="Typo.h3" Class="mb-4">
+					<MudText
+						Align="Align.Center" Color="Color.Secondary" Typo="Typo.h3" Class="mb-4"
+					>
 						Sign In
 					</MudText>
 
@@ -28,7 +30,6 @@
 							Label="Username"
 							Class="mt-3 "
 							Variant="Variant.Outlined"
-
 						/>
 
 						<MudTextField
@@ -65,9 +66,9 @@
 					</MudCardActions>
 
 					<MudContainer MaxWidth="MaxWidth.Small" Style="text-align: center;">
-						<MudText>Don't have an account?</MudText> <MudLink Href="/signup">Sign Up</MudLink>
+						<MudText>Don't have an account?</MudText>
+						<MudLink Href="/signup">Sign Up</MudLink>
 					</MudContainer>
-
 				</MudCard>
 			</MudItem>
 		</MudGrid>
@@ -94,7 +95,7 @@
 			this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
 			this.Snackbar.Configuration.VisibleStateDuration = 2;
 
-			Settings.isUserLoggedIn=true;
+			Settings.User = "testuser";
 
 			Snackbar.Add(
 				"Login Successful.",

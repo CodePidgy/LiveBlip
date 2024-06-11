@@ -13,8 +13,7 @@
             <MudList Clickable="true">
                 <MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
                     <NestedList>
-                        @foreach (var device in devicesList)
-                        {
+                        @foreach (var device in devicesList) {
                             <MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
                                 @device.Name
                             </MudListItem>
@@ -61,63 +60,77 @@
 </div>
 
 @code {
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		if (Settings.isUserLoggedIn=true) {
-			NavigationManager.NavigateTo("/");
+	// fields ----------------------------------------------------------------------------------- //
+	private List<Device> devicesList = new List<Device> {
+        new Device {
+			Name = "Samsung S21 FE",
+			Latitude = -26.080730,
+			Longitude = 27.878570,
+			BatteryPerc = 20
+		},
+        new Device {
+			Name = "Device 2",
+			Latitude = -25.747867,
+			Longitude = 28.229271
+		}
+    };
+	private int markerIndex = 0;
+	private Device selectedDevice = null;
+    private bool isPowerSavingMode = false;
+
+	// methods ---------------------------------------------------------------------------------- //
+	protected override void OnInitialized() {
+		if (Settings.User == string.Empty) {
+			NavigationManager.NavigateTo("/welcome");
 		}
 	}
-    private List<Device> devicesList = new List<Device>
-    {
-        new Device { Name = "Samsung S21 FE", Latitude = -26.080730, Longitude = 27.878570, BatteryPerc = 20 },
-        new Device { Name = "Device 2", Latitude = -25.747867, Longitude = 28.229271 }
-    };
 
-    private int markerIndex = 0;
+	private async Task AddNewMarker(Device device) {
+        var newMarker = new { latitude = device.Latitude, longitude = device.Longitude };
 
-    private async Task ShowAddDeviceDialog()
-    {
-        var parameters = new DialogParameters();
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<AddMarkerDialog>("Add Device", parameters, options);
-        var result = await dialog.Result;
+        await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
 
-        if (!result.Cancelled)
-        {
-            var (deviceName, deviceNumber) = ((string, int))result.Data;
-            var newDevice = new Device
-            {
+        markerIndex++;
+    }
+
+	private void CloseDeviceCard() {
+        selectedDevice = null;
+    }
+
+    private async Task ShowAddDeviceDialog() {
+        DialogParameters parameters = new DialogParameters();
+        DialogOptions options = new DialogOptions {
+			CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true
+		};
+        IDialogReference dialog = DialogService.Show<AddMarkerDialog>(
+			"Add Device", parameters, options
+		);
+        DialogResult result = await dialog.Result;
+
+        if (!result.Cancelled) {
+            var (deviceName, deviceNumber) = ((string, int)) result.Data;
+
+            Device newDevice = new Device {
                 Name = deviceName,
                 Latitude = -33.8688 + markerIndex * 0.01,
                 Longitude = 151.2093 + markerIndex * 0.01,
                 BatteryPerc = 40
             };
+
             devicesList.Add(newDevice);
+
             await AddNewMarker(newDevice);
         }
     }
 
-    private async Task AddNewMarker(Device device)
-    {
-        var newMarker = new { latitude = device.Latitude, longitude = device.Longitude };
-        await JSRuntime.InvokeVoidAsync("AddMarker", newMarker);
-        markerIndex++;
-    }
-
-    private Device selectedDevice = null;
-    private bool isPowerSavingMode = false;
-
-    private async Task ShowDeviceOnMap(Device device)
-    {
+    private async Task ShowDeviceOnMap(Device device) {
         var coords = new { latitude = device.Latitude, longitude = device.Longitude };
+
         selectedDevice = device;
+
         int zoomLevel = 12;
 
         await JSRuntime.InvokeVoidAsync("setMapView", device.Latitude, device.Longitude, zoomLevel);
         await JSRuntime.InvokeVoidAsync("AddMarker", coords);
-    }
-
-    private void CloseDeviceCard()
-    {
-        selectedDevice = null;
     }
 }
