@@ -6,15 +6,15 @@
 
 <MudAppBar Color="Color.Dark" Elevation="1">
 	<MudTooltip Text="Home" Delay="500">
-		<MudLink
-			Href="@(Settings.User == string.Empty ? "/welcome" : "/")"
-			Color="Color.Primary"
-			Typo="Typo.h4"
-			Underline="Underline.None"
-		>
-			LiveBlip
+		<MudLink Href="#">
+			@if (Settings.DarkMode) {
+				<MudImage
+					Src="images/logo-light.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown"
+				/>
+			} else {
+				<MudImage Src="images/logo-dark.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown" />
+			}
 		</MudLink>
-
 	</MudTooltip>
 
 	<MudSpacer />
@@ -42,7 +42,12 @@
 	</MudTooltip>
 
 	<MudTooltip Text="Account" Delay="500">
-        <MudMenu PositionAtCursor="false" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense>
+        <MudMenu
+			PositionAtCursor="false"
+			AnchorOrigin="Origin.BottomRight"
+			TransformOrigin="Origin.TopRight"
+			Dense
+		>
             <ActivatorContent>
                 <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
             </ActivatorContent>
