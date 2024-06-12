@@ -52,7 +52,7 @@
                 <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
             </ActivatorContent>
             <ChildContent>
-				@if (Settings.User != string.Empty) {
+				@if (Settings.User == "testuser") {
 					<MudMenuItem Href="/account">
 						<div class="d-flex align-center">
 							<MudIcon Class="mr-2" Size="Size.Small"
@@ -70,7 +70,6 @@
 					</MudMenuItem>
 
 				} else {
-
 					<MudMenuItem Href="/signup">
 						<div class="d-flex align-center">
 							<MudIcon Class="mr-2" Size="Size.Small"

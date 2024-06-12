@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System
 @using LiveBlip.Models
 @inject IJSRuntime JSRuntime
 @inject MudBlazor.IDialogService DialogService
@@ -6,61 +7,127 @@
 @inject Settings Settings
 
 <div class="container">
-    <h3>Home</h3>
 
-    <div class="sidebar">
-        <MudPaper Width="100%">
-            <MudList Clickable="true">
-                <MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
-                    <NestedList>
-                        @foreach (var device in devicesList) {
-                            <MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
-                                @device.Name
-                            </MudListItem>
-                        }
-                    </NestedList>
-                </MudListItem>
-                <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
-                    <NestedList>
-                        <MudListItem Icon="@Icons.Material.Filled.AddCircle" Title="Add A Device">
-                            <MudButton OnClick="ShowAddDeviceDialog">Add A Device</MudButton>
-                        </MudListItem>
-                        <MudListItem Icon="@Icons.Material.Filled.WatchLater">
-                            Turn Device Off
-                        </MudListItem>
-                    </NestedList>
-                </MudListItem>
-            </MudList>
-        </MudPaper>
-    </div>
-
-    <div class="map-container">
-        <Map />
-    </div>
-
-    @if (selectedDevice != null)
+	@if (Settings.User == "temp")
     {
-        <MudCard Class="about-device">
-            <MudCardContent>
-                <MudText Typo="Typo.h6">@selectedDevice.Name</MudText>
-                <MudText Typo="Typo.body2">Last seen Wednesday 22 May at 04:37 (UTC)</MudText>
-                <MudText Typo="Typo.body2">Battery at @selectedDevice.BatteryPerc%</MudText>
-                <MudGrid>
-                    <MudItem xs="6">
-                        <MudText Typo="Typo.body2">Power saving mode</MudText>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudSwitch @bind-Checked="isPowerSavingMode" Color="Color.Primary" />
-                    </MudItem>
-                </MudGrid>
-            </MudCardContent>
-            <MudIconButton Class="close-button" Icon="@Icons.Material.Filled.Close" Color="Color.Secondary" OnClick="CloseDeviceCard" />
-        </MudCard>
-    }
+		<div class="sidebar">
+			<MudPaper Width="100%">
+				<MudList Clickable="true">
+					<MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
+						<NestedList>
+							<MudListItem Icon="@Icons.Material.Filled.Api" Title="@tempDevice.Name" OnClick="() => ShowDeviceOnMap(tempDevice)">
+								@tempDevice.Name
+							</MudListItem>
+						</NestedList>
+					</MudListItem>
+					<MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
+						<NestedList>
+							@if (Settings.User == "testuser") {
+								<MudButton OnClick="ShowAddDeviceDialog">Add A Device</MudButton>
+							} else {
+								<MudButton OnClick="ShowAddDeviceDialog" Disabled="true">Add A Device</MudButton>
+							}
+							<MudListItem Icon="@Icons.Material.Filled.WatchLater">
+								Turn Device Off
+							</MudListItem>
+						</NestedList>
+					</MudListItem>
+				</MudList>
+			</MudPaper>
+		</div>
+
+		<div class="map-container">
+			<Map />
+		</div>
+
+		@if (selectedDevice != null)
+		{
+			<MudCard Class="about-device">
+				<MudCardContent>
+					<MudText Typo="Typo.h6">@tempDevice.Name</MudText>
+					<MudText Typo="Typo.body2">Last seen Wednesday 22 May at 04:37 (UTC)</MudText>
+					<MudText Typo="Typo.body2">Battery at @tempDevice.BatteryPerc%</MudText>
+					<MudGrid>
+						<MudItem xs="6">
+							<MudText Typo="Typo.body2">Power saving mode</MudText>
+						</MudItem>
+						<MudItem xs="6">
+							<MudSwitch @bind-Checked="isPowerSavingMode" Color="Color.Primary" />
+						</MudItem>
+					</MudGrid>
+				</MudCardContent>
+				<MudIconButton Class="close-button" Icon="@Icons.Material.Filled.Close" Color="Color.Secondary" OnClick="CloseDeviceCard" />
+			</MudCard>
+		}
+
+	}
+	else
+	{
+
+
+		<div class="sidebar">
+			<MudPaper Width="100%">
+				<MudList Clickable="true">
+					<MudListItem Icon="@Icons.Material.Filled.Api" Title="Devices" Text="Devices" InitiallyExpanded="true">
+						<NestedList>
+							@foreach (var device in devicesList) {
+								<MudListItem Icon="@Icons.Material.Filled.Api" Title="@device.Name" OnClick="() => ShowDeviceOnMap(device)">
+									@device.Name
+								</MudListItem>
+							}
+						</NestedList>
+					</MudListItem>
+					<MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Settings" InitiallyExpanded="true">
+						<NestedList>
+							<MudListItem Icon="@Icons.Material.Filled.AddCircle" Title="Add A Device">
+								<MudButton OnClick="ShowAddDeviceDialog">Add A Device</MudButton>
+							</MudListItem>
+							<MudListItem Icon="@Icons.Material.Filled.WatchLater">
+								Turn Device Off
+							</MudListItem>
+						</NestedList>
+					</MudListItem>
+				</MudList>
+			</MudPaper>
+		</div>
+
+		<div class="map-container">
+			<Map />
+		</div>
+
+		@if (selectedDevice != null)
+		{
+			<MudCard Class="about-device">
+				<MudCardContent>
+					<MudText Typo="Typo.h6">@selectedDevice.Name</MudText>
+					<MudText Typo="Typo.body2">Last seen Wednesday 22 May at 04:37 (UTC)</MudText>
+					<MudText Typo="Typo.body2">Battery at @selectedDevice.BatteryPerc%</MudText>
+					<MudGrid>
+						<MudItem xs="6">
+							<MudText Typo="Typo.body2">Power saving mode</MudText>
+						</MudItem>
+						<MudItem xs="6">
+							<MudSwitch @bind-Checked="isPowerSavingMode" Color="Color.Primary" />
+						</MudItem>
+					</MudGrid>
+				</MudCardContent>
+				<MudIconButton Class="close-button" Icon="@Icons.Material.Filled.Close" Color="Color.Secondary" OnClick="CloseDeviceCard" />
+			</MudCard>
+		}
+
+
+	}
+
 </div>
 
 @code {
 	// fields ----------------------------------------------------------------------------------- //
+
+	public Device tempDevice = new Device{Name = "IMEI: 000000000000000",
+			Latitude = 40.730610,
+			Longitude = -73.935242,
+			BatteryPerc = 80};
+
 	private List<Device> devicesList = new List<Device> {
         new Device {
 			Name = "Samsung S21 FE",
