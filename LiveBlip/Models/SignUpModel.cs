@@ -11,7 +11,7 @@ public class SignUpModel {
 	public string Password { get; set; }
 	[Required]
 	[Compare(nameof(Password))]
-	public string Password2 { get; set; }
+	public string ConfirmPassword { get; set; }
 	[Required]
 	public string Email { get; set; }
 

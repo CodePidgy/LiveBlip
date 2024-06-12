@@ -1,0 +1,28 @@
+@inject MudBlazor.IDialogService DialogService
+@code {
+    [CascadingParameter] MudBlazor.MudDialogInstance MudDialog { get; set; }
+
+    private string deviceName;
+    private int deviceNumber;
+
+    private void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok((deviceName, deviceNumber)));
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+}
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField Label="Device Name" @bind-Value="deviceName" />
+        <MudTextField Label="Device Number" @bind-Value="deviceNumber" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Submit" Color="Color.Primary">Submit</MudButton>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>

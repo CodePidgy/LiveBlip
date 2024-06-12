@@ -2,29 +2,42 @@
 
 <PageTitle>Contact Us</PageTitle>
 
-<div class="contact-card">
-	<div class="page-heading">
-		<h1>Contact Us</h1>
-	</div>
+<MudContainer MaxWidth="MaxWidth.Small" Class="my-16">
+	<MudCard Height="385px" Class="mud-theme-dark rounded-xl">
+		<MudCardHeader Class="d-flex justify-center ">
+			<MudText Color="Color.Secondary" Typo="Typo.h6">Contact Us</MudText>
+		</MudCardHeader>
 
-	<div class="contact-info">
-		<div class="contact-info-card">
-			<a href="tel:011-595-9730"><img src="images/phone.png" class="contact-image"/></a>
-			<p class="contact-text">(011) 595 9730</p>
-		</div>
+		<MudDivider DividerType="DividerType.Middle" />
 
-		<div class="contact-info-card">
-			<a href="mailto:liveblip@ithegi.co.za">
-				<img src="images/email.png" class="contact-image"/>
-			</a>
-			<p class="contact-text">liveblip@ithegi.co.za</p>
-		</div>
+		<MudCardContent Style="padding-top: 55px; padding-bottom: 55px; padding-left: 15%; padding-right: 15%">
+			<MudContainer Class="d-flex justify-space-between align-center">
+				<MudLink Href="tel:011-595-9730" Class="mr-5">
+					<MudIcon Icon="@Icons.Material.Filled.Phone" Style="font-size: 64px;" />
+				</MudLink>
 
-		<div class="contact-info-card">
-			<a href="https://maps.app.goo.gl/q9DRmHqSRhYKuXKg7">
-				<img src="images/location.png" class="contact-image"/>
-			</a>
-			<p class="contact-text">91 Vlagskip St, Laser Park, Roodepoort, 2040</p>
-		</div>
-	</div>
-</div>
+				<MudText Align="Align.Center" Color="Color.Secondary">(011) 595 9730</MudText>
+			</MudContainer>
+
+			<MudContainer Class="d-flex justify-space-between align-center">
+				<MudLink Href="mailto:liveblip@ithegi.co.za" Class="mr-5">
+					<MudIcon Icon="@Icons.Material.Filled.Email" Style="font-size: 64px;" />
+				</MudLink>
+
+				<MudText Align="Align.Center" Color="Color.Secondary">
+					liveblip@ithegi.co.za
+				</MudText>
+			</MudContainer>
+
+			<MudContainer Class="d-flex justify-space-between align-center">
+				<MudLink Href="https://maps.app.goo.gl/q9DRmHqSRhYKuXKg7" Class="mr-5">
+					<MudIcon Icon="@Icons.Material.Filled.LocationOn" Style="font-size: 64px;" />
+				</MudLink>
+
+				<MudText Align="Align.Center" Color="Color.Secondary">
+					91 Vlagskip St, Laser Park
+				</MudText>
+			</MudContainer>
+		</MudCardContent>
+	</MudCard>
+</MudContainer>

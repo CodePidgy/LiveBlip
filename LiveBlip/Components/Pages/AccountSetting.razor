@@ -1,0 +1,103 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using LiveBlip.Models
+@inject ISnackbar Snackbar
+@inject NavigationManager Navigation
+
+<MudContainer Class="mt-1">
+	<MudCard Elevation="0" Class="rounded-xl">
+		<MudCardHeader Class="d-flex justify-center ">
+			<MudText
+				Color="Color.Secondary"
+				Typo="Typo.h5"
+			>
+                Change Email
+            </MudText>
+		</MudCardHeader>
+
+		<MudDivider DividerType="DividerType.Middle" />
+
+		<MudCardContent>
+            <MudText
+                Align="Align.Center"
+                Class="mt-4 mb-5"
+			>
+                Change Email Address
+            </MudText>
+
+            <MudGrid Justify="Justify.Center">
+                <MudItem>
+                    <MudButton
+                        Color="Color.Primary"
+                        Variant="Variant.Filled"
+                        OnClick="OnAccountChange"
+					>
+                        Change email
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+
+			<MudText
+                Align="Align.Center"
+                Color="Color.Secondary"
+                Typo="Typo.h5"
+                Class="mt-8 mb-5"
+			>
+				Delete account
+			</MudText>
+
+			<MudDivider />
+
+            <MudText
+				Align="Align.Center"
+				Color="Color.Secondary"
+				Class="mt-8 mb-5"
+			>
+            	Once you delete your account, there is no going back. Please be certain.
+            </MudText>
+
+            <MudGrid Justify="Justify.Center">
+                <MudItem>
+                    <MudButton
+                        Color="Color.Error"
+                        Variant="Variant.Filled"
+                        OnClick="OnAccountChange"
+					>
+                        Delete your account
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+		</MudCardContent>
+	</MudCard>
+</MudContainer>
+
+@code {
+	// fields ----------------------------------------------------------------------------------- //
+    private bool showChangeEmailDialog;
+    private string? confirmUsername;
+    private bool showDeleteAccountDialog;
+    private bool deleteSuccess;
+    private string? newEmailAddress;
+
+	// methods ---------------------------------------------------------------------------------- //
+	private void OnAccountChange() {
+		bool success = true;
+
+        if(!success) {
+            Snackbar.Add("User profile updated successfully.", Severity.Info);
+
+            StateHasChanged();
+        } else {
+			this.Snackbar.Clear();
+        	this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+			this.Snackbar.Configuration.VisibleStateDuration = 2000;
+
+            Snackbar.Add(
+				"Database not connected. This feature is in development.",
+				Severity.Error,
+				(options) => {
+            		options.CloseAfterNavigation = true;
+        		}
+			);
+        }
+    }
+}

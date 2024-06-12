@@ -1,62 +1,106 @@
 @inject Settings Settings
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedLocalStorage LocalStorage
+@inject NavigationManager NavigationManager
+@using LiveBlip.Models
 
 <MudAppBar Color="Color.Dark" Elevation="1">
-	<MudLink Href="#" Color="Color.Primary" Typo="Typo.h4" Underline="Underline.None">
-		LiveBlip
-	</MudLink>
+	<MudTooltip Text="Home" Delay="500">
+		<MudLink Href="#">
+			@if (Settings.DarkMode) {
+				<MudImage
+					Src="images/logo-light.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown"
+				/>
+			} else {
+				<MudImage Src="images/logo-dark.png" Fluid="true" ObjectFit="ObjectFit.ScaleDown" />
+			}
+		</MudLink>
+	</MudTooltip>
 
 	<MudSpacer />
 
-	<MudMenu>
-		<ActivatorContent>
-			<MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Primary"/>
-		</ActivatorContent>
+	<MudTooltip Text="About Us" Delay="500">
+		<MudIconButton Icon="@Icons.Material.Filled.Info" Href="/about" Color="Color.Primary" />
+	</MudTooltip>
 
-		<ChildContent>
-			<MudMenuItem>
-				<MudLink
-					Href="/about"
-					Color="Color.Primary"
-					Typo="Typo.h6"
-					Underline="Underline.None"
-				>
-					About Us
-				</MudLink>
-			</MudMenuItem>
-			<MudMenuItem>
-				<MudLink
-					Href="/contact"
-					Color="Color.Primary"
-					Typo="Typo.h6"
-					Underline="Underline.None"
-				>
-					Contact Us
-				</MudLink>
-			</MudMenuItem>
-		</ChildContent>
-	</MudMenu>
-
-	@if (Settings.DarkMode) {
+	<MudTooltip Text="Contact Us" Delay="500">
 		<MudIconButton
-			Icon="@Icons.Material.Filled.WbSunny"
+			Icon="@Icons.Material.Filled.PermPhoneMsg" Href="/contact" Color="Color.Primary"
+		/>
+	</MudTooltip>
+
+	<MudTooltip
+		Text="@(Settings.DarkMode ? "Switch to Light Mode" : "Switch to Dark Mode")" Delay="500"
+	>
+		<MudIconButton
+			Icon="@(
+				Settings.DarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.DarkMode
+			)"
 			Color="Color.Primary"
 			OnClick="DarkModeToggleChanged"
 		/>
-	} else {
-		<MudIconButton
-			Icon="@Icons.Material.Filled.DarkMode"
-			Color="Color.Primary"
-			OnClick="DarkModeToggleChanged"
-		/>
-	}
+	</MudTooltip>
 
-	<MudLink Href="/account">
-		<MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
-	</MudLink>
+	<MudTooltip Text="Account" Delay="500">
+        <MudMenu
+			PositionAtCursor="false"
+			AnchorOrigin="Origin.BottomRight"
+			TransformOrigin="Origin.TopRight"
+			Dense
+		>
+            <ActivatorContent>
+                <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Primary" />
+            </ActivatorContent>
+            <ChildContent>
+				@if (Settings.User == "testuser") {
+					<MudMenuItem Href="/account">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+                         		Icon="@Icons.Material.Filled.ManageAccounts" />
+							<MudText Align="Align.Center">Settings</MudText>
+						</div>
+					</MudMenuItem>
+
+					<MudMenuItem OnClick="OnSignOut">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+								Icon="@Icons.Material.Filled.Logout" />
+							<MudText Align="Align.Center">Logout</MudText>
+						</div>
+					</MudMenuItem>
+
+				} else {
+					<MudMenuItem Href="/signup">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+								Icon="@Icons.Material.Filled.PersonAddAlt1" />
+							<MudText Align="Align.Center">Sign Up</MudText>
+						</div>
+					</MudMenuItem>
+
+					<MudMenuItem Href="/signin">
+						<div class="d-flex align-center">
+							<MudIcon Class="mr-2" Size="Size.Small"
+								Icon="@Icons.Material.Filled.Login" />
+							<MudText Align="Align.Center">Sign In</MudText>
+						</div>
+					</MudMenuItem>
+				}
+            </ChildContent>
+        </MudMenu>
+    </MudTooltip>
 </MudAppBar>
 
 @code {
 	// fields ----------------------------------------------------------------------------------- //
 	[Parameter]
 	public EventCallback DarkModeToggleChanged { get; set; }
+	private bool isUserLoggedIn;
+	// Methods ---------------------------------------------------------------------------------- //
+
+	private void OnSignOut() {
+		Settings.User = string.Empty;
+
+		NavigationManager.NavigateTo("/welcome");
+	}
 }

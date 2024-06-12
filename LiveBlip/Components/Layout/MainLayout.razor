@@ -30,12 +30,12 @@
 	// fields ----------------------------------------------------------------------------------- //
     private MudTheme theme = new MudTheme() {
 		Palette = new PaletteLight() {
-			Primary = new MudColor("#f44336"),
+			Primary = new MudColor("#2196f3"),
 			Secondary = new MudColor("#121212"),
 			Dark = new MudColor("#fafbfb")
 		},
 		PaletteDark = new PaletteDark() {
-			Primary = new MudColor("#f44336"),
+			Primary = new MudColor("#2196f3"),
 			Secondary = new MudColor("#fafbfb"),
 			Dark = new MudColor("#121212")
 		}
@@ -44,17 +44,27 @@
 	// methods ---------------------------------------------------------------------------------- //
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		// Unsure why, but despite the page being rendered, a wait is needed for the theme to be set
+		// 1 millisecond delay, ensures dark mode and light mode work
 		await Task.Delay(1);
 
+		SetLogoTheme();
 		SetMapTheme();
 	}
 
 	private void DarkModeToggleChanged() {
 		Settings.DarkMode = !Settings.DarkMode;
 
+		SetLogoTheme();
 		SetMapTheme();
 	}
+	private void SetLogoTheme() {
+		if (Settings.DarkMode) {
+			JSRuntime.InvokeVoidAsync("SetDarkMode");
+		} else {
+			JSRuntime.InvokeVoidAsync("SetLightMode");
+		}
 
+	}
 	private void SetMapTheme() {
 		if (Settings.DarkMode) {
 			JSRuntime.InvokeVoidAsync("SetDarkMode");

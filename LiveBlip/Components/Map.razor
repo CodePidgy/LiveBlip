@@ -1,14 +1,24 @@
 @inject IJSRuntime JSRuntime
 
-<div id="map"></div>
+<div id="map" @*style="width: 50%; height: 700px;" *@ ></div>
 
 @code {
-    protected override async Task OnAfterRenderAsync(bool firstRender) {
-        if (firstRender) {
+    private List<(double latitude, double longitude)> hardcodedCoordinates = new List<(double latitude, double longitude)>
+    {
+        (-26.080730, 27.878570),
+        (-25.747867, 28.229271),  // Another coordinate example
+        // Another coordinate example
+    };
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
             await JSRuntime.InvokeVoidAsync("InitMap");
-			await JSRuntime.InvokeVoidAsync(
-				"AddMarker", new { latitude = -26.080730, longitude = 27.878570 }
-			);
+            foreach (var coord in hardcodedCoordinates)
+            {
+                await JSRuntime.InvokeVoidAsync("AddMarker", new { latitude = coord.latitude, longitude = coord.longitude });
+            }
         }
     }
 }
